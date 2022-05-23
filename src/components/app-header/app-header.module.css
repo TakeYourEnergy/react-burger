@@ -1,0 +1,32 @@
+.header {
+   background: #1C1C21;
+   margin: 40px 0;
+   padding: 16px 310px;
+   display: flex;
+   align-items: center;
+}
+
+.constructorAndTape {
+   margin-right: 112px;
+}
+
+.list {
+   display: flex;
+   list-style-type: none;
+}
+
+.item {
+   padding: 16px 20px;
+}
+
+.link {
+   display: flex;
+   align-items: center;
+   color: #F2F2F3;
+}
+
+.personal {
+   padding: 16px 20px;
+   margin-left: 289px;
+}
+
