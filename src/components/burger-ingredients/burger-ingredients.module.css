@@ -28,3 +28,7 @@
    margin-bottom: 52px
 }
 
+.ingredients::-webkit-scrollbar-button {
+   height: 50px;
+}
+

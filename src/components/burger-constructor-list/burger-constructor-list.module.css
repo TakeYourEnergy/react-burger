@@ -1,0 +1,39 @@
+.box {
+   display: flex;
+   flex-direction: column;
+   overflow-y: auto;
+   height: 696px;
+   max-width: 536px;
+   margin-bottom: 20px;
+}
+
+.box::-webkit-scrollbar {
+   width: 8px;
+}
+
+.box::-webkit-scrollbar-thumb {
+   background-color: #8585AD;
+}
+
+.box::-webkit-scrollbar-track {
+   background-color: #2F2F37;
+
+}
+
+.box::-webkit-scrollbar-button {
+   height: 40px;
+}
+
+.bun {
+   margin-left: 25px;
+   margin-bottom: 16px;
+}
+
+.bun:last-child {
+   margin-bottom: 0;
+}
+
+.main,
+.souse {
+   margin-bottom: 16px;
+}

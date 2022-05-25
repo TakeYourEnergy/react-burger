@@ -1,0 +1,15 @@
+.section {
+   display: flex;
+   flex-direction: column;
+}
+
+.ordering {
+   display: flex;
+   max-width: 520px;
+   justify-content: end;
+}
+
+.text {
+   text-align: center;
+   padding: 14px 0;
+}
