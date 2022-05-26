@@ -1,12 +1,10 @@
 .section {
-   margin-left: 330px;
    max-width: 600px;
    width: 100%;
 }
 
 .tabs {
    display: flex;
-   justify-content: space-between;
    margin-bottom: 40px;
 }
 

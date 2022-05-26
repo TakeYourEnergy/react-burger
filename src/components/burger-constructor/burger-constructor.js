@@ -4,7 +4,7 @@ import { Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-co
 
 const BurgerConstructor = () => {
    return (
-      <section styles={styles.section}>
+      <section className={styles.section}>
          <BurgerConstructorList />
          <div className={styles.ordering}>
             <p className={`${styles.text} text text_type_digits-medium mr-10`}>610 <CurrencyIcon type="primary"/></p>

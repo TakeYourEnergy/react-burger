@@ -16,9 +16,9 @@ const BurgerConstructorList = () => {
                   thumbnail='https://code.s3.yandex.net/react/code/bun-02-mobile.png'
                />
             </div>
-            <>
-               {data.map((item) => item.type === 'main' ?
-                  <div className={styles.main}>
+            <div className={styles.item}>
+               {data.map(item => item.type === 'main' ?
+                  <div className={styles.main} key={item._id}>
                      <DragIcon type="main" />
                      <ConstructorElement
                         text={item.name}
@@ -27,7 +27,7 @@ const BurgerConstructorList = () => {
                      />
                   </div> :
                   item.type === 'sause' &&
-                  <div className={styles.sause}>
+                  <div className={styles.sause} key={item._id}>
                      <DragIcon type="primary" />
                      <ConstructorElement
                         text={item.name}
@@ -36,7 +36,7 @@ const BurgerConstructorList = () => {
                      />
                   </div>
                )}
-            </>
+            </div>
             <div className={styles.bun}>
                <ConstructorElement
                   type="bottom"

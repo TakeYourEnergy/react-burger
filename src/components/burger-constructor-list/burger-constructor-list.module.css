@@ -1,27 +1,27 @@
 .box {
    display: flex;
    flex-direction: column;
-   overflow-y: auto;
-   height: 696px;
-   max-width: 536px;
+   width: 544px;
    margin-bottom: 20px;
 }
 
-.box::-webkit-scrollbar {
+.item {
+   overflow-y: auto;
+   height: 550px;
+}
+
+.item::-webkit-scrollbar {
    width: 8px;
 }
 
-.box::-webkit-scrollbar-thumb {
+.item::-webkit-scrollbar-thumb {
    background-color: #8585AD;
 }
 
-.box::-webkit-scrollbar-track {
+.item::-webkit-scrollbar-track {
    background-color: #2F2F37;
+   margin-bottom: 15px
 
-}
-
-.box::-webkit-scrollbar-button {
-   height: 40px;
 }
 
 .bun {

@@ -10,7 +10,7 @@ const Item = ({ name, image, price }) => {
       <div className={styles.item} onClick={() => setCount(count + 1)}>
          <img className={styles.image} src={image} alt={name} />
          <div className={styles.boxPrice}>
-            <p className='text text_type_main-default mr-2'>{price}</p>
+            <p className='text text_type_digits-default mr-2'>{price}</p>
             <CurrencyIcon type="primary" />
          </div>
          <div className={styles.name}>
