@@ -1,6 +1,7 @@
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './item.module.css';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Item = ({ name, image, price }) => {
 
@@ -22,3 +23,9 @@ const Item = ({ name, image, price }) => {
 }
 
 export default Item
+
+Item.propTypes = {
+   name: PropTypes.string,
+   image: PropTypes.string,
+   price: PropTypes.number
+}

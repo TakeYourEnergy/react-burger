@@ -1,6 +1,8 @@
 import styles from './ingredient-item.module.css';
 import data from '../../utils/data';
 import Item from '../item/item';
+import PropTypes from 'prop-types';
+
 
 const IngredientItem = (props) => {
    return (
@@ -15,3 +17,9 @@ const IngredientItem = (props) => {
 }
 
 export default IngredientItem;
+
+IngredientItem.propTypes = {
+   id: PropTypes.string,
+   name: PropTypes.string,
+   type: PropTypes.string
+}

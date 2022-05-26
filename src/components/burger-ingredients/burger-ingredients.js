@@ -8,7 +8,7 @@ const BurgerIngredients = () => {
    const [current, setCurrent] = React.useState('rolls')
 
    const scrollIntoViewAdd = (value) => {
-      document.querySelector('#ingredients')?.querySelector(`#${value}`).scrollIntoView({
+      document.querySelector('#ingredients').querySelector(`#${value}`).scrollIntoView({
          behavior: 'smooth'
       })
    }
