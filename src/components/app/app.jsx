@@ -6,14 +6,14 @@ import styles from './app.module.css'
 
 function App() {
   return (
-    <>
+    <div className={styles.page}>
       <AppHeader />
       <main className={styles.main}>
         <BurgerIngredients />
         <BurgerConstructor />
       </main>
 
-    </>
+    </div>
   );
 }
 

@@ -14,4 +14,14 @@
 .text {
    text-align: center;
    padding: 14px 0;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   
+}
+
+.text>svg {
+   width: 33px;
+   height: 33px;
+   margin-left: 9px;
 }

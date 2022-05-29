@@ -7,7 +7,7 @@ const BurgerConstructor = () => {
       <section className={styles.section}>
          <BurgerConstructorList />
          <div className={styles.ordering}>
-            <p className={`${styles.text} text text_type_digits-medium mr-10`}>610 <CurrencyIcon type="primary"/></p>
+            <p className={`${styles.text} text text_type_digits-medium mr-10`}>610<CurrencyIcon type="primary"/></p>
             <Button type="primary" size="large">Оформить заказ</Button>
          </div>
       </section>
