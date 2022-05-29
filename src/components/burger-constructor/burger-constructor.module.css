@@ -1,0 +1,27 @@
+.section {
+   display: flex;
+   flex-direction: column;
+   margin-top: 60px;
+   margin-left: 40px;
+}
+
+.ordering {
+   display: flex;
+   max-width: 520px;
+   justify-content: end;
+}
+
+.text {
+   text-align: center;
+   padding: 14px 0;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   
+}
+
+.text>svg {
+   width: 33px;
+   height: 33px;
+   margin-left: 9px;
+}

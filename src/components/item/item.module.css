@@ -1,0 +1,26 @@
+.item {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin-right: 24px;
+   width: 100%;
+   max-width: 272px;
+   text-align: center;
+   cursor: pointer;
+   position: relative;
+   margin-bottom: 40px;
+}
+
+.item:last-child {
+   margin-right: 0;
+}
+
+.image {
+   margin-bottom: 8px;
+}
+
+.boxPrice {
+   display: flex;
+   margin-bottom: 8px;
+}
+

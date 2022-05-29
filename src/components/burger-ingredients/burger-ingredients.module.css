@@ -1,0 +1,39 @@
+.section {
+   max-width: 600px;
+   width: 100%;
+}
+
+.tabs {
+   display: flex;
+   margin-bottom: 40px;
+   justify-content: space-between;
+}
+
+.tab {
+   width: 100%;
+}
+
+.ingredients {
+   overflow-y: auto;
+   height: 676px;
+}
+
+.ingredients::-webkit-scrollbar {
+   width: 8px;
+}
+
+.ingredients::-webkit-scrollbar-thumb {
+   background-color: #8585AD;
+}
+
+.ingredients::-webkit-scrollbar-track {
+   background-color: #2F2F37;
+   margin-bottom: 52px
+}
+
+.ingredients::-webkit-scrollbar-button {
+   height: 50px;
+}
+
+
+
