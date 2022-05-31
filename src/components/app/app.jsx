@@ -3,6 +3,8 @@ import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import styles from './app.module.css'
+import Modal from '../modal/modal';
+import OrderDetails from '../order-details/order-details';
 
 
 const config = {
@@ -15,10 +17,12 @@ const checkResponse = (res) => {
 
 
 function App() {
-  const [data, setData] = useState([])
+  const [isOrderDetailsOpened, setIsOrderDetailsOpened] = React.useState(false);
+  const [isIngredientDetails, setIsIngredientDetails] = React.useState(false);
+  const [data, setData] = useState([]);
+
 
   useEffect(() => {
-
     const getData = () => {
       fetch(config.url)
         .then(checkResponse)
@@ -29,13 +33,53 @@ function App() {
   }, [])
 
 
+  // Закрытие всех модалок
+  const closeAllModals = () => {
+    setIsOrderDetailsOpened(false);
+    setIsIngredientDetails(false)
+  };
+
+  const openIngredientModal = () => {
+    setIsIngredientDetails(true)
+  }
+
+  const openOrderModal = () => {
+
+  }
+
+  // Обработка нажатия Esc
+  const handleEscKeydown = (e) => {
+    e.key === "Escape" && closeAllModals();
+  };
+
+
   return (
     <div className={styles.page}>
       <AppHeader />
       <main className={styles.main}>
-        <BurgerIngredients ingredientsData={data}/>
-        <BurgerConstructor ingredientsData={data}/>
+        <BurgerIngredients ingredientsData={data} openIngredientModal={openIngredientModal} />
+        <BurgerConstructor ingredientsData={data} />
       </main>
+
+      {isOrderDetailsOpened &&
+        <Modal
+          title="Детали заказа"
+          onOverlayClick={closeAllModals}
+          onEscKeydown={handleEscKeydown}
+        >
+          <OrderDetails />
+        </Modal>
+      }
+
+      {isIngredientDetails &&
+        <Modal
+          title=""
+          onOverlayClick={closeAllModals}
+          onEscKeydown={handleEscKeydown}
+        >
+          <OrderDetails />
+        </Modal>
+      }
 
     </div>
   );

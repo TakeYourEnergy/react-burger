@@ -3,12 +3,12 @@ import styles from './item.module.css';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Item = ({ name, image, price }) => {
+const Item = ({ name, image, price, openIngredientModal }) => {
 
    const [count, setCount] = React.useState(0)
 
    return (
-      <div className={styles.item} onClick={() => setCount(count + 1)}>
+      <div className={styles.item} onClick={() => { setCount(count + 1); openIngredientModal() }}>
          <img className={styles.image} src={image} alt={name} />
          <div className={styles.boxPrice}>
             <p className='text text_type_digits-default mr-2'>{price}</p>
