@@ -6,6 +6,7 @@
    text-align: center;
    color: #F2F2F3;
    text-shadow: 0px 0px 16px rgba(51, 51, 255, 0.25), 0px 0px 8px rgba(51, 51, 255, 0.25), 0px 4px 32px rgba(51, 51, 255, 0.5);
+   margin-bottom: 32px;
 }
 
 .ident {
@@ -15,6 +16,7 @@
    line-height: 30px;
    text-align: center;
    color: #F2F2F3;
+   margin-bottom: 60px;
 }
 
 .status {
@@ -25,6 +27,7 @@
    line-height: 24px;
    text-align: center;
    color: #F2F2F3;
+   margin-bottom: 8px;
 }
 
 .text {
@@ -35,4 +38,10 @@
    line-height: 24px;
    text-align: center;
    color: #8585AD;
+}
+
+.img {
+   width: 120px;
+   height: 120px;
+   margin-bottom: 60px;
 }

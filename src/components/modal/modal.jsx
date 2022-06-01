@@ -23,11 +23,12 @@ const Modal = ({ title, onOverlayClick, onEscKeydown, children }) => {
          <div className={styles.modal}>
             <h3 className={styles.title}>{title}</h3>
             {children}
+            <div className={styles.closeIcon} onClick={onOverlayClick}>
+               <CloseIcon type="primary" />
+            </div>
          </div>
-         <div className={styles.closeIcon} onClick={onOverlayClick}>
-            <CloseIcon type="primary" />
-         </div>
-         <ModalOverlay onClick={onOverlayClick} />
+
+         <ModalOverlay onClickClose={onOverlayClick} />
       </>,
       modalsContainer
    )
@@ -36,9 +37,9 @@ const Modal = ({ title, onOverlayClick, onEscKeydown, children }) => {
 
 export default Modal
 
-Modal.PropTypes = {
-   title: PropTypes.string.isRequired,
-   onOverlayClick: PropTypes.func.isRequired,
-   onEscKeydown: PropTypes.func.isRequired,
-   children: PropTypes.node.isRequired
-}
+// Modal.PropTypes = {
+//    title: PropTypes.string.isRequired,
+//    onOverlayClick: PropTypes.func.isRequired,
+//    onEscKeydown: PropTypes.func.isRequired,
+//    children: PropTypes.node.isRequired
+// }

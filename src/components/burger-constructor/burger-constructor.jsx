@@ -9,7 +9,7 @@ const BurgerConstructor = (props) => {
          <BurgerConstructorList burgerIngr={props.ingredientsData}/>
          <div className={styles.ordering}>
             <p className={`${styles.text} text text_type_digits-medium mr-10`}>610<CurrencyIcon type="primary"/></p>
-            <Button type="primary" size="large">Оформить заказ</Button>
+            <Button onClick={() => props.openOrderModal()} type="primary" size="large">Оформить заказ</Button>
          </div>
       </section>
    )

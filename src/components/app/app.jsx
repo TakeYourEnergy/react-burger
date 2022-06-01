@@ -44,7 +44,7 @@ function App() {
   }
 
   const openOrderModal = () => {
-
+    setIsOrderDetailsOpened(true)
   }
 
   // Обработка нажатия Esc
@@ -57,21 +57,21 @@ function App() {
     <div className={styles.page}>
       <AppHeader />
       <main className={styles.main}>
-        <BurgerIngredients ingredientsData={data} openIngredientModal={openIngredientModal} />
-        <BurgerConstructor ingredientsData={data} />
+        <BurgerIngredients ingredientsData={data} openIngredientModal={openIngredientModal} /> 
+        <BurgerConstructor ingredientsData={data} openOrderModal={openOrderModal} />
       </main>
 
-      {isOrderDetailsOpened &&
+      {isIngredientDetails &&
         <Modal
-          title="Детали заказа"
+          title=""
           onOverlayClick={closeAllModals}
           onEscKeydown={handleEscKeydown}
         >
-          <OrderDetails />
+
         </Modal>
       }
 
-      {isIngredientDetails &&
+      {isOrderDetailsOpened &&
         <Modal
           title=""
           onOverlayClick={closeAllModals}
