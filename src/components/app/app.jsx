@@ -5,6 +5,7 @@ import BurgerConstructor from '../burger-constructor/burger-constructor';
 import styles from './app.module.css'
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
+import IngredientDetails from '../ingredient-details/ingredient-details';
 
 
 const config = {
@@ -20,7 +21,7 @@ function App() {
   const [isOrderDetailsOpened, setIsOrderDetailsOpened] = React.useState(false);
   const [isIngredientDetails, setIsIngredientDetails] = React.useState(false);
   const [data, setData] = useState([]);
-
+  const [id, setId] = React.useState('')
 
   useEffect(() => {
     const getData = () => {
@@ -39,8 +40,9 @@ function App() {
     setIsIngredientDetails(false)
   };
 
-  const openIngredientModal = () => {
+  const openIngredientModal = (id) => {
     setIsIngredientDetails(true)
+    setId(id)
   }
 
   const openOrderModal = () => {
@@ -57,23 +59,22 @@ function App() {
     <div className={styles.page}>
       <AppHeader />
       <main className={styles.main}>
-        <BurgerIngredients ingredientsData={data} openIngredientModal={openIngredientModal} /> 
+        <BurgerIngredients ingredientsData={data} openIngredientModal={openIngredientModal} />
         <BurgerConstructor ingredientsData={data} openOrderModal={openOrderModal} />
       </main>
 
       {isIngredientDetails &&
         <Modal
-          title=""
+          title="Детали ингредиента"
           onOverlayClick={closeAllModals}
           onEscKeydown={handleEscKeydown}
         >
-
+          <IngredientDetails data={data} id={id} />
         </Modal>
       }
 
       {isOrderDetailsOpened &&
         <Modal
-          title=""
           onOverlayClick={closeAllModals}
           onEscKeydown={handleEscKeydown}
         >

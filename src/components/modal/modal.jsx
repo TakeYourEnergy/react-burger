@@ -21,13 +21,12 @@ const Modal = ({ title, onOverlayClick, onEscKeydown, children }) => {
    return ReactDOM.createPortal(
       <>
          <div className={styles.modal}>
-            <h3 className={styles.title}>{title}</h3>
+            <h3 className={`text text_type_main-large ${styles.title}`}>{title}</h3>
             {children}
             <div className={styles.closeIcon} onClick={onOverlayClick}>
                <CloseIcon type="primary" />
             </div>
          </div>
-
          <ModalOverlay onClickClose={onOverlayClick} />
       </>,
       modalsContainer

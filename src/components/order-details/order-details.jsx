@@ -6,10 +6,10 @@ const OrderDetails = () => {
    return (
       <>
          <p className={styles.number}>034536</p>
-         <p className={styles.ident}>идентификатор заказа</p>
+         <p className={`"text text_type_main-default text_color_inactive" ${styles.ident}`}>идентификатор заказа</p>
          <img className={styles.img} src={done} alt="done" />
-         <p className={styles.status}>Ваш заказ начали готовить</p>
-         <p className={styles.text}>Дождитесь готовности на орбитальной станции</p>
+         <p className={`"text text_type_main-default text_color_inactive" ${styles.status}`}>Ваш заказ начали готовить</p>
+         <p className={`"text text_type_main-default text_color_inactive" ${styles.text}`}>Дождитесь готовности на орбитальной станции</p>
       </>
    )
 }
