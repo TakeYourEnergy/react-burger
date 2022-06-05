@@ -9,7 +9,7 @@ import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 const modalsContainer = document.querySelector('#modals');
 
 const Modal = ({ title, onOverlayClick, onEscKeydown, children }) => {
-
+   console.log(title);
    useEffect(() => {
       document.addEventListener('keydown', onEscKeydown);
 
@@ -36,9 +36,9 @@ const Modal = ({ title, onOverlayClick, onEscKeydown, children }) => {
 
 export default Modal
 
-// Modal.PropTypes = {
-//    title: PropTypes.string.isRequired,
-//    onOverlayClick: PropTypes.func.isRequired,
-//    onEscKeydown: PropTypes.func.isRequired,
-//    children: PropTypes.node.isRequired
-// }
+Modal.propTypes = {
+   title: PropTypes.string.isRequired,
+   onOverlayClick: PropTypes.func.isRequired,
+   onEscKeydown: PropTypes.func.isRequired,
+   children: PropTypes.node.isRequired
+}

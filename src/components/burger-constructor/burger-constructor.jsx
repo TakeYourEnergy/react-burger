@@ -19,4 +19,5 @@ export default BurgerConstructor
 
 BurgerConstructor.propTypes = {
    ingredientsData: PropTypes.arrayOf(PropTypes.object).isRequired,
+   openOrderModal: PropTypes.func.isRequired,
 }

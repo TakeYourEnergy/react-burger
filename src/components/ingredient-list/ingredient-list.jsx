@@ -24,4 +24,5 @@ IngredientList.propTypes = {
    name: PropTypes.string.isRequired,
    type: PropTypes.string.isRequired,
    ingredientData: PropTypes.arrayOf(PropTypes.object).isRequired,
+   openIngredientModal: PropTypes.func.isRequired
 }

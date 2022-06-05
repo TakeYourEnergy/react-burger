@@ -77,6 +77,7 @@ function App() {
         <Modal
           onOverlayClick={closeAllModals}
           onEscKeydown={handleEscKeydown}
+          title=''
         >
           <OrderDetails />
         </Modal>

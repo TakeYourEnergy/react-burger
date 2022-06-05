@@ -3,12 +3,9 @@ import PropTypes from 'prop-types';
 
 
 const IngredientDetails = ({ data, id }) => {
-
    const elem = data.find((item) => {
       return item._id === id
    })
-   console.log(elem);
-
    return (
       <>
          <img className={styles.img} src={elem.image_large} alt="img" />
@@ -38,3 +35,8 @@ const IngredientDetails = ({ data, id }) => {
 }
 
 export default IngredientDetails
+
+IngredientDetails.propTypes = {
+   id: PropTypes.string.isRequired,
+   data: PropTypes.arrayOf(PropTypes.object).isRequired
+}
