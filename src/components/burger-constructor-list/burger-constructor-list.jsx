@@ -1,8 +1,10 @@
 import styles from './burger-constructor-list.module.css';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
+import { menuItemPropTypes } from '../../utils/prop-types';
 
 const BurgerConstructorList = (props) => {
+
    return (
       <div className={styles.box}>
          <div className={styles.bun}>
@@ -53,5 +55,5 @@ const BurgerConstructorList = (props) => {
 export default BurgerConstructorList
 
 BurgerConstructorList.propTypes = {
-   burgerIngr: PropTypes.arrayOf(PropTypes.object).isRequired,
+   burgerIngr: PropTypes.arrayOf(menuItemPropTypes.isRequired).isRequired,
 }

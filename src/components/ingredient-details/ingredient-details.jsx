@@ -1,6 +1,6 @@
 import styles from './ingredient-details.module.css';
 import PropTypes from 'prop-types';
-
+import { menuItemPropTypes } from '../../utils/prop-types';
 
 const IngredientDetails = ({ data, id }) => {
    const elem = data.find((item) => {
@@ -38,5 +38,5 @@ export default IngredientDetails
 
 IngredientDetails.propTypes = {
    id: PropTypes.string.isRequired,
-   data: PropTypes.arrayOf(PropTypes.object).isRequired
+   data: PropTypes.arrayOf(menuItemPropTypes.isRequired).isRequired
 }

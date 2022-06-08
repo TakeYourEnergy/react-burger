@@ -3,7 +3,7 @@ import styles from "./burger-ingredients.module.css";
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientList from "../ingredient-list/ingredient-list";
 import PropTypes from 'prop-types';
-
+import { menuItemPropTypes } from "../../utils/prop-types";
 
 const BurgerIngredients = (props) => {
    const [current, setCurrent] = React.useState('rolls')
@@ -54,6 +54,6 @@ export default BurgerIngredients
 
 
 BurgerIngredients.propTypes = {
-   ingredientsData: PropTypes.arrayOf(PropTypes.object).isRequired,
+   ingredientsData: PropTypes.arrayOf(menuItemPropTypes.isRequired).isRequired,
    openIngredientModal: PropTypes.func.isRequired
 }

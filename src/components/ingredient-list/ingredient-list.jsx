@@ -2,7 +2,7 @@ import styles from './ingredient-list.module.css';
 import Item from '../item/item';
 import PropTypes from 'prop-types';
 import React from 'react';
-
+import { menuItemPropTypes } from '../../utils/prop-types';
 
 const IngredientList = React.forwardRef((props, ref) => {
    const dataArray = props.ingredientData
@@ -21,8 +21,7 @@ export default IngredientList;
 
 IngredientList.propTypes = {
    id: PropTypes.string.isRequired,
-   name: PropTypes.string.isRequired,
-   type: PropTypes.string.isRequired,
-   ingredientData: PropTypes.arrayOf(PropTypes.object).isRequired,
-   openIngredientModal: PropTypes.func.isRequired
+   ingredientData: PropTypes.arrayOf(menuItemPropTypes.isRequired).isRequired,
+   openIngredientModal: PropTypes.func.isRequired,
+   menuItemPropTypes
 }
