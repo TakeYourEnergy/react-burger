@@ -103,6 +103,7 @@ video {
     vertical-align: baseline;
     background: transparent;
 }
+
 a {
     margin: 0;
     padding: 0;
@@ -156,4 +157,3 @@ input,
 select {
     vertical-align: middle;
 }
-

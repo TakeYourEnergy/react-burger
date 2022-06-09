@@ -2,13 +2,14 @@ import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-c
 import styles from './item.module.css';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { menuItemPropTypes } from '../../utils/prop-types';
 
-const Item = ({ name, image, price }) => {
+const Item = ({ name, image, price, openIngredientModal, id }) => {
 
    const [count, setCount] = React.useState(0)
 
    return (
-      <div className={styles.item} onClick={() => setCount(count + 1)}>
+      <div className={styles.item} onClick={() => { setCount(count + 1); openIngredientModal(id) }}>
          <img className={styles.image} src={image} alt={name} />
          <div className={styles.boxPrice}>
             <p className='text text_type_digits-default mr-2'>{price}</p>
@@ -25,7 +26,7 @@ const Item = ({ name, image, price }) => {
 export default Item
 
 Item.propTypes = {
-   name: PropTypes.string.isRequired,
-   image: PropTypes.string.isRequired,
-   price: PropTypes.number.isRequired
+   openIngredientModal: PropTypes.func.isRequired,
+   id: PropTypes.string.isRequired,
+   menuItemPropTypes
 }

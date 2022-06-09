@@ -1,11 +1,11 @@
 import styles from './burger-constructor-list.module.css';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import data from '../../utils/data';
+import PropTypes from 'prop-types';
+import { menuItemPropTypes } from '../../utils/prop-types';
 
+const BurgerConstructorList = (props) => {
 
-const BurgerConstructorList = () => {
    return (
-
       <div className={styles.box}>
          <div className={styles.bun}>
             <ConstructorElement
@@ -17,7 +17,7 @@ const BurgerConstructorList = () => {
             />
          </div>
          <div className={styles.item}>
-            {data.map(item => item.type === 'main' ?
+            {props.burgerIngr.map(item => item.type === 'main' ?
                <div className={styles.main} key={item._id}>
                   <DragIcon type="main" />
                   <ConstructorElement
@@ -53,3 +53,7 @@ const BurgerConstructorList = () => {
 }
 
 export default BurgerConstructorList
+
+BurgerConstructorList.propTypes = {
+   burgerIngr: PropTypes.arrayOf(menuItemPropTypes.isRequired).isRequired,
+}
