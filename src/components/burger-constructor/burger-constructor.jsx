@@ -7,7 +7,7 @@ import { menuItemPropTypes } from "../../utils/prop-types";
 const BurgerConstructor = (props) => {
    return (
       <section className={styles.section}>
-         <BurgerConstructorList burgerIngr={props.ingredientsData} />
+         <BurgerConstructorList />
          <div className={styles.ordering}>
             <p className={`${styles.text} text text_type_digits-medium mr-10`}>610<CurrencyIcon type="primary" /></p>
             <Button onClick={() => props.openOrderModal()} type="primary" size="large">Оформить заказ</Button>
@@ -19,6 +19,5 @@ const BurgerConstructor = (props) => {
 export default BurgerConstructor
 
 BurgerConstructor.propTypes = {
-   ingredientsData: PropTypes.arrayOf(menuItemPropTypes.isRequired).isRequired,
    openOrderModal: PropTypes.func.isRequired,
 }

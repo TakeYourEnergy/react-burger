@@ -1,9 +1,12 @@
+import React, { useContext } from 'react';
 import styles from './burger-constructor-list.module.css';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
 import { menuItemPropTypes } from '../../utils/prop-types';
+import { BurgerContext } from '../../services/burger-context';
 
-const BurgerConstructorList = (props) => {
+const BurgerConstructorList = () => {
+   const data = useContext(BurgerContext) // тут данные передаются через useContext
 
    return (
       <div className={styles.box}>
@@ -17,7 +20,7 @@ const BurgerConstructorList = (props) => {
             />
          </div>
          <div className={styles.item}>
-            {props.burgerIngr.map(item => item.type === 'main' ?
+            {data.map(item => item.type === 'main' ?
                <div className={styles.main} key={item._id}>
                   <DragIcon type="main" />
                   <ConstructorElement
@@ -54,6 +57,6 @@ const BurgerConstructorList = (props) => {
 
 export default BurgerConstructorList
 
-BurgerConstructorList.propTypes = {
-   burgerIngr: PropTypes.arrayOf(menuItemPropTypes.isRequired).isRequired,
-}
+// BurgerConstructorList.propTypes = {
+//    burgerIngr: PropTypes.arrayOf(menuItemPropTypes.isRequired).isRequired,
+// }

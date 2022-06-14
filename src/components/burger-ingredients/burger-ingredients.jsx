@@ -41,9 +41,9 @@ const BurgerIngredients = (props) => {
             </div>
          </div>
          <div className={styles.ingredients} id='ingredients'>
-            <IngredientList id='rolls' name='Булки' type='bun' ref={rollsRef} ingredientData={props.ingredientsData} openIngredientModal={props.openIngredientModal} />
-            <IngredientList id='sauces' name='Соусы' type='sauce' ref={saucesRef} ingredientData={props.ingredientsData} openIngredientModal={props.openIngredientModal} />
-            <IngredientList id='toppings' name='Начинки' type='main' ref={toppingsRef} ingredientData={props.ingredientsData} openIngredientModal={props.openIngredientModal} />
+            <IngredientList id='rolls' name='Булки' type='bun' ref={rollsRef} openIngredientModal={props.openIngredientModal} />
+            <IngredientList id='sauces' name='Соусы' type='sauce' ref={saucesRef} openIngredientModal={props.openIngredientModal} />
+            <IngredientList id='toppings' name='Начинки' type='main' ref={toppingsRef} openIngredientModal={props.openIngredientModal} />
          </div>
       </section>
 
@@ -54,6 +54,5 @@ export default BurgerIngredients
 
 
 BurgerIngredients.propTypes = {
-   ingredientsData: PropTypes.arrayOf(menuItemPropTypes.isRequired).isRequired,
    openIngredientModal: PropTypes.func.isRequired
 }

@@ -6,6 +6,7 @@ import styles from './app.module.css'
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
+import { BurgerContext } from '../../services/burger-context';
 
 
 const config = {
@@ -59,8 +60,10 @@ function App() {
     <div className={styles.page}>
       <AppHeader />
       <main className={styles.main}>
-        <BurgerIngredients ingredientsData={data} openIngredientModal={openIngredientModal} />
-        <BurgerConstructor ingredientsData={data} openOrderModal={openOrderModal} />
+        <BurgerContext.Provider value={data}>
+          <BurgerIngredients openIngredientModal={openIngredientModal} />
+          <BurgerConstructor openOrderModal={openOrderModal} />
+        </BurgerContext.Provider>
       </main>
 
       {isIngredientDetails &&
