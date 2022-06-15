@@ -7,6 +7,7 @@ import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import { BurgerContext } from '../../services/burger-context';
+import { getIngredients } from '../../utils/api';
 
 
 const config = {
@@ -25,13 +26,9 @@ function App() {
   const [id, setId] = React.useState('')
 
   useEffect(() => {
-    const getData = () => {
-      fetch(config.url)
-        .then(checkResponse)
-        .then(res => setData(res.data))
-        .catch(error => console.error(error))
-    }
-    getData()
+    getIngredients()
+      .then(res => setData(res.data))
+      .catch(error => console.error(error))
   }, [])
 
 
