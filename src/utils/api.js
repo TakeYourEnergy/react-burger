@@ -12,13 +12,13 @@ export const getIngredients = () => {
       .then(checkResponse)
 }
 
-export const getOrder = (ingredientsArray) => {
-   return fetch(`${config.url}/orders`), {
+export const getOrder = (arr) => {
+   return fetch(`${config.url}/orders`, {
       method: 'POST',
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-         ingredients: ingredientsArray,
+         ingredients: arr,
       }),
-
-   }
+   })
+      .then(checkResponse)
 }

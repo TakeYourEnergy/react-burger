@@ -10,17 +10,7 @@ import { BurgerContext } from '../../services/burger-context';
 import { getIngredients } from '../../utils/api';
 
 
-const config = {
-  url: 'https://norma.nomoreparties.space/api/ingredients',
-}
-
-const checkResponse = (res) => {
-  return res.ok ? res.json() : Promise.reject(res.status)
-}
-
-
 function App() {
-  const [isOrderDetailsOpened, setIsOrderDetailsOpened] = React.useState(false);
   const [isIngredientDetails, setIsIngredientDetails] = React.useState(false);
   const [data, setData] = useState([]);
   const [id, setId] = React.useState('')
@@ -34,17 +24,12 @@ function App() {
 
   // Закрытие всех модалок
   const closeAllModals = () => {
-    setIsOrderDetailsOpened(false);
     setIsIngredientDetails(false)
   };
 
   const openIngredientModal = (id) => {
     setIsIngredientDetails(true)
     setId(id)
-  }
-
-  const openOrderModal = () => {
-    setIsOrderDetailsOpened(true)
   }
 
   // Обработка нажатия Esc
@@ -59,7 +44,7 @@ function App() {
       <main className={styles.main}>
         <BurgerContext.Provider value={data}>
           <BurgerIngredients openIngredientModal={openIngredientModal} />
-          <BurgerConstructor openOrderModal={openOrderModal} />
+          <BurgerConstructor />
         </BurgerContext.Provider>
       </main>
 
@@ -72,17 +57,6 @@ function App() {
           <IngredientDetails data={data} id={id} />
         </Modal>
       }
-
-      {isOrderDetailsOpened &&
-        <Modal
-          onOverlayClick={closeAllModals}
-          onEscKeydown={handleEscKeydown}
-          title=''
-        >
-          <OrderDetails />
-        </Modal>
-      }
-
     </div>
   );
 }
