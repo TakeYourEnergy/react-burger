@@ -1,8 +1,9 @@
 import styles from './order-details.module.css';
 import done from '../../images/done.svg'
+import PropTypes from 'prop-types';
 
 
-const OrderDetails = ({order}) => {
+const OrderDetails = ({ order }) => {
    return (
       <>
          <p className={styles.number}>{order}</p>
@@ -15,3 +16,7 @@ const OrderDetails = ({order}) => {
 }
 
 export default OrderDetails
+
+OrderDetails.propTypes = {
+   order: PropTypes.number.isRequired,
+}
