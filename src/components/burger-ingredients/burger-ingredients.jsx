@@ -2,8 +2,6 @@ import React, { useRef, useEffect, useContext } from "react";
 import styles from "./burger-ingredients.module.css";
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientList from "../ingredient-list/ingredient-list";
-import PropTypes from 'prop-types';
-import { menuItemPropTypes } from "../../utils/prop-types";
 import { BurgerContext } from "../../services/burger-context";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import Modal from "../modal/modal";
@@ -24,10 +22,6 @@ const BurgerIngredients = () => {
       setIsIngredientDetails(true)
       setId(id)
    }
-
-   const handleEscKeydown = (e) => {
-      e.key === "Escape" && closeIngredientModal();
-   };
 
    const rollsRef = useRef(null)
    const saucesRef = useRef(null)
@@ -72,8 +66,7 @@ const BurgerIngredients = () => {
          {isIngredientDetails &&
             <Modal
                title="Детали ингредиента"
-               onOverlayClick={closeIngredientModal}
-               onEscKeydown={handleEscKeydown}
+               onClose={closeIngredientModal}
             >
                <IngredientDetails data={data} id={id} />
             </Modal>
@@ -83,8 +76,3 @@ const BurgerIngredients = () => {
 }
 
 export default BurgerIngredients
-
-
-BurgerIngredients.propTypes = {
-
-}

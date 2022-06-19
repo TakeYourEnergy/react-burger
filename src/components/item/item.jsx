@@ -2,7 +2,7 @@ import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-c
 import styles from './item.module.css';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { menuItemPropTypes } from '../../utils/prop-types';
+
 
 const Item = ({ name, image, price, openIngredientModal, id }) => {
 
@@ -28,5 +28,7 @@ export default Item
 Item.propTypes = {
    openIngredientModal: PropTypes.func.isRequired,
    id: PropTypes.string.isRequired,
-   menuItemPropTypes
+   name: PropTypes.string.isRequired,
+   image: PropTypes.string.isRequired,
+   price: PropTypes.number.isRequired,
 }

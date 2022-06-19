@@ -42,7 +42,6 @@ const BurgerConstructor = () => {
    }
 
    const postOrder = () => {
-      //openOrderModal()
       showLoading()
       getOrder(dataId)
          .then(res => setOrder({ orderId: res.order.number, loading: false }))
@@ -62,8 +61,7 @@ const BurgerConstructor = () => {
          {order.loading && <Spinner />}
          {isOrderDetailsOpened &&
             <Modal
-               onOverlayClick={closeModal}
-               onEscKeydown={(e) => e.key === "Escape" && closeModal()}
+               onClose={closeModal}
                title=''
             >
                <OrderDetails order={order.orderId} />

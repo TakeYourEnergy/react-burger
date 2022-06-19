@@ -47,7 +47,7 @@ const BurgerConstructorList = () => {
          <div className={styles.bun}>
             {data.find((item) => item.name === 'Краторная булка N-200i') &&
                <ConstructorElement
-                  type="top"
+                  type="bottom"
                   isLocked={true}
                   text={`${bun.name} (низ)`}
                   price={bun.price}
