@@ -1,0 +1,19 @@
+.over {
+   display: flex;
+   position: fixed;
+   top: 0;
+   left: 0;
+   height: 100%;
+   width: 100%;
+   justify-content: center;
+   align-items: center;
+   background-color: rgba(0, 0, 0, .5);
+}
+
+.spinner {
+   z-index: 10;
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   height: 100%;
+}
