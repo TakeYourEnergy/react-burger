@@ -3,11 +3,10 @@ import styles from './burger-constructor-list.module.css';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
 import { menuItemPropTypes } from '../../utils/prop-types';
-import { BurgerContext } from '../../services/burger-context';
-
+import { useSelector } from 'react-redux';
 
 const BurgerConstructorList = () => {
-   const data = useContext(BurgerContext)
+   const data = useSelector(state => state.ingredientsReducer.ingredients)
    const bun = { ...data[0] }
 
    return (

@@ -2,13 +2,11 @@ import React, { useRef, useEffect, useContext } from "react";
 import styles from "./burger-ingredients.module.css";
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientList from "../ingredient-list/ingredient-list";
-import { BurgerContext } from "../../services/burger-context";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import Modal from "../modal/modal";
 
 const BurgerIngredients = () => {
 
-   const data = useContext(BurgerContext)
    const [current, setCurrent] = React.useState('rolls')
    const [isIngredientDetails, setIsIngredientDetails] = React.useState(false);
    const [id, setId] = React.useState('')
@@ -68,7 +66,7 @@ const BurgerIngredients = () => {
                title="Детали ингредиента"
                onClose={closeIngredientModal}
             >
-               <IngredientDetails data={data} id={id} />
+               <IngredientDetails id={id} />
             </Modal>
          }
       </>

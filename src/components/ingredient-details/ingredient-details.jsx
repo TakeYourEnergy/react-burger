@@ -1,8 +1,11 @@
 import styles from './ingredient-details.module.css';
 import PropTypes from 'prop-types';
 import { menuItemPropTypes } from '../../utils/prop-types';
+import { useSelector } from 'react-redux';
 
-const IngredientDetails = ({ data, id }) => {
+const IngredientDetails = ({ id }) => {
+   const data = useSelector(state => state.ingredientsReducer.ingredients)
+
    const elem = data.find((item) => {
       return item._id === id
    })

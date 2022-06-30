@@ -3,10 +3,11 @@ import styles from './ingredient-list.module.css';
 import Item from '../item/item';
 import PropTypes from 'prop-types';
 import { menuItemPropTypes } from '../../utils/prop-types';
-import { BurgerContext } from '../../services/burger-context';
+import { useSelector } from 'react-redux';
 
 const IngredientList = React.forwardRef((props, ref) => {
-   const data = useContext(BurgerContext)
+   const data = useSelector(state => state.ingredientsReducer.ingredients)
+
 
    return (
       <>

@@ -2,15 +2,16 @@ import React, { useContext, useMemo, useState } from "react";
 import BurgerConstructorList from "../burger-constructor-list/burger-constructor-list";
 import styles from './burger-constructor.module.css';
 import { Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { BurgerContext } from '../../services/burger-context';
 import { getOrder } from "../../utils/api";
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import Spinner from "../spinner/spinner";
+import { useSelector } from "react-redux";
 
 const BurgerConstructor = () => {
 
-   const data = useContext(BurgerContext)
+   const data = useSelector(state => state.ingredientsReducer.ingredients)
+
    const [totalPrice, setTotalPrice] = useState(0)
    const [order, setOrder] = useState({ orderId: null, loading: false })
    const [isOrderDetailsOpened, setIsOrderDetailsOpened] = useState(false);
