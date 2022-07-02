@@ -2,14 +2,21 @@ import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-c
 import styles from './item.module.css';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux'
+import { OPEN_MODAL_INGREDIENT } from '../../services/actions/object-ingredient';
 
 
-const Item = ({ name, image, price, openIngredientModal, id }) => {
+const Item = ({ name, image, price, id }) => {
+   const dispatch = useDispatch()
+
+   const openIngredientModal = () => {
+      dispatch({ type: OPEN_MODAL_INGREDIENT, idIngredients: id })
+   }
 
    const [count, setCount] = React.useState(0)
 
    return (
-      <div className={styles.item} onClick={() => { setCount(count + 1); openIngredientModal(id) }}>
+      <div className={styles.item} onClick={() => { setCount(count + 1); openIngredientModal() }}>
          <img className={styles.image} src={image} alt={name} />
          <div className={styles.boxPrice}>
             <p className='text text_type_digits-default mr-2'>{price}</p>
@@ -26,7 +33,6 @@ const Item = ({ name, image, price, openIngredientModal, id }) => {
 export default Item
 
 Item.propTypes = {
-   openIngredientModal: PropTypes.func.isRequired,
    id: PropTypes.string.isRequired,
    name: PropTypes.string.isRequired,
    image: PropTypes.string.isRequired,

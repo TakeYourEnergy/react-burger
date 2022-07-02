@@ -1,4 +1,4 @@
-import React, { useContext, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import BurgerConstructorList from "../burger-constructor-list/burger-constructor-list";
 import styles from './burger-constructor.module.css';
 import { Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -6,7 +6,7 @@ import { getOrder } from "../../utils/api";
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import Spinner from "../spinner/spinner";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from 'react-redux';
 
 const BurgerConstructor = () => {
 
@@ -15,6 +15,7 @@ const BurgerConstructor = () => {
    const [totalPrice, setTotalPrice] = useState(0)
    const [order, setOrder] = useState({ orderId: null, loading: false })
    const [isOrderDetailsOpened, setIsOrderDetailsOpened] = useState(false);
+
 
    useMemo(() => {
       let sum = data.reduce((acc, item) => {
@@ -25,7 +26,7 @@ const BurgerConstructor = () => {
       setTotalPrice(sum)
    }, [data])
 
-   const closeModal = () => {
+   const closeModalOrder = () => {
       setIsOrderDetailsOpened(false);
    }
 
@@ -62,7 +63,7 @@ const BurgerConstructor = () => {
          {order.loading && <Spinner />}
          {isOrderDetailsOpened &&
             <Modal
-               onClose={closeModal}
+               onCloseOrder={closeModalOrder}
                title=''
             >
                <OrderDetails order={order.orderId} />

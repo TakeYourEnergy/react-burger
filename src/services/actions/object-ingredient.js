@@ -1,7 +1,2 @@
-
-
-
-
-export const objectIngredient = (state, action) => {
-   return state
-}
+export const OPEN_MODAL_INGREDIENT = 'OPEN_INGREDIENT_MODAL';
+export const CLOSE_MODAL_INGREDIENT = 'CLOSE_INGREDIENT_MODAL'

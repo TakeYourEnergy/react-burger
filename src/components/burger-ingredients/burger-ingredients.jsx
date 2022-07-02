@@ -1,25 +1,16 @@
-import React, { useRef, useEffect, useContext } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import styles from "./burger-ingredients.module.css";
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientList from "../ingredient-list/ingredient-list";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import Modal from "../modal/modal";
+import { useSelector, useDispatch } from 'react-redux';
 
 const BurgerIngredients = () => {
 
-   const [current, setCurrent] = React.useState('rolls')
-   const [isIngredientDetails, setIsIngredientDetails] = React.useState(false);
-   const [id, setId] = React.useState('')
+   const [current, setCurrent] = useState('rolls')
 
-
-   const closeIngredientModal = () => {
-      setIsIngredientDetails(false)
-   };
-
-   const openIngredientModal = (id) => {
-      setIsIngredientDetails(true)
-      setId(id)
-   }
+   const isOpened = useSelector((state) => state.objectIngredient.isOpened )
 
    const rollsRef = useRef(null)
    const saucesRef = useRef(null)
@@ -55,18 +46,17 @@ const BurgerIngredients = () => {
                </div>
             </div>
             <div className={styles.ingredients} id='ingredients'>
-               <IngredientList id='rolls' name='Булки' type='bun' ref={rollsRef} openIngredientModal={openIngredientModal} />
-               <IngredientList id='sauces' name='Соусы' type='sauce' ref={saucesRef} openIngredientModal={openIngredientModal} />
-               <IngredientList id='toppings' name='Начинки' type='main' ref={toppingsRef} openIngredientModal={openIngredientModal} />
+               <IngredientList id='rolls' name='Булки' type='bun' ref={rollsRef} />
+               <IngredientList id='sauces' name='Соусы' type='sauce' ref={saucesRef} />
+               <IngredientList id='toppings' name='Начинки' type='main' ref={toppingsRef} />
             </div>
          </section>
 
-         {isIngredientDetails &&
+         {isOpened &&
             <Modal
                title="Детали ингредиента"
-               onClose={closeIngredientModal}
             >
-               <IngredientDetails id={id} />
+               <IngredientDetails />
             </Modal>
          }
       </>
