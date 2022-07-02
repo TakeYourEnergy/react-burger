@@ -11,7 +11,7 @@ import { CLOSE_MODAL_INGREDIENT } from '../../services/actions/object-ingredient
 const modalsContainer = document.querySelector('#modals');
 
 const Modal = ({ title, children, onCloseOrder }) => {
-   console.log(onCloseOrder)
+
    const dispatch = useDispatch()
    const onClose = () => {
       dispatch({ type: CLOSE_MODAL_INGREDIENT })
