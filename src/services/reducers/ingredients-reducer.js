@@ -9,7 +9,8 @@ const initialState = {
    ingredients: [],
    ingredientsRequest: false,
    ingredientsFailed: false,
-   ingredientsPending: true
+   ingredientsPending: true,
+   ingrSpin: ''
 }
 
 export const ingredientsReducer = (state = initialState, action) => {

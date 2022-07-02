@@ -6,16 +6,17 @@ import ReactDOM from 'react-dom';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { CLOSE_MODAL_INGREDIENT } from '../../services/actions/object-ingredient';
+import { NUMBER_NULL } from '../../services/actions/order';
 
 
 const modalsContainer = document.querySelector('#modals');
 
-const Modal = ({ title, children, onCloseOrder }) => {
+const Modal = ({ title, children }) => {
 
    const dispatch = useDispatch()
    const onClose = () => {
       dispatch({ type: CLOSE_MODAL_INGREDIENT })
-      onCloseOrder()
+      dispatch({ type: NUMBER_NULL })
    }
 
    useEffect(() => {
