@@ -7,15 +7,20 @@ import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import Spinner from "../spinner/spinner";
 import { useSelector, useDispatch } from 'react-redux';
+import { getOrderNumber } from "../../services/actions/order";
 
 const BurgerConstructor = () => {
 
    const data = useSelector(state => state.ingredientsReducer.ingredients)
+   const bunId = useSelector(state => state.ingredientsReducer.ingredients.find(item => item.name === 'Краторная булка N-200i'))
+   //console.log('data>>>', data)
 
    const [totalPrice, setTotalPrice] = useState(0)
    const [order, setOrder] = useState({ orderId: null, loading: false })
    const [isOrderDetailsOpened, setIsOrderDetailsOpened] = useState(false);
 
+   const dispatch = useDispatch()
+   //const state = useSelector(state => console.log(state))
 
    useMemo(() => {
       let sum = data.reduce((acc, item) => {
@@ -34,7 +39,8 @@ const BurgerConstructor = () => {
       setIsOrderDetailsOpened(true)
    }
 
-   const dataId = data.map(item => item._id)
+   const dataId = data.map(item => item._id) //без одной булки
+   //console.log('dataID>>>', dataId)
 
    const showLoading = () => {
       setOrder({
@@ -43,8 +49,15 @@ const BurgerConstructor = () => {
       })
    }
 
+
    const postOrder = () => {
       showLoading()
+
+      if ({ ...bunId }._id !== 'undefined') {
+         const orderArrIdAll = [...dataId, { ...bunId }._id]
+         dispatch(getOrderNumber(orderArrIdAll))
+      }
+
       getOrder(dataId)
          .then(res => setOrder({ orderId: res.order.number, loading: false }))
          .catch(err => console.error(err))
