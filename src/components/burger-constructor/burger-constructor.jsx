@@ -2,13 +2,11 @@ import { useMemo, useState } from "react";
 import BurgerConstructorList from "../burger-constructor-list/burger-constructor-list";
 import styles from './burger-constructor.module.css';
 import { Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { getOrder } from "../../utils/api";
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import Spinner from "../spinner/spinner";
 import { useSelector, useDispatch } from 'react-redux';
 import { getOrderNumber } from "../../services/actions/order";
-import { NUMBER_NULL } from "../../services/actions/order";
 
 const BurgerConstructor = () => {
 

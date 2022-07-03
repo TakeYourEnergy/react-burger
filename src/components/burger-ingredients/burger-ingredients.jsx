@@ -1,34 +1,31 @@
-import React, { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import styles from "./burger-ingredients.module.css";
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientList from "../ingredient-list/ingredient-list";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import Modal from "../modal/modal";
 import { useSelector, useDispatch } from 'react-redux';
+import { useInView } from "react-intersection-observer";
 
 const BurgerIngredients = () => {
 
    const [current, setCurrent] = useState('rolls')
 
-   const isOpened = useSelector((state) => state.objectIngredient.isOpened )
+   const [rollsRef, inViewBuns] = useInView({ threshold: 0.3 })
+   const [saucesRef, inViewSauces] = useInView({ threshold: 0.3 })
+   const [toppingsRef, inViewToppings] = useInView({ threshold: 0.3 })
 
-   const rollsRef = useRef(null)
-   const saucesRef = useRef(null)
-   const toppingsRef = useRef(null)
+   const isOpened = useSelector((state) => state.objectIngredient.isOpened)
 
    useEffect(() => {
-      switch (current) {
-         case "rolls":
-            rollsRef.current.scrollIntoView({ behavior: 'smooth' })
-            break;
-         case "sauces":
-            saucesRef.current.scrollIntoView({ behavior: 'smooth' })
-            break;
-         case "toppings":
-            toppingsRef.current.scrollIntoView({ behavior: 'smooth' })
-            break;
-      }
-   }, [current])
+      if (inViewBuns) { setCurrent('rolls') }
+      else if (inViewSauces) { setCurrent('sauces') }
+      else if (inViewToppings) { setCurrent('toppings') }
+   }, [inViewBuns, inViewSauces, inViewToppings])
+
+   const setScroll = (value) => {
+      document.getElementById(value).scrollIntoView({ behavior: "smooth", block: 'start' })
+   }
 
    return (
       <>
@@ -36,13 +33,13 @@ const BurgerIngredients = () => {
             <h1 className="text text_type_main-large mb-5">Соберите бургер</h1>
             <div className={styles.tabs}>
                <div className={styles.tab}>
-                  <Tab value="rolls" active={current === 'rolls'} onClick={setCurrent}>Булки</Tab>
+                  <Tab value="rolls" active={current === 'rolls'} onClick={() => setScroll('rolls')}>Булки</Tab>
                </div>
                <div className={styles.tab}>
-                  <Tab value="sauces" active={current === 'sauces'} onClick={setCurrent}>Соусы</Tab>
+                  <Tab value="sauces" active={current === 'sauces'} onClick={() => setScroll('sauces')}>Соусы</Tab>
                </div>
                <div className={styles.tab}>
-                  <Tab value="toppings" active={current === 'toppings'} onClick={setCurrent}>Начинки</Tab>
+                  <Tab value="toppings" active={current === 'toppings'} onClick={() => setScroll('toppings')}>Начинки</Tab>
                </div>
             </div>
             <div className={styles.ingredients} id='ingredients'>
