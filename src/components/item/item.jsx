@@ -4,19 +4,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux'
 import { OPEN_MODAL_INGREDIENT } from '../../services/actions/object-ingredient';
+import { useDrag } from "react-dnd";
 
-
-const Item = ({ name, image, price, id }) => {
+const Item = ({ name, image, price, id, item }) => {
    const dispatch = useDispatch()
+
+
+   const [, dragRef] = useDrag({
+      type: 'item',
+      item: { item }
+   })
 
    const openIngredientModal = () => {
       dispatch({ type: OPEN_MODAL_INGREDIENT, idIngredients: id })
    }
 
-   const [count, setCount] = React.useState(0)
+   
 
    return (
-      <div className={styles.item} onClick={() => { setCount(count + 1); openIngredientModal() }}>
+      <div ref={dragRef} className={styles.item} onClick={() => { openIngredientModal() }}>
          <img className={styles.image} src={image} alt={name} />
          <div className={styles.boxPrice}>
             <p className='text text_type_digits-default mr-2'>{price}</p>
@@ -25,7 +31,7 @@ const Item = ({ name, image, price, id }) => {
          <div className={styles.name}>
             <p className="text text_type_main-default">{name}</p>
          </div>
-         {count > 0 && <Counter count={count} size="default" />}
+         {<Counter count={0} size="default" />}
       </div>
    )
 }

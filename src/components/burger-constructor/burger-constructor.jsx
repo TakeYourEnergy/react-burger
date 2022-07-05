@@ -7,8 +7,19 @@ import OrderDetails from "../order-details/order-details";
 import Spinner from "../spinner/spinner";
 import { useSelector, useDispatch } from 'react-redux';
 import { getOrderNumber } from "../../services/actions/order";
+import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useDrop } from "react-dnd";
+import { v4 as uuidv4 } from 'uuid';
+import { ADD_ITEM } from "../../services/actions/burger-constructor";
+
 
 const BurgerConstructor = () => {
+
+   const buns = useSelector(state => state.burgerConstructorReducer.buns)
+   const mains = useSelector(state => state.burgerConstructorReducer.mains)
+   console.log(mains)
+
+
 
    const data = useSelector(state => state.ingredientsReducer.ingredients)
    const bunId = useSelector(state => state.ingredientsReducer.ingredients.find(item => item.name === 'Краторная булка N-200i'))
@@ -19,6 +30,17 @@ const BurgerConstructor = () => {
    const dispatch = useDispatch()
    const orderLoading = useSelector(state => state.orderReducer.ingrSpin)
    const isOrderDetailsOpened = useSelector(state => state.orderReducer.isOrderDetailsOpened)
+
+   const [, dropTarget] = useDrop({
+      accept: "item",
+      drop({ item }) {
+         dispatch({
+            type: ADD_ITEM,
+            payload: { ...item, uuid: uuidv4() }
+         })
+      },
+   });
+
 
    useMemo(() => {
       let sum = data.reduce((acc, item) => {
@@ -43,14 +65,42 @@ const BurgerConstructor = () => {
    return (
       <>
          <section className={styles.section}>
-            <BurgerConstructorList />
+            <div className={styles.box}>
+               <div className={`${styles.bun}`}>
+                  {buns.type && <ConstructorElement
+                     type="top"
+                     isLocked={true}
+                     text={`${buns.name} (верх)`}
+                     price={buns.price}
+                     thumbnail={buns.image}
+                  />}
+               </div>
+
+               <div ref={dropTarget} className={styles.item}>
+                  <div>
+                     <BurgerConstructorList />
+                  </div>
+               </div>
+
+               <div className={`${styles.bun}`}>
+                  {buns.type && <ConstructorElement
+                     type="bottom"
+                     isLocked={true}
+                     text={`${buns.name} (верх)`}
+                     price={buns.price}
+                     thumbnail={buns.image}
+                  />}
+               </div>
+
+            </div>
             <div className={styles.ordering}>
                <p className={`${styles.text} text text_type_digits-medium mr-10`}>{totalPrice}<CurrencyIcon type="primary" /></p>
                <Button onClick={() => postOrder()} type="primary" size="large">Оформить заказ</Button>
             </div>
          </section>
          {orderLoading && <Spinner />}
-         {isOrderDetailsOpened &&
+         {
+            isOrderDetailsOpened &&
             <Modal
                title=''
             >
