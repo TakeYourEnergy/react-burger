@@ -40,7 +40,10 @@
 
 .item {
    overflow-y: auto;
-   height: 550px;
+   max-height: 550px;
+   list-style: none;
+   padding: 0;
+   margin: 0;
 }
 
 .item::-webkit-scrollbar {
