@@ -22,6 +22,11 @@ export const burgerConstructorReducer = (state = initialState, action) => {
                mains: [...state.mains, action.payload]
             }
          }
+      case DELETE_ITEM: 
+         return {
+            ...state,
+            mains: [...state.mains].filter((item) => item.uuid !== action.payload.uuid)
+         }
       default:
          return state
    }

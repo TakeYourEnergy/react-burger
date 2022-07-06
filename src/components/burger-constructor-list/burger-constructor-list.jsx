@@ -3,12 +3,12 @@ import styles from './burger-constructor-list.module.css';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
 import { menuItemPropTypes } from '../../utils/prop-types';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useDrop, useDrag } from "react-dnd";
+import { DELETE_ITEM } from '../../services/actions/burger-constructor';
 
 const BurgerConstructorList = ({ item, index }) => {
-   // const data = useSelector(state => state.ingredientsReducer.ingredients)
-   // const bun = { ...data[0] }
+   const dispatch = useDispatch();
 
    const [, drop] = useDrop({
       accept: 'item',
@@ -18,16 +18,20 @@ const BurgerConstructorList = ({ item, index }) => {
    })
 
    return (
-
       <div ref={drop} className={styles.main} >
          <DragIcon type="main" />
          <ConstructorElement
             text={item.name}
             price={item.price}
             thumbnail={item.image}
+            handleClose={() => {
+               dispatch({
+                  type: DELETE_ITEM,
+                  payload: item
+               })
+            }}
          />
       </div>
-
    )
 }
 

@@ -9,7 +9,6 @@ import { useDrag } from "react-dnd";
 const Item = ({ name, image, price, id, item }) => {
    const dispatch = useDispatch()
 
-
    const [, dragRef] = useDrag({
       type: 'item',
       item: { item }
