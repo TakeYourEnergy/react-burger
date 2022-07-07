@@ -1,10 +1,10 @@
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './item.module.css';
-import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux'
 import { OPEN_MODAL_INGREDIENT } from '../../services/actions/object-ingredient';
 import { useDrag } from "react-dnd";
+
 
 const Item = ({ name, image, price, id, item }) => {
    const dispatch = useDispatch()
@@ -14,11 +14,21 @@ const Item = ({ name, image, price, id, item }) => {
       item: { item }
    })
 
+   let count = 0
+   const buns = useSelector(state => state.burgerConstructorReducer.buns)
+   const mains = useSelector(state => state.burgerConstructorReducer.mains)
+   mains.forEach(element => {
+      if (item._id === element._id) {
+         count++
+      }
+   });
+   if (buns._id === item._id) {
+      count++
+   }
+
    const openIngredientModal = () => {
       dispatch({ type: OPEN_MODAL_INGREDIENT, idIngredients: id })
    }
-
-   
 
    return (
       <div ref={dragRef} className={styles.item} onClick={() => { openIngredientModal() }}>
@@ -30,7 +40,7 @@ const Item = ({ name, image, price, id, item }) => {
          <div className={styles.name}>
             <p className="text text_type_main-default">{name}</p>
          </div>
-         {<Counter count={0} size="default" />}
+         {<Counter count={count} size="default" />}
       </div>
    )
 }
