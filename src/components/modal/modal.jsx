@@ -4,20 +4,11 @@ import PropTypes from 'prop-types';
 import ModalOverlay from '../modal-overlay/modal-overlay';
 import ReactDOM from 'react-dom';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useSelector, useDispatch } from 'react-redux';
-import { CLOSE_MODAL_INGREDIENT } from '../../services/actions/object-ingredient';
-import { NUMBER_NULL } from '../../services/actions/order';
 
 
 const modalsContainer = document.querySelector('#modals');
 
-const Modal = ({ title, children }) => {
-
-   const dispatch = useDispatch()
-   const onClose = () => {
-      dispatch({ type: CLOSE_MODAL_INGREDIENT })
-      dispatch({ type: NUMBER_NULL })
-   }
+const Modal = ({ title, children, onClose }) => {
 
    useEffect(() => {
       const handleEscKeydown = (e) => {

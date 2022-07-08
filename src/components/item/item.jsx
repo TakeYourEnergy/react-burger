@@ -17,6 +17,7 @@ const Item = ({ name, image, price, id, item }) => {
    let count = 0
    const buns = useSelector(state => state.burgerConstructorReducer.buns)
    const mains = useSelector(state => state.burgerConstructorReducer.mains)
+   
    mains.forEach(element => {
       if (item._id === element._id) {
          count++

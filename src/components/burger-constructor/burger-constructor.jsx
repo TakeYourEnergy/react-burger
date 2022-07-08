@@ -11,19 +11,18 @@ import { useDrop } from "react-dnd";
 import { v4 as uuidv4 } from 'uuid';
 import { ADD_ITEM, MOVE_ITEM } from "../../services/actions/burger-constructor";
 import BurgerConstructorList from "../burger-constructor-list/burger-constructor-list";
+import { CLOSE_MODAL_INGREDIENT } from "../../services/actions/object-ingredient";
+import { NUMBER_NULL } from "../../services/actions/order";
 
 
 const BurgerConstructor = () => {
    const dispatch = useDispatch()
    const [totalPrice, setTotalPrice] = useState(0)
 
-   //const state = useSelector(state => console.log(state.burgerConstructorReducer.mains))
-
    const { buns, mains } = useSelector(state => ({
       buns: state.burgerConstructorReducer.buns,
       mains: state.burgerConstructorReducer.mains
    }))
-
 
    const orderLoading = useSelector(state => state.orderReducer.ingrSpin)
    const isOrderDetailsOpened = useSelector(state => state.orderReducer.isOrderDetailsOpened)
@@ -38,13 +37,17 @@ const BurgerConstructor = () => {
       },
    });
 
+   const onClose = () => {
+      //dispatch({ type: CLOSE_MODAL_INGREDIENT })
+      dispatch({ type: NUMBER_NULL })
+   }
+
    //вычисление суммы заказа
    useMemo(() => {
       let sumMains = mains.reduce((acc, item) => acc + item.price, 0)
       let sumBuns = buns.price ? buns.price * 2 : 0
       setTotalPrice(sumMains + sumBuns)
    }, [mains, buns])
-
 
    const postOrder = () => {
       if (mains.length && buns.price > 0) {
@@ -105,7 +108,7 @@ const BurgerConstructor = () => {
          {
             isOrderDetailsOpened &&
             <Modal
-               title=''
+               title='' onClose={onClose}
             >
                <OrderDetails />
             </Modal>

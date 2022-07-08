@@ -13,7 +13,6 @@ const initiaState = {
 }
 
 export const orderReducer = (state = initiaState, action) => {
-   //console.log('OrderAction>>>', action)
 
    switch (action.type) {
       case GET_ORDER:
