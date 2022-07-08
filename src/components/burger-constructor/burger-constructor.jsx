@@ -17,8 +17,13 @@ const BurgerConstructor = () => {
    const dispatch = useDispatch()
    const [totalPrice, setTotalPrice] = useState(0)
 
-   const buns = useSelector(state => state.burgerConstructorReducer.buns)
-   const mains = useSelector(state => state.burgerConstructorReducer.mains)
+   //const state = useSelector(state => console.log(state.burgerConstructorReducer.mains))
+
+   const { buns, mains } = useSelector(state => ({
+      buns: state.burgerConstructorReducer.buns,
+      mains: state.burgerConstructorReducer.mains
+   }))
+
 
    const orderLoading = useSelector(state => state.orderReducer.ingrSpin)
    const isOrderDetailsOpened = useSelector(state => state.orderReducer.isOrderDetailsOpened)
@@ -72,7 +77,7 @@ const BurgerConstructor = () => {
                   />}
                </div>
 
-               <div ref={dropTarget} className={styles.item}>
+               <div className={styles.item}>
                   {mains.map((item, index) =>
                      <div key={item.uuid}>
                         <BurgerConstructorList items={item} index={index} moveItem={moveItem} />

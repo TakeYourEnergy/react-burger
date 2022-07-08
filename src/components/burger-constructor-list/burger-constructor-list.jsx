@@ -3,11 +3,12 @@ import styles from './burger-constructor-list.module.css';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
 import { menuItemPropTypes } from '../../utils/prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useDrop, useDrag } from "react-dnd";
 import { DELETE_ITEM } from '../../services/actions/burger-constructor';
 
 const BurgerConstructorList = ({ items, index, moveItem }) => {
+
    const dispatch = useDispatch();
 
    const [{ isDragging }, drag] = useDrag({

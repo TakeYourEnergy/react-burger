@@ -31,7 +31,7 @@ export const burgerConstructorReducer = (state = initialState, action) => {
          newList.splice(action.dragIndex, 1);
          newList.splice(action.hoverIndex, 0, dragItems)
          
-         console.log('newList>>>', newList)
+         //console.log('newList>>>', newList)
          
          return {
             ...state,
