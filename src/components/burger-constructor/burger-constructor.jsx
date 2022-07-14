@@ -11,7 +11,6 @@ import { useDrop } from "react-dnd";
 import { v4 as uuidv4 } from 'uuid';
 import { ADD_ITEM, MOVE_ITEM } from "../../services/actions/burger-constructor";
 import BurgerConstructorList from "../burger-constructor-list/burger-constructor-list";
-import { CLOSE_MODAL_INGREDIENT } from "../../services/actions/object-ingredient";
 import { NUMBER_NULL } from "../../services/actions/order";
 
 
@@ -23,6 +22,8 @@ const BurgerConstructor = () => {
       buns: state.burgerConstructorReducer.buns,
       mains: state.burgerConstructorReducer.mains
    }))
+
+   console.log(mains)
 
    const orderLoading = useSelector(state => state.orderReducer.ingrSpin)
    const isOrderDetailsOpened = useSelector(state => state.orderReducer.isOrderDetailsOpened)
@@ -38,7 +39,6 @@ const BurgerConstructor = () => {
    });
 
    const onClose = () => {
-      //dispatch({ type: CLOSE_MODAL_INGREDIENT })
       dispatch({ type: NUMBER_NULL })
    }
 
@@ -54,7 +54,7 @@ const BurgerConstructor = () => {
          const orderArrIdAll = [...mains, buns, buns]
          dispatch(getOrderNumber(orderArrIdAll))
       } else {
-         alert('не хватает либо булки, либо нет ингридиентов')
+         alert('не хватает либо булки, либо нет ингредиентов')
       }
    }
 
@@ -71,21 +71,23 @@ const BurgerConstructor = () => {
          <section ref={dropTarget} className={styles.section}>
             <div className={styles.box}>
                <div className={`${styles.bun}`}>
-                  {buns.type && <ConstructorElement
+                  {buns.type ? (<ConstructorElement
                      type="top"
                      isLocked={true}
                      text={`${buns.name} (верх)`}
                      price={buns.price}
                      thumbnail={buns.image}
-                  />}
+                  />) :
+                     <p className="text text_type_digits-default text_color_inactive pt-8 pl-3">Перенесите булку</p>}
                </div>
 
                <div className={styles.item}>
-                  {mains.map((item, index) =>
+                  {mains.length > 0 ? (mains.map((item, index) =>
                      <div key={item.uuid}>
                         <BurgerConstructorList items={item} index={index} moveItem={moveItem} />
                      </div>
-                  )}
+                  )) :
+                     <p className="text text_type_digits-default text_color_inactive pt-8 pb-8 pl-10">Перенесите начинки и соусы</p>}
                </div>
 
                <div ref={dropTarget} className={`${styles.bun}`}>
