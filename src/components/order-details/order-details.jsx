@@ -1,9 +1,10 @@
 import styles from './order-details.module.css';
 import done from '../../images/done.svg'
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
+const OrderDetails = () => {
+   const order = useSelector(state => state.orderReducer.numberOrder)
 
-const OrderDetails = ({ order }) => {
    return (
       <>
          <p className={styles.number}>{order}</p>
@@ -16,7 +17,3 @@ const OrderDetails = ({ order }) => {
 }
 
 export default OrderDetails
-
-OrderDetails.propTypes = {
-   order: PropTypes.number.isRequired,
-}

@@ -1,15 +1,38 @@
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './item.module.css';
-import React from 'react';
 import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux'
+import { OPEN_MODAL_INGREDIENT } from '../../services/actions/object-ingredient';
+import { useDrag } from "react-dnd";
 
 
-const Item = ({ name, image, price, openIngredientModal, id }) => {
+const Item = ({ name, image, price, id, item }) => {
+   const dispatch = useDispatch()
 
-   const [count, setCount] = React.useState(0)
+   const [, dragRef] = useDrag({
+      type: 'item',
+      item: { item }
+   })
+
+   let count = 0
+   const buns = useSelector(state => state.burgerConstructorReducer.buns)
+   const mains = useSelector(state => state.burgerConstructorReducer.mains)
+   
+   mains.forEach(element => {
+      if (item._id === element._id) {
+         count++
+      }
+   });
+   if (buns._id === item._id) {
+      count++
+   }
+
+   const openIngredientModal = () => {
+      dispatch({ type: OPEN_MODAL_INGREDIENT, idIngredients: id })
+   }
 
    return (
-      <div className={styles.item} onClick={() => { setCount(count + 1); openIngredientModal(id) }}>
+      <div ref={dragRef} className={styles.item} onClick={() => { openIngredientModal() }}>
          <img className={styles.image} src={image} alt={name} />
          <div className={styles.boxPrice}>
             <p className='text text_type_digits-default mr-2'>{price}</p>
@@ -18,7 +41,7 @@ const Item = ({ name, image, price, openIngredientModal, id }) => {
          <div className={styles.name}>
             <p className="text text_type_main-default">{name}</p>
          </div>
-         {count > 0 && <Counter count={count} size="default" />}
+         {<Counter count={count} size="default" />}
       </div>
    )
 }
@@ -26,7 +49,6 @@ const Item = ({ name, image, price, openIngredientModal, id }) => {
 export default Item
 
 Item.propTypes = {
-   openIngredientModal: PropTypes.func.isRequired,
    id: PropTypes.string.isRequired,
    name: PropTypes.string.isRequired,
    image: PropTypes.string.isRequired,

@@ -8,7 +8,7 @@ import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 const modalsContainer = document.querySelector('#modals');
 
-const Modal = ({ title, onClose, children }) => {
+const Modal = ({ title, children, onClose }) => {
 
    useEffect(() => {
       const handleEscKeydown = (e) => {
@@ -41,6 +41,5 @@ export default Modal
 
 Modal.propTypes = {
    title: PropTypes.string.isRequired,
-   onClose: PropTypes.func.isRequired,
    children: PropTypes.node.isRequired
 }

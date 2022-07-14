@@ -1,8 +1,12 @@
 import styles from './ingredient-details.module.css';
 import PropTypes from 'prop-types';
 import { menuItemPropTypes } from '../../utils/prop-types';
+import { useSelector, useDispatch } from 'react-redux';
 
-const IngredientDetails = ({ data, id }) => {
+const IngredientDetails = () => {
+   const data = useSelector(state => state.ingredientsReducer.ingredients)
+   const id = useSelector(state => state.objectIngredient.idIngredients)
+
    const elem = data.find((item) => {
       return item._id === id
    })
@@ -37,6 +41,5 @@ const IngredientDetails = ({ data, id }) => {
 export default IngredientDetails
 
 IngredientDetails.propTypes = {
-   id: PropTypes.string.isRequired,
-   data: PropTypes.arrayOf(menuItemPropTypes.isRequired).isRequired
+   
 }
