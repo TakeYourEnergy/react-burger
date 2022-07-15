@@ -9,6 +9,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getIngredientsData } from '../../services/actions/ingredients';
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Authorization from '../login/authorization/authorization';
+import Registration from '../login/registration/registration';
 
 
 function App() {
@@ -22,17 +25,31 @@ function App() {
   }, [])
 
   return (
-    <div className={styles.page}>
-      <AppHeader />
-      {stateToSpinner ?
-        <Spinner /> :
-        <main className={styles.main}>
-          <DndProvider backend={HTML5Backend}>
-            <BurgerIngredients />
-            <BurgerConstructor />
-          </DndProvider>
-        </main>}
-    </div>
+    <Router>
+      <div className={styles.page}>
+        <AppHeader />
+
+        <Switch>
+          <Route exact path="/">
+            {stateToSpinner ?
+              <Spinner /> :
+              <main className={styles.main}>
+                <DndProvider backend={HTML5Backend}>
+                  <BurgerIngredients />
+                  <BurgerConstructor />
+                </DndProvider>
+              </main>}
+          </Route>
+          <Route exact path="/login">
+            <Authorization />
+          </Route>
+          <Route exact path="/register">
+            <Registration />
+          </Route>
+        </Switch>
+
+      </div>
+    </Router>
   );
 }
 
