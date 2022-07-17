@@ -12,6 +12,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Authorization from '../login/authorization/authorization';
 import Registration from '../login/registration/registration';
+import ForgotPassword from '../login/forgot-password/forgot-password';
 
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getIngredientsData())
-  }, [])
+  }, [dispatch])
 
   return (
     <Router>
@@ -45,6 +46,9 @@ function App() {
           </Route>
           <Route exact path="/register">
             <Registration />
+          </Route>
+          <Route exact path="/forgot-password">
+            <ForgotPassword />
           </Route>
         </Switch>
 
