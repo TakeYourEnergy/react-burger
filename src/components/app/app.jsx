@@ -13,6 +13,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Authorization from '../login/authorization/authorization';
 import Registration from '../login/registration/registration';
 import ForgotPassword from '../login/forgot-password/forgot-password';
+import ResetPassword from '../login/reset-password/reset-password';
 
 
 function App() {
@@ -49,6 +50,9 @@ function App() {
           </Route>
           <Route exact path="/forgot-password">
             <ForgotPassword />
+          </Route>
+          <Route exact path='/reset-password'>
+            <ResetPassword />
           </Route>
         </Switch>
 

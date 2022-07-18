@@ -1,25 +1,46 @@
 import styles from './forgot-password.module.css'
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import {
    EmailInput,
    Button
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
+import { recoveryPasswordEmail } from '../../../services/actions/login';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 
 
 const ForgotPassword = () => {
    const [emailForgot, setEmailForgot] = useState('')
+   const dispatch = useDispatch();
+   const history = useHistory(); 
 
+   //const selector = useSelector(state => console.log(state.loginReducer))
 
    const emailForgotInput = (e) => {
       setEmailForgot(e.target.value)
    }
 
+   const forgotPasswordSubmit = (e) => {
+      e.preventDefault();
+      //диспачим введенное мыло, делая запрос к серверу
+      dispatch(recoveryPasswordEmail(emailForgot))
+      //обнуляем поле инпута
+      setEmailForgot('')
+   }
+
+   const resetPassword = useCallback(
+      () => {
+         history.replace({ pathname: '/reset-password' });
+      },
+      [history]
+   )
+
    return (
       <div className={styles.container}>
-         <h2 className={`${styles.title} text text_type_main-medium mb-6`}>Восстановление пароля</h2>
-         <form className={styles.form}>
+         <h2 className={`text text_type_main-medium mb-6`}>Восстановление пароля</h2>
+         <form className={styles.form} onSubmit={forgotPasswordSubmit}>
             <div className='mb-6'>
                <EmailInput
                   placeholder={"Укажите email"}
@@ -32,7 +53,7 @@ const ForgotPassword = () => {
                   type={"email"}
                />
             </div>
-            <Button disabled={!(emailForgot)} type="primary" size="medium" to='/reset-password'>Восстановить</Button>
+            <Button disabled={!(emailForgot)} type="primary" size="medium" onClick={resetPassword}>Восстановить</Button>
          </form>
          <div className={`${styles.text} text text_type_main-default text_color_inactive mt-20`}>
             <p className={`${styles.question} text text_type_main-default text_color_inactive`}>Вспомнили пароль?</p>&nbsp;

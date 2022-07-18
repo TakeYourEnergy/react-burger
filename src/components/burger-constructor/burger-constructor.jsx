@@ -23,8 +23,6 @@ const BurgerConstructor = () => {
       mains: state.burgerConstructorReducer.mains
    }))
 
-   console.log(mains)
-
    const orderLoading = useSelector(state => state.orderReducer.ingrSpin)
    const isOrderDetailsOpened = useSelector(state => state.orderReducer.isOrderDetailsOpened)
 
