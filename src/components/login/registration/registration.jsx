@@ -7,11 +7,15 @@ import {
 import { Link } from "react-router-dom";
 import styles from "./registration.module.css";
 import { useState } from "react";
+import { registrationUser } from "../../../services/actions/login";
+import { useDispatch, useSelector } from "react-redux";
 
 const Registration = () => {
   const [nameRegistration, setNameRegistration] = useState("");
   const [emailRegistration, setEmailRegistration] = useState("");
   const [passwordRegistration, setPasswordRegistration] = useState("");
+  const dispatch = useDispatch()
+  const selector = useSelector(state => console.log(state.loginReducer))
 
   const inputNameRegistration = (e) => {
     setNameRegistration(e.target.value);
@@ -25,11 +29,16 @@ const Registration = () => {
     setPasswordRegistration(e.target.value);
   };
 
+  const newUserRegistation = (e) => {
+    e.preventDefault();
+    dispatch(registrationUser(nameRegistration, emailRegistration, passwordRegistration));
+  }
+
   return (
     <div className={styles.container}>
       <h2 className={`text text_type_main-medium pb-6`}>Регистрация</h2>
 
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={newUserRegistation}>
         <div className={styles.inp}>
           <Input
             placeholder={"Имя"}

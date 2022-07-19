@@ -35,3 +35,20 @@ export const recoveryPassword = (email) => {
    })
       .then(checkResponse)
 }
+
+
+
+//запрос на создание пользователя
+export const newUser = (name, email, password) => {
+   return fetch(`${config.url}/auth/register`, {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+         email: email,
+         password: password,
+         name: name,
+      }),
+   })
+      .then(checkResponse)
+}
+
