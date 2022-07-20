@@ -6,6 +6,10 @@ import {
    REGISTRATION_USER_REQUEST,
    REGISTRATION_USER_SUCCESS,
    REGISTRATION_USER_FAILED,
+
+   GET_RESET_PASSWORD_REQUEST,
+   GET_RESET_PASSWORD_SUCCESS,
+   GET_RESET_PASSWORD_FAILED,
 } from "../actions/login";
 
 const initialState = {
@@ -14,7 +18,11 @@ const initialState = {
    forgotPasswordFailed: false,
 
    newUserRequest: false,
-   newUserFailed: false
+   newUserFailed: false,
+
+   resetPasswordRequest: false,
+   resetPasswordSuccess: false,
+   resetPasswordFailed: false,
 }
 
 
@@ -67,6 +75,26 @@ export const loginReducer = (state = initialState, action) => {
          return {
             newUserRequest: false,
             newUserFailed: true
+         }
+
+      case GET_RESET_PASSWORD_REQUEST:
+         return {
+            ...state,
+            resetPasswordRequest: true,
+            resetPasswordFailed: false
+         }
+      case GET_RESET_PASSWORD_SUCCESS:
+         return {
+            ...state,
+            resetPasswordSuccess: true,
+            resetPasswordRequest: false,
+            resetPasswordFailed: false,
+         }
+      case GET_RESET_PASSWORD_FAILED:
+         return {
+            ...state,
+            resetPasswordFailed: true,
+            resetPasswordRequest: false
          }
       default:
          return state

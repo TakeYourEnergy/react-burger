@@ -15,7 +15,7 @@ const Registration = () => {
   const [emailRegistration, setEmailRegistration] = useState("");
   const [passwordRegistration, setPasswordRegistration] = useState("");
   const dispatch = useDispatch()
-  const selector = useSelector(state => console.log(state.loginReducer))
+  //const selector = useSelector(state => console.log(state.loginReducer))
 
   const inputNameRegistration = (e) => {
     setNameRegistration(e.target.value);

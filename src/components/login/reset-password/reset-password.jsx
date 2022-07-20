@@ -2,25 +2,34 @@ import styles from './reset-password.module.css';
 import { PasswordInput, Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getNewPassword } from '../../../services/actions/login';
 
 const ResetPassword = () => {
    const [passwordInput, setPasswordInput] = useState('')
-   const [passwordFromLetter, setPasswordFromLettert] = useState('')
+   const [tokenFromLetter, setTokenFromLettert] = useState('')
+   const dispatch = useDispatch()
 
    const emailInputReset = (e) => {
       setPasswordInput(e.target.value)
    }
 
-   const passwordFromLetterInput = (e) => {
-      setPasswordFromLettert(e.target.value)
+   const tokenFromLetterInput = (e) => {
+      setTokenFromLettert(e.target.value)
+   }
+
+   const resetPasswordForm = (e) => {
+      e.preventDefault();
+      dispatch(getNewPassword(passwordInput, tokenFromLetter))
+
    }
 
    return (
       <div className={styles.container}>
          <h2 className={`${styles.title} text text_type_main-medium mb-6`}>Восстановление пароля</h2>
-         <form className={styles.form}>
+         <form className={styles.form} onSubmit={resetPasswordForm}>
             <div className='mb-6'>
-               <PasswordInput
+               <Input
                   placeholder='Введите новый пароль'
                   name={"password"}
                   onChange={emailInputReset}
@@ -28,13 +37,14 @@ const ResetPassword = () => {
                   size={"default"}
                   errorText={"Ошибка"}
                   error={false}
+                  icon={'ShowIcon'}
                />
             </div>
             <div className='mb-6'>
                <Input
                   placeholder='Введите код из письма'
-                  onChange={passwordFromLetterInput}
-                  value={passwordFromLetter}
+                  onChange={tokenFromLetterInput}
+                  value={tokenFromLetter}
                   type={"text"}
                   size={"default"}
                   error={false}

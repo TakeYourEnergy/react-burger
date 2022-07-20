@@ -1,4 +1,4 @@
-//сохраняем токе в куку (из тренажера)
+//сохраняем токен в куку (из тренажера)
 export function setCookie(name, value, props) {
    props = props || {};
    let exp = props.expires;
