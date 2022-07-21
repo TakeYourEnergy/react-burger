@@ -4,10 +4,10 @@ import {
   PasswordInput,
   Button
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import styles from "./registration.module.css";
 import { useState } from "react";
-import { registrationUser } from "../../../services/actions/login";
+import { registrationUser } from "../../services/actions/login";
 import { useDispatch, useSelector } from "react-redux";
 
 const Registration = () => {
@@ -15,7 +15,10 @@ const Registration = () => {
   const [emailRegistration, setEmailRegistration] = useState("");
   const [passwordRegistration, setPasswordRegistration] = useState("");
   const dispatch = useDispatch()
-  //const selector = useSelector(state => console.log(state.loginReducer))
+
+  const { user } = useSelector(state => ({
+    user: state.loginReducer.user
+  }))
 
   const inputNameRegistration = (e) => {
     setNameRegistration(e.target.value);
@@ -32,6 +35,16 @@ const Registration = () => {
   const newUserRegistation = (e) => {
     e.preventDefault();
     dispatch(registrationUser(nameRegistration, emailRegistration, passwordRegistration));
+  }
+
+  if (user) {
+    return (
+      <Redirect
+        to={{
+          pathname: "/",
+        }}
+      />
+    )
   }
 
   return (

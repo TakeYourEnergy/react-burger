@@ -1,6 +1,6 @@
 import { recoveryPassword } from "../../utils/api";
 import { newUser } from "../../utils/api";
-import { setCookie } from "../../components/login/cookie";
+import { setCookie } from "../../pages/cookie";
 import { newPassword } from "../../utils/api";
 
 //восстановление пароля (RECOVERY - восстановить) /forgot-password

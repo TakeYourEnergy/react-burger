@@ -1,13 +1,13 @@
 import styles from "./authorization.module.css";
 import { useState } from "react";
+import { Link, useHistory, Redirect } from "react-router-dom";
 
 import {
   EmailInput,
   PasswordInput,
   Button
 } from "@ya.praktikum/react-developer-burger-ui-components";
-
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Authorization = () => {
   const [emailAuthorization, setEmailAuthorization] = useState("");
@@ -20,6 +20,7 @@ const Authorization = () => {
   const onChangePassword = (e) => {
     setPasswordAuthorization(e.target.value);
   };
+
 
   return (
     <div className={styles.container}>

@@ -5,7 +5,7 @@ import {
    Input
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useHistory, Redirect } from "react-router-dom";
-import { recoveryPasswordEmail } from '../../../services/actions/login';
+import { recoveryPasswordEmail } from '../../services/actions/login';
 import { useDispatch, useSelector } from 'react-redux';
 
 
@@ -40,14 +40,6 @@ const ForgotPassword = () => {
       //обнуляем поле инпута
       setEmailForgot('')
    }
-
-   //!В случае успеха пользователь направляется на маршрут /reset-password
-   // const resetPassword = useCallback(
-   //    () => {
-   //       history.replace({ pathname: '/reset-password' });
-   //    },
-   //    [history]
-   // )
 
    return (
       <div className={styles.container}>

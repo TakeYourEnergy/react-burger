@@ -10,10 +10,12 @@ import { getIngredientsData } from '../../services/actions/ingredients';
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Authorization from '../login/authorization/authorization';
-import Registration from '../login/registration/registration';
-import ForgotPassword from '../login/forgot-password/forgot-password';
-import ResetPassword from '../login/reset-password/reset-password';
+import Authorization from '../../pages/authorization/authorization';
+import Registration from '../../pages/registration/registration';
+import ForgotPassword from '../../pages/forgot-password/forgot-password';
+import ResetPassword from '../../pages/reset-password/reset-password';
+import Profile from '../../pages/profile/profile';
+
 
 
 function App() {
@@ -53,6 +55,9 @@ function App() {
           </Route>
           <Route exact path='/reset-password'>
             <ResetPassword />
+          </Route>
+          <Route exact path='/profile'>
+            <Profile />
           </Route>
         </Switch>
 
