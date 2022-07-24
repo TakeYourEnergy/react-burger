@@ -2,6 +2,7 @@ import { recoveryPassword } from "../../utils/api";
 import { newUser } from "../../utils/api";
 import { setCookie } from "../../pages/cookie";
 import { newPassword } from "../../utils/api";
+import { getProfile } from "../../utils/api";
 
 //восстановление пароля (RECOVERY - восстановить) /forgot-password
 export const RECOVERY_PASSWORD_REQUEST = "RECOVERY_PASSWORD_REQUEST";
@@ -17,6 +18,12 @@ export const REGISTRATION_USER_FAILED = "REGISTRATION_USER_FAILED";
 export const GET_RESET_PASSWORD_REQUEST = "GET_RESET_PASSWORD_REQUEST";
 export const GET_RESET_PASSWORD_SUCCESS = "GET_RESET_PASSWORD_SUCCESS";
 export const GET_RESET_PASSWORD_FAILED = "GET_RESET_PASSWORD_FAILED";
+
+
+//получение данных о пользователе /profile
+export const GET_PROFILE_REQUEST = "GET_PROFILE_REQUEST";
+export const GET_PROFILE_SUCCESS = "GET_PROFILE_SUCCESS";
+export const GET_PROFILE_FAILED = "GET_PROFILE_FAILED";
 
 
 //восстановление пароля (RECOVERY - восстановить)
@@ -91,3 +98,25 @@ export function getNewPassword(password, token) {
    }
 }
 
+
+//получение данных о пользователе /profile
+export function getProfileData() {
+   return function (dispatch) {
+      dispatch({ type: GET_PROFILE_REQUEST })
+
+      getProfile()
+         .then(res => {
+            if (res && res.success) {
+               dispatch({
+                  type: GET_PROFILE_SUCCESS,
+                  user: res.user
+               })
+            } else {
+               dispatch({ type: GET_PROFILE_FAILED })
+            }
+         })
+         .catch(err => {
+            dispatch({ type: GET_PROFILE_FAILED })
+         })
+   }
+}

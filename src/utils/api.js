@@ -1,3 +1,5 @@
+import { getCookie } from "../pages/cookie"
+
 const config = {
    url: 'https://norma.nomoreparties.space/api'
 }
@@ -61,6 +63,37 @@ export const newPassword = (password, token) => {
       body: JSON.stringify({
          password: password,
          token: token
+      }),
+   })
+      .then(checkResponse)
+}
+
+
+//эндпоинт получения данных о пользователе
+export const getProfile = () => {
+   return fetch(`${config.url}/auth/user`, {
+      method: 'GET',
+      headers: {
+         "Content-Type": "application/json",
+         Authorization: 'Bearer ' + getCookie('token')
+      },
+   })
+      .then(checkResponse)
+}
+
+
+//эндпоинт обновления данных о пользователе
+export const getProfileUpdate = (email, name, password) => {
+   return fetch(`${config.url}/auth/user`, {
+      method: 'PATCH',
+      headers: {
+         "Content-Type": "application/json",
+         Authorization: 'Bearer ' + getCookie('token')
+      },
+      body: JSON.stringify({
+         email: email,
+         name: name,
+         password: password,
       }),
    })
       .then(checkResponse)

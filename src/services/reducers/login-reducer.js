@@ -10,6 +10,10 @@ import {
    GET_RESET_PASSWORD_REQUEST,
    GET_RESET_PASSWORD_SUCCESS,
    GET_RESET_PASSWORD_FAILED,
+
+   GET_PROFILE_REQUEST,
+   GET_PROFILE_SUCCESS,
+   GET_PROFILE_FAILED,
 } from "../actions/login";
 
 const initialState = {
@@ -23,6 +27,10 @@ const initialState = {
    resetPasswordRequest: false,
    resetPasswordSuccess: false,
    resetPasswordFailed: false,
+
+   getProfileRequest: false,
+   getProfileFailed: false,
+   answer: false,
 }
 
 
@@ -96,6 +104,30 @@ export const loginReducer = (state = initialState, action) => {
             resetPasswordFailed: true,
             resetPasswordRequest: false
          }
+
+      case GET_PROFILE_REQUEST:
+         return {
+            ...state,
+            getProfileRequest: true,
+            getProfileFailed: false,
+            answer: false,
+         }
+      case GET_PROFILE_SUCCESS:
+         return {
+            ...state,
+            getProfileRequest: false,
+            getProfileFailed: false,
+            user: action.user,
+            answer: true,
+         }
+      case GET_PROFILE_FAILED:
+         return {
+            ...state,
+            getProfileRequest: false,
+            getProfileFailed: true,
+            answer: false,
+         }
+
       default:
          return state
    }
