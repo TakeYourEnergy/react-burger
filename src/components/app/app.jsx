@@ -15,6 +15,7 @@ import Registration from '../../pages/registration/registration';
 import ForgotPassword from '../../pages/forgot-password/forgot-password';
 import ResetPassword from '../../pages/reset-password/reset-password';
 import Profile from '../../pages/profile/profile';
+import ProtectedRoute from '../../pages/protectedRoute/ProtectedRoute';
 
 
 
@@ -23,6 +24,7 @@ function App() {
   const stateToSpinner = useSelector(state => state.ingredientsReducer.ingrSpin)
   const dispatch = useDispatch();
 
+  //const state = useSelector(state => console.log(state.loginReducer.user))
 
   useEffect(() => {
     dispatch(getIngredientsData())
@@ -56,9 +58,9 @@ function App() {
           <Route exact path='/reset-password'>
             <ResetPassword />
           </Route>
-          <Route exact path='/profile'>
+          <ProtectedRoute exact path='/profile'>
             <Profile />
-          </Route>
+          </ProtectedRoute>
         </Switch>
 
       </div>

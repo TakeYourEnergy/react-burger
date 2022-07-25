@@ -1,18 +1,21 @@
 import styles from './profile.module.css';
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import { Button, Input, EmailInput, PasswordInput, } from "@ya.praktikum/react-developer-burger-ui-components";
 import { getProfileData } from '../../services/actions/login';
 import { useDispatch, useSelector } from 'react-redux';
+import { updateProfileData } from '../../services/actions/login';
 
 
 const Profile = () => {
    const [nameProfile, setNameProfile] = useState('')
    const [emailProfile, setEmailProfile] = useState('')
    const [passwordProfile, setPasswordProfile] = useState('')
+   const location = useLocation();
    //const [form, setFormValue] = useState({ name: "", email: "", password: "" });
 
    const dispatch = useDispatch();
+
    const { user, answer } = useSelector(state => ({
       user: state.loginReducer.user,
       answer: state.loginReducer.answer
@@ -29,6 +32,13 @@ const Profile = () => {
 
    const onChangeInputPasswordProfile = (e) => {
       setPasswordProfile(e.target.value)
+   }
+
+
+   //отредактирует информацию на экране профиля и нажмёт «Сохранить»
+   const submitProfile = (e) => {
+      e.preventDefault()
+      dispatch(updateProfileData(emailProfile, nameProfile, passwordProfile))
    }
 
    useEffect(() => {
@@ -68,7 +78,7 @@ const Profile = () => {
                В этом разделе вы можете &nbsp; изменить свои персональные данные
             </p>
          </nav>
-         <form className={styles.form} name="register" >
+         <form className={styles.form} name="register" onSubmit={submitProfile}>
             <div className={styles.inp}>
                <Input
                   type={'text'}

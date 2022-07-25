@@ -14,9 +14,14 @@ import {
    GET_PROFILE_REQUEST,
    GET_PROFILE_SUCCESS,
    GET_PROFILE_FAILED,
+
+   UPDATE_PROFILE_REQUEST,
+   UPDATE_PROFILE_SUCCESS,
+   UPDATE_PROFILE_FAILED,
 } from "../actions/login";
 
 const initialState = {
+   user: null,
    forgotPasswordRequest: false,
    forgotPasswordSuccess: false,
    forgotPasswordFailed: false,
@@ -31,6 +36,9 @@ const initialState = {
    getProfileRequest: false,
    getProfileFailed: false,
    answer: false,
+
+   updateProfileRequest: false,
+   updateProfileFailed: false,
 }
 
 
@@ -127,7 +135,25 @@ export const loginReducer = (state = initialState, action) => {
             getProfileFailed: true,
             answer: false,
          }
-
+      case UPDATE_PROFILE_REQUEST:
+         return {
+            ...state,
+            updateProfileRequest: true,
+            updateProfileFailed: false,
+         }
+      case UPDATE_PROFILE_SUCCESS:
+         return {
+            ...state,
+            updateProfileRequest: false,
+            user: action.user,
+            updateProfileFailed: false,
+         }
+      case UPDATE_PROFILE_FAILED:
+         return {
+            ...state,
+            updateProfileRequest: false,
+            updateProfileFailed: true,
+         }
       default:
          return state
    }

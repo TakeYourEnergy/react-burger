@@ -68,7 +68,6 @@ export const newPassword = (password, token) => {
       .then(checkResponse)
 }
 
-
 //эндпоинт получения данных о пользователе
 export const getProfile = () => {
    return fetch(`${config.url}/auth/user`, {

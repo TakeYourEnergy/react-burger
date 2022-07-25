@@ -3,6 +3,7 @@ import { newUser } from "../../utils/api";
 import { setCookie } from "../../pages/cookie";
 import { newPassword } from "../../utils/api";
 import { getProfile } from "../../utils/api";
+import { getProfileUpdate } from "../../utils/api";
 
 //восстановление пароля (RECOVERY - восстановить) /forgot-password
 export const RECOVERY_PASSWORD_REQUEST = "RECOVERY_PASSWORD_REQUEST";
@@ -25,6 +26,11 @@ export const GET_PROFILE_REQUEST = "GET_PROFILE_REQUEST";
 export const GET_PROFILE_SUCCESS = "GET_PROFILE_SUCCESS";
 export const GET_PROFILE_FAILED = "GET_PROFILE_FAILED";
 
+//обновления данных о пользователе
+export const UPDATE_PROFILE_REQUEST = "UPDATE_PROFILE_REQUEST";
+export const UPDATE_PROFILE_SUCCESS = "UPDATE_PROFILE_SUCCESS";
+export const UPDATE_PROFILE_FAILED = "UPDATE_PROFILE_FAILED";
+
 
 //восстановление пароля (RECOVERY - восстановить)
 export function recoveryPasswordEmail(email) {
@@ -44,7 +50,6 @@ export function recoveryPasswordEmail(email) {
          })
    }
 }
-
 
 //регистрация пользователя
 export function registrationUser(name, email, password) {
@@ -74,7 +79,6 @@ export function registrationUser(name, email, password) {
    }
 }
 
-
 ///получение нового пароля /reset-password
 export function getNewPassword(password, token) {
    return function (dispatch) {
@@ -98,7 +102,6 @@ export function getNewPassword(password, token) {
    }
 }
 
-
 //получение данных о пользователе /profile
 export function getProfileData() {
    return function (dispatch) {
@@ -117,6 +120,28 @@ export function getProfileData() {
          })
          .catch(err => {
             dispatch({ type: GET_PROFILE_FAILED })
+         })
+   }
+}
+
+//обновления данных о пользователе /profile
+export function updateProfileData(email, name, password) {
+   return function (dispatch) {
+      dispatch({ type: UPDATE_PROFILE_REQUEST })
+
+      getProfileUpdate(email, name, password)
+         .then(res => {
+            if (res && res.success) {
+               dispatch({
+                  type: UPDATE_PROFILE_SUCCESS,
+                  user: res.user
+               })
+            } else {
+               dispatch({ type: UPDATE_PROFILE_FAILED })
+            }
+         })
+         .catch(err => {
+            dispatch({ type: UPDATE_PROFILE_FAILED })
          })
    }
 }
