@@ -18,6 +18,10 @@ import {
    UPDATE_PROFILE_REQUEST,
    UPDATE_PROFILE_SUCCESS,
    UPDATE_PROFILE_FAILED,
+
+   SIGNOUT_REQUEST,
+   SIGNOUT_SUCCESS,
+   SIGNOUT_FAILED,
 } from "../actions/login";
 
 const initialState = {
@@ -39,6 +43,9 @@ const initialState = {
 
    updateProfileRequest: false,
    updateProfileFailed: false,
+
+   signOutRequest: false,
+   signOutFailed: false
 }
 
 
@@ -153,6 +160,26 @@ export const loginReducer = (state = initialState, action) => {
             ...state,
             updateProfileRequest: false,
             updateProfileFailed: true,
+         }
+
+      case SIGNOUT_REQUEST:
+         return {
+            ...state,
+            signOutRequest: true,
+            signOutFailed: false,
+         }
+      case SIGNOUT_SUCCESS:
+         return {
+            ...state,
+            signOutRequest: false,
+            signOutFailed: false,
+            user: null
+         }
+      case SIGNOUT_FAILED: 
+         return {
+            ...state,
+            signOutRequest: false,
+            signOutFailed: true,
          }
       default:
          return state

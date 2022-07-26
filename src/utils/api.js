@@ -97,3 +97,17 @@ export const getProfileUpdate = (email, name, password) => {
    })
       .then(checkResponse)
 }
+
+//выход из системы
+export const signOut = (refreshToken) => {
+   return fetch(`${config.url}/auth/logout`, {
+      method: 'POST',
+      headers: {
+         "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+         token: refreshToken
+      }),
+   })
+      .then(checkResponse)
+}

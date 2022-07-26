@@ -29,4 +29,11 @@ export function getCookie(name) {
    return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
+//удаление куки
+export function deleteCookie(name) {
+   // Находим куку по ключу token, удаляем её значение, 
+   // устанавливаем отрицательное время жизни, чтобы удалить сам ключ token
+   setCookie(name, null, { expires: -1 });
+}
+
 

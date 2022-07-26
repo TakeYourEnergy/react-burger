@@ -4,6 +4,8 @@ import { setCookie } from "../../pages/cookie";
 import { newPassword } from "../../utils/api";
 import { getProfile } from "../../utils/api";
 import { getProfileUpdate } from "../../utils/api";
+import { signOut } from "../../utils/api";
+import { deleteCookie } from "../../pages/cookie";
 
 //восстановление пароля (RECOVERY - восстановить) /forgot-password
 export const RECOVERY_PASSWORD_REQUEST = "RECOVERY_PASSWORD_REQUEST";
@@ -20,7 +22,6 @@ export const GET_RESET_PASSWORD_REQUEST = "GET_RESET_PASSWORD_REQUEST";
 export const GET_RESET_PASSWORD_SUCCESS = "GET_RESET_PASSWORD_SUCCESS";
 export const GET_RESET_PASSWORD_FAILED = "GET_RESET_PASSWORD_FAILED";
 
-
 //получение данных о пользователе /profile
 export const GET_PROFILE_REQUEST = "GET_PROFILE_REQUEST";
 export const GET_PROFILE_SUCCESS = "GET_PROFILE_SUCCESS";
@@ -30,6 +31,11 @@ export const GET_PROFILE_FAILED = "GET_PROFILE_FAILED";
 export const UPDATE_PROFILE_REQUEST = "UPDATE_PROFILE_REQUEST";
 export const UPDATE_PROFILE_SUCCESS = "UPDATE_PROFILE_SUCCESS";
 export const UPDATE_PROFILE_FAILED = "UPDATE_PROFILE_FAILED";
+
+//выход из системы
+export const SIGNOUT_REQUEST = "SIGNOUT_REQUEST";
+export const SIGNOUT_SUCCESS = "SIGNOUT_SUCCESS";
+export const SIGNOUT_FAILED = "SIGNOUT_FAILED";
 
 
 //восстановление пароля (RECOVERY - восстановить)
@@ -142,6 +148,29 @@ export function updateProfileData(email, name, password) {
          })
          .catch(err => {
             dispatch({ type: UPDATE_PROFILE_FAILED })
+         })
+   }
+}
+
+//выход из системы
+export function logOut (refreshToken) {
+   return function (dispatch) {
+      dispatch({ type: SIGNOUT_REQUEST })
+
+      signOut(refreshToken)
+         .then(res => {
+            if (res && res.success) {
+               localStorage.removeItem('token')
+               deleteCookie('token')
+               dispatch({
+                  type: SIGNOUT_SUCCESS,
+               })
+            } else {
+               dispatch({ type: SIGNOUT_FAILED })
+            }
+         })
+         .catch(err => {
+            dispatch({ type: SIGNOUT_FAILED })
          })
    }
 }

@@ -16,6 +16,8 @@ import ForgotPassword from '../../pages/forgot-password/forgot-password';
 import ResetPassword from '../../pages/reset-password/reset-password';
 import Profile from '../../pages/profile/profile';
 import ProtectedRoute from '../../pages/protectedRoute/ProtectedRoute';
+import { getCookie } from '../../pages/cookie';
+import { getProfileData } from '../../services/actions/login';
 
 
 
@@ -24,11 +26,24 @@ function App() {
   const stateToSpinner = useSelector(state => state.ingredientsReducer.ingrSpin)
   const dispatch = useDispatch();
 
-  //const state = useSelector(state => console.log(state.loginReducer.user))
+  const { user } = useSelector(state => ({
+    user: state.loginReducer.user
+  }))
+
+  const getRefreshToken = localStorage.getItem('token')
+
+  const getAccessTokenFromCookie = getCookie('token') //document.cookie
 
   useEffect(() => {
     dispatch(getIngredientsData())
-  }, [dispatch])
+
+//сохраняем пользователя при перезагрузке страницы
+    if (getRefreshToken && getAccessTokenFromCookie && !user) {
+      dispatch(getProfileData())
+    }
+  }, [dispatch, user, getRefreshToken, getAccessTokenFromCookie ])
+
+
 
   return (
     <Router>

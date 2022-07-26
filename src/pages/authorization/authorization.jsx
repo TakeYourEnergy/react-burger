@@ -14,7 +14,9 @@ const Authorization = () => {
   const [passwordAuthorization, setPasswordAuthorization] = useState("");
   const location = useLocation();
 
-  const user = useSelector(state => console.log(state.loginReducer.user));
+  const { user } = useSelector(state => ({
+    user: state.loginReducer.user
+  }))
 
   const onChangeInput = (e) => {
     setEmailAuthorization(e.target.value);

@@ -5,14 +5,15 @@ import { Button, Input, EmailInput, PasswordInput, } from "@ya.praktikum/react-d
 import { getProfileData } from '../../services/actions/login';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateProfileData } from '../../services/actions/login';
+import { logOut } from '../../services/actions/login';
 
 
 const Profile = () => {
    const [nameProfile, setNameProfile] = useState('')
    const [emailProfile, setEmailProfile] = useState('')
    const [passwordProfile, setPasswordProfile] = useState('')
-   const location = useLocation();
-   //const [form, setFormValue] = useState({ name: "", email: "", password: "" });
+   const location = useLocation()
+   const getRefreshToken = localStorage.getItem('token')
 
    const dispatch = useDispatch();
 
@@ -34,7 +35,6 @@ const Profile = () => {
       setPasswordProfile(e.target.value)
    }
 
-
    //отредактирует информацию на экране профиля и нажмёт «Сохранить»
    const submitProfile = (e) => {
       e.preventDefault()
@@ -43,10 +43,20 @@ const Profile = () => {
 
    useEffect(() => {
       dispatch(getProfileData())
-      // if (answer) {
-      //    setFormValue({ name: user.name, email: user.email, password: "" });
-      // }
    }, [dispatch])
+
+   //выход из профиля
+   const signOutProfile = () => {
+      dispatch(logOut(getRefreshToken))
+   }
+
+   //кнопка отмены -  возвращает информацию о пользователе к исходному значению до редактирования
+   const cancellation = (e) => {
+      e.preventDefault()
+      setNameProfile(user.name)
+      setEmailProfile(user.email)
+      setPasswordProfile('')
+   }
 
    return (
       <div className={styles.profile}>
@@ -68,7 +78,7 @@ const Profile = () => {
                </li>
                <li className={styles.item}>
                   <NavLink
-                     activeClassName={styles.activeLink}
+                     activeClassName={styles.activeLink} onClick={signOutProfile}
                      className={`${styles.link} text text_type_main-medium`} exact to='/login' >
                      <p className="text text_type_main-medium">Выход</p>
                   </NavLink>
@@ -117,7 +127,7 @@ const Profile = () => {
                />
             </div>
             <div className={styles.buttons}>
-               <Button type="secondary" size="medium">Отмена</Button>
+               <Button type="secondary" size="medium" onClick={cancellation}>Отмена</Button>
                <Button disabled={!(nameProfile && emailProfile && passwordProfile)} type="primary" size="medium">Сохранить</Button>
             </div>
          </form >
