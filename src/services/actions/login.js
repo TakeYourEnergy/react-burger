@@ -6,6 +6,7 @@ import { getProfile } from "../../utils/api";
 import { getProfileUpdate } from "../../utils/api";
 import { signOut } from "../../utils/api";
 import { deleteCookie } from "../../pages/cookie";
+import { refreshToken } from "../../utils/api";
 
 //восстановление пароля (RECOVERY - восстановить) /forgot-password
 export const RECOVERY_PASSWORD_REQUEST = "RECOVERY_PASSWORD_REQUEST";
@@ -36,6 +37,11 @@ export const UPDATE_PROFILE_FAILED = "UPDATE_PROFILE_FAILED";
 export const SIGNOUT_REQUEST = "SIGNOUT_REQUEST";
 export const SIGNOUT_SUCCESS = "SIGNOUT_SUCCESS";
 export const SIGNOUT_FAILED = "SIGNOUT_FAILED";
+
+//обновление токена
+export const TOKEN_REQUEST = "TOKEN_REQUEST";
+export const TOKEN_SUCCESS = "TOKEN_SUCCESS";
+export const TOKEN_FAILED = "TOKEN_FAILED";
 
 
 //восстановление пароля (RECOVERY - восстановить)
@@ -153,7 +159,7 @@ export function updateProfileData(email, name, password) {
 }
 
 //выход из системы
-export function logOut (refreshToken) {
+export function logOut(refreshToken) {
    return function (dispatch) {
       dispatch({ type: SIGNOUT_REQUEST })
 
@@ -171,6 +177,28 @@ export function logOut (refreshToken) {
          })
          .catch(err => {
             dispatch({ type: SIGNOUT_FAILED })
+         })
+   }
+}
+
+//обновление токена
+export function updateToken() {
+   return function (dispatch) {
+      dispatch({ type: TOKEN_REQUEST })
+
+      refreshToken()
+         .then(res => {
+            if (res && res.success) {
+               let authToken = res.accessToken.split('Bearer ')[1]
+               setCookie('token', authToken)
+               localStorage.setItem('token', res.refreshToken)
+               dispatch({ type: TOKEN_SUCCESS })
+            } else {
+               dispatch({ type: TOKEN_FAILED })
+            }
+         })
+         .catch(err => {
+            dispatch({ type: TOKEN_FAILED })
          })
    }
 }

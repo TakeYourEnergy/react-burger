@@ -22,10 +22,15 @@ import {
    SIGNOUT_REQUEST,
    SIGNOUT_SUCCESS,
    SIGNOUT_FAILED,
+
+   TOKEN_REQUEST,
+   TOKEN_SUCCESS,
+   TOKEN_FAILED,
 } from "../actions/login";
 
 const initialState = {
    user: null,
+
    forgotPasswordRequest: false,
    forgotPasswordSuccess: false,
    forgotPasswordFailed: false,
@@ -45,7 +50,11 @@ const initialState = {
    updateProfileFailed: false,
 
    signOutRequest: false,
-   signOutFailed: false
+   signOutFailed: false,
+
+   tokenRequest: false,
+   tokenSuccess: false,
+   tokenFailed: false,
 }
 
 
@@ -175,11 +184,31 @@ export const loginReducer = (state = initialState, action) => {
             signOutFailed: false,
             user: null
          }
-      case SIGNOUT_FAILED: 
+      case SIGNOUT_FAILED:
          return {
             ...state,
             signOutRequest: false,
             signOutFailed: true,
+         }
+
+      case TOKEN_REQUEST:
+         return {
+            ...state,
+            tokenRequest: true,
+            tokenSuccess: false,
+            tokenFailed: false,
+         }
+      case TOKEN_SUCCESS:
+         return {
+            tokenRequest: false,
+            tokenSuccess: true,
+            tokenFailed: false,
+         }
+      case TOKEN_FAILED:
+         return {
+            tokenRequest: false,
+            tokenSuccess: false,
+            tokenFailed: true,
          }
       default:
          return state

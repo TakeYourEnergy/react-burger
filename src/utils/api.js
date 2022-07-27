@@ -111,3 +111,18 @@ export const signOut = (refreshToken) => {
    })
       .then(checkResponse)
 }
+
+//обновление токена
+export const refreshToken = () => {
+   return fetch(`${config.url}/auth/token`, {
+      method: 'POST',
+      headers: {
+         "Content-Type": "application/json",
+         Authorization: 'Bearer ' + getCookie('token')
+      },
+      body: JSON.stringify({
+         token: localStorage.getItem('token')
+      }),
+   })
+      .then(checkResponse)
+}

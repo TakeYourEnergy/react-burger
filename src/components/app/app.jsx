@@ -18,6 +18,7 @@ import Profile from '../../pages/profile/profile';
 import ProtectedRoute from '../../pages/protectedRoute/ProtectedRoute';
 import { getCookie } from '../../pages/cookie';
 import { getProfileData } from '../../services/actions/login';
+import { updateToken } from '../../services/actions/login';
 
 
 
@@ -26,8 +27,9 @@ function App() {
   const stateToSpinner = useSelector(state => state.ingredientsReducer.ingrSpin)
   const dispatch = useDispatch();
 
-  const { user } = useSelector(state => ({
-    user: state.loginReducer.user
+  const { user, tokenSuccess } = useSelector(state => ({
+    user: state.loginReducer.user,
+    tokenSuccess: state.loginReducer.tokenSuccess
   }))
 
   const getRefreshToken = localStorage.getItem('token')
@@ -37,11 +39,19 @@ function App() {
   useEffect(() => {
     dispatch(getIngredientsData())
 
-//сохраняем пользователя при перезагрузке страницы
+    //запрос на получение или обновление данных о пользователе - при перезагрузке
     if (getRefreshToken && getAccessTokenFromCookie && !user) {
       dispatch(getProfileData())
     }
-  }, [dispatch, user, getRefreshToken, getAccessTokenFromCookie ])
+    //если токен из куки просрочился и есть второй — refreshToken, то получаем новый - accessToken
+    if (!getAccessTokenFromCookie && getRefreshToken) {
+      dispatch(updateToken())
+    }
+    //повторяем запрос на получение или обновление данных о пользователе
+    if (tokenSuccess && getRefreshToken && getAccessTokenFromCookie) {
+      dispatch(getProfileData())
+    }
+  }, [dispatch, user, getRefreshToken, getAccessTokenFromCookie])
 
 
 

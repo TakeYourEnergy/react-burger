@@ -9,9 +9,6 @@ import { logOut } from '../../services/actions/login';
 
 
 const Profile = () => {
-   const [nameProfile, setNameProfile] = useState('')
-   const [emailProfile, setEmailProfile] = useState('')
-   const [passwordProfile, setPasswordProfile] = useState('')
    const location = useLocation()
    const getRefreshToken = localStorage.getItem('token')
 
@@ -22,6 +19,11 @@ const Profile = () => {
       answer: state.loginReducer.answer
    }))
 
+   const [nameProfile, setNameProfile] = useState(`${user.name}`)
+   const [emailProfile, setEmailProfile] = useState(`${user.email}`)
+   const [passwordProfile, setPasswordProfile] = useState('')
+
+   console.log(user)
 
    const onChangeInputNameProfile = (e) => {
       setNameProfile(e.target.value)
