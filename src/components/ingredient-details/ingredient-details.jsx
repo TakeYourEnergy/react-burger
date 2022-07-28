@@ -2,10 +2,14 @@ import styles from './ingredient-details.module.css';
 import PropTypes from 'prop-types';
 import { menuItemPropTypes } from '../../utils/prop-types';
 import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 const IngredientDetails = () => {
+   const { id } = useParams();
+   console.log(id)
+
    const data = useSelector(state => state.ingredientsReducer.ingredients)
-   const id = useSelector(state => state.objectIngredient.idIngredients)
+   // const id = useSelector(state => state.objectIngredient.idIngredients)
 
    const elem = data.find((item) => {
       return item._id === id
@@ -40,6 +44,3 @@ const IngredientDetails = () => {
 
 export default IngredientDetails
 
-IngredientDetails.propTypes = {
-   
-}

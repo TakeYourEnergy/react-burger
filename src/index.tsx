@@ -7,6 +7,7 @@ import { compose, createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { rootReducer } from './services/reducers/root-reducer';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 
 declare global {
@@ -25,9 +26,11 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
+  <Router>
     <Provider store={store}>
       <App />
     </Provider>
+  </Router>
 );
 
 // If you want to start measuring performance in your app, pass a function

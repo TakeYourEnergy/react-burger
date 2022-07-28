@@ -23,8 +23,6 @@ const Profile = () => {
    const [emailProfile, setEmailProfile] = useState(`${user.email}`)
    const [passwordProfile, setPasswordProfile] = useState('')
 
-   console.log(user)
-
    const onChangeInputNameProfile = (e) => {
       setNameProfile(e.target.value)
    }

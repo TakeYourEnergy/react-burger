@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getIngredientsData } from '../../services/actions/ingredients';
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch, useLocation, useHistory } from 'react-router-dom';
 import Authorization from '../../pages/authorization/authorization';
 import Registration from '../../pages/registration/registration';
 import ForgotPassword from '../../pages/forgot-password/forgot-password';
@@ -17,9 +17,10 @@ import ResetPassword from '../../pages/reset-password/reset-password';
 import Profile from '../../pages/profile/profile';
 import ProtectedRoute from '../../pages/protectedRoute/ProtectedRoute';
 import { getCookie } from '../../pages/cookie';
-import { getProfileData } from '../../services/actions/login';
-import { updateToken } from '../../services/actions/login';
-
+import { getProfileData, updateToken } from '../../services/actions/login';
+import Modal from '../modal/modal';
+import { CLOSE_MODAL_INGREDIENT } from '../../services/actions/object-ingredient';
+import IngredientDetails from '../ingredient-details/ingredient-details';
 
 
 function App() {
@@ -36,6 +37,18 @@ function App() {
 
   const getAccessTokenFromCookie = getCookie('token') //document.cookie
 
+  const history = useHistory()
+  const location = useLocation()
+  const background = location.state?.background
+  console.log(location)
+
+
+  const onClose = () => {
+    dispatch({ type: CLOSE_MODAL_INGREDIENT })
+    history.replace('/')
+    //dispatch({ type: NUMBER_NULL })
+  }
+
   useEffect(() => {
     dispatch(getIngredientsData())
 
@@ -51,45 +64,59 @@ function App() {
     if (tokenSuccess && getRefreshToken && getAccessTokenFromCookie) {
       dispatch(getProfileData())
     }
-  }, [dispatch, user, getRefreshToken, getAccessTokenFromCookie])
+  }, [dispatch, user, getRefreshToken, getAccessTokenFromCookie, tokenSuccess])
 
 
 
   return (
-    <Router>
-      <div className={styles.page}>
-        <AppHeader />
 
-        <Switch>
-          <Route exact path="/">
-            {stateToSpinner ?
-              <Spinner /> :
-              <main className={styles.main}>
-                <DndProvider backend={HTML5Backend}>
-                  <BurgerIngredients />
-                  <BurgerConstructor />
-                </DndProvider>
-              </main>}
-          </Route>
-          <Route exact path="/login">
-            <Authorization />
-          </Route>
-          <Route exact path="/register">
-            <Registration />
-          </Route>
-          <Route exact path="/forgot-password">
-            <ForgotPassword />
-          </Route>
-          <Route exact path='/reset-password'>
-            <ResetPassword />
-          </Route>
-          <ProtectedRoute exact path='/profile'>
-            <Profile />
-          </ProtectedRoute>
-        </Switch>
+    <div className={styles.page}>
+      <AppHeader />
 
-      </div>
-    </Router>
+      <Switch location={background || location}>
+        <Route exact path="/">
+          {stateToSpinner ?
+            <Spinner /> :
+            <main className={styles.main}>
+              <DndProvider backend={HTML5Backend}>
+                <BurgerIngredients />
+                <BurgerConstructor />
+              </DndProvider>
+            </main>}
+        </Route>
+        <Route exact path="/login">
+          <Authorization />
+        </Route>
+        <Route exact path="/register">
+          <Registration />
+        </Route>
+        <Route exact path="/forgot-password">
+          <ForgotPassword />
+        </Route>
+        <Route exact path='/reset-password'>
+          <ResetPassword />
+        </Route>
+        <Route
+          path='/ingredients/:id'>
+          <IngredientDetails />
+        </Route>
+        <ProtectedRoute exact path='/profile'>
+          <Profile />
+        </ProtectedRoute>
+      </Switch>
+
+      {background &&
+        <Route exact path="/ingredients/:id">
+          <Modal
+            title="Детали ингредиента" onClose={onClose}
+          >
+            <IngredientDetails />
+          </Modal>
+        </Route>
+      }
+
+    </div>
+
   );
 }
 

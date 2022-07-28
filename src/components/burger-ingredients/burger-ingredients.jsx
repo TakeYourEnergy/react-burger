@@ -7,7 +7,6 @@ import Modal from "../modal/modal";
 import { useSelector, useDispatch } from 'react-redux';
 import { useInView } from "react-intersection-observer";
 import { CLOSE_MODAL_INGREDIENT } from "../../services/actions/object-ingredient";
-import { NUMBER_NULL } from "../../services/actions/order";
 
 const BurgerIngredients = () => {
 
@@ -58,13 +57,13 @@ const BurgerIngredients = () => {
             </div>
          </section>
 
-         {isOpened &&
+         {/* {isOpened &&
             <Modal
                title="Детали ингредиента" onClose={onClose}
             >
                <IngredientDetails />
             </Modal>
-         }
+         } */}
       </>
    )
 }
