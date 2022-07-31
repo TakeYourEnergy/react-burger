@@ -1,6 +1,6 @@
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './app-header.module.css';
-import { NavLink, useRouteMatch } from 'react-router-dom';
+import { NavLink, useRouteMatch, Link } from 'react-router-dom';
 
 const AppHeader = () => {
 
@@ -21,14 +21,16 @@ const AppHeader = () => {
                   </NavLink>
                </li>
                <li className={styles.item}>
-                  <a className={`${styles.link} text text_type_main-default`} href='1' onClick={(e) => e.preventDefault()}>
-                     <ListIcon type={"secondary"} />
+                  <NavLink className={`${styles.link} text text_type_main-default`} activeClassName={styles.activeLink} exact to='/profile/orders'>
+                     <ListIcon type={isOrders ? 'primary' : 'secondary'} />
                      <p className='pl-2'>Лента заказов</p>
-                  </a>
+                  </NavLink>
                </li>
             </ul>
          </div>
-         <Logo />
+         <Link to='/' >
+            <Logo />
+         </Link>
          <div className={styles.personal}>
             <NavLink className={`${styles.link} text text_type_main-default`} activeClassName={styles.activeLink} exact to='/profile'>
                <ProfileIcon type={isProfile ? 'primary' : 'secondary'} />

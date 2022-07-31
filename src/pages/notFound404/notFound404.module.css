@@ -1,0 +1,21 @@
+.box {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+}
+
+.img {
+   width: 800px;
+   height: 550px;
+   margin-bottom: 30px;
+   border-radius: 40px;
+}
+
+.link {
+   font-size: 30px;
+   font-family: 'Jet Brains Mono';
+   line-height: 1.5;
+   font-weight: normal;
+   color: #8585AD;
+}

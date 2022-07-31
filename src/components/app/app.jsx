@@ -21,7 +21,8 @@ import { getProfileData, updateToken } from '../../services/actions/login';
 import Modal from '../modal/modal';
 import { CLOSE_MODAL_INGREDIENT } from '../../services/actions/object-ingredient';
 import IngredientDetails from '../ingredient-details/ingredient-details';
-
+import IngredientPages from '../../pages/ingredientPages/ingredientPages';
+import NotFound404 from '../../pages/notFound404/notFound404';
 
 function App() {
 
@@ -93,12 +94,15 @@ function App() {
           <ResetPassword />
         </Route>
         <Route
-          path='/ingredients/:id'>
-          <IngredientDetails />
+          path='/ingredient/:id'>
+          <IngredientPages />
         </Route>
         <ProtectedRoute exact path='/profile'>
           <Profile />
         </ProtectedRoute>
+        <Route >
+          <NotFound404 />
+        </Route>
       </Switch>
       {/* Show the modal when a background page is set */}
       {background &&
