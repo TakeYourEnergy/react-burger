@@ -15,7 +15,6 @@ const BurgerIngredients = () => {
    const [rollsRef, inViewBuns] = useInView({ threshold: 0.3 })
    const [saucesRef, inViewSauces] = useInView({ threshold: 0.3 })
    const [toppingsRef, inViewToppings] = useInView({ threshold: 0.3 })
-
    const isOpened = useSelector((state) => state.objectIngredient.isOpened)
 
    const dispatch = useDispatch()

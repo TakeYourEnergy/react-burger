@@ -40,12 +40,14 @@ function App() {
   const history = useHistory()
   const location = useLocation()
   const background = location.state?.background
-  console.log(location)
+
+  const isOpened = useSelector((state) => state.objectIngredient.isOpened)
+  console.log(isOpened)
 
 
   const onClose = () => {
     dispatch({ type: CLOSE_MODAL_INGREDIENT })
-    history.replace('/')
+    history.goBack()
     //dispatch({ type: NUMBER_NULL })
   }
 
@@ -104,7 +106,7 @@ function App() {
           <Profile />
         </ProtectedRoute>
       </Switch>
-
+      {/* Show the modal when a background page is set */}
       {background &&
         <Route exact path="/ingredients/:id">
           <Modal

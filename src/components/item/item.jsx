@@ -6,7 +6,6 @@ import { OPEN_MODAL_INGREDIENT } from '../../services/actions/object-ingredient'
 import { useDrag } from "react-dnd";
 import { Link, useLocation } from 'react-router-dom';
 
-
 const Item = ({ name, image, price, id, item }) => {
 
    const dispatch = useDispatch()
@@ -31,6 +30,7 @@ const Item = ({ name, image, price, id, item }) => {
       count++
    }
 
+   //открытие модального окна с ингредиентами
    const openIngredientModal = () => {
       dispatch({ type: OPEN_MODAL_INGREDIENT, idIngredients: id })
    }
