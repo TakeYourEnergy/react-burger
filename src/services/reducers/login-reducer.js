@@ -26,6 +26,10 @@ import {
    TOKEN_REQUEST,
    TOKEN_SUCCESS,
    TOKEN_FAILED,
+
+   AUTHORIZATION_REQUEST,
+   AUTHORIZATION_SUCCESS,
+   AUTHORIZATION_FAILED
 } from "../actions/login";
 
 const initialState = {
@@ -55,6 +59,9 @@ const initialState = {
    tokenRequest: false,
    tokenSuccess: false,
    tokenFailed: false,
+
+   authorizationRequest: false,
+   authorizationFailed: false
 }
 
 
@@ -209,6 +216,24 @@ export const loginReducer = (state = initialState, action) => {
             tokenRequest: false,
             tokenSuccess: false,
             tokenFailed: true,
+         }
+
+      case AUTHORIZATION_REQUEST:
+         return {
+            ...state,
+            authorizationRequest: true,
+            authorizationFailed: false
+         }
+      case AUTHORIZATION_SUCCESS:
+         return {
+            authorizationRequest: false,
+            authorizationFailed: false,
+            user: action.user
+         }
+      case AUTHORIZATION_FAILED:
+         return {
+            authorizationRequest: false,
+            authorizationFailed: true,
          }
       default:
          return state

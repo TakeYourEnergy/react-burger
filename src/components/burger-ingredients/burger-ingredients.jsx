@@ -2,11 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import styles from "./burger-ingredients.module.css";
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientList from "../ingredient-list/ingredient-list";
-import IngredientDetails from "../ingredient-details/ingredient-details";
-import Modal from "../modal/modal";
-import { useSelector, useDispatch } from 'react-redux';
 import { useInView } from "react-intersection-observer";
-import { CLOSE_MODAL_INGREDIENT } from "../../services/actions/object-ingredient";
 
 const BurgerIngredients = () => {
 
@@ -15,14 +11,7 @@ const BurgerIngredients = () => {
    const [rollsRef, inViewBuns] = useInView({ threshold: 0.3 })
    const [saucesRef, inViewSauces] = useInView({ threshold: 0.3 })
    const [toppingsRef, inViewToppings] = useInView({ threshold: 0.3 })
-   const isOpened = useSelector((state) => state.objectIngredient.isOpened)
 
-   const dispatch = useDispatch()
-
-   const onClose = () => {
-      dispatch({ type: CLOSE_MODAL_INGREDIENT })
-      //dispatch({ type: NUMBER_NULL })
-   }
 
    useEffect(() => {
       if (inViewBuns) { setCurrent('rolls') }
@@ -56,13 +45,6 @@ const BurgerIngredients = () => {
             </div>
          </section>
 
-         {/* {isOpened &&
-            <Modal
-               title="Детали ингредиента" onClose={onClose}
-            >
-               <IngredientDetails />
-            </Modal>
-         } */}
       </>
    )
 }

@@ -126,3 +126,18 @@ export const refreshToken = () => {
    })
       .then(checkResponse)
 }
+
+//запрос авторизации
+export const authorizationLogin = (email, password) => {
+   return fetch(`${config.url}/auth/login`, {
+      method: 'POST',
+      headers: {
+         "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+         email: email,
+         password: password
+      }),
+   })
+      .then(checkResponse)
+}

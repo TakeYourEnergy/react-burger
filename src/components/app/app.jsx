@@ -34,16 +34,11 @@ function App() {
   }))
 
   const getRefreshToken = localStorage.getItem('token')
-
   const getAccessTokenFromCookie = getCookie('token') //document.cookie
 
   const history = useHistory()
   const location = useLocation()
   const background = location.state?.background
-
-  const isOpened = useSelector((state) => state.objectIngredient.isOpened)
-  console.log(isOpened)
-
 
   const onClose = () => {
     dispatch({ type: CLOSE_MODAL_INGREDIENT })
@@ -67,7 +62,6 @@ function App() {
       dispatch(getProfileData())
     }
   }, [dispatch, user, getRefreshToken, getAccessTokenFromCookie, tokenSuccess])
-
 
 
   return (
@@ -108,7 +102,7 @@ function App() {
       </Switch>
       {/* Show the modal when a background page is set */}
       {background &&
-        <Route exact path="/ingredients/:id">
+        <Route exact path="/ingredient/:id">
           <Modal
             title="Детали ингредиента" onClose={onClose}
           >

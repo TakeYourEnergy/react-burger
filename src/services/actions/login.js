@@ -7,6 +7,7 @@ import { getProfileUpdate } from "../../utils/api";
 import { signOut } from "../../utils/api";
 import { deleteCookie } from "../../pages/cookie";
 import { refreshToken } from "../../utils/api";
+import { authorizationLogin } from "../../utils/api";
 
 //восстановление пароля (RECOVERY - восстановить) /forgot-password
 export const RECOVERY_PASSWORD_REQUEST = "RECOVERY_PASSWORD_REQUEST";
@@ -42,6 +43,11 @@ export const SIGNOUT_FAILED = "SIGNOUT_FAILED";
 export const TOKEN_REQUEST = "TOKEN_REQUEST";
 export const TOKEN_SUCCESS = "TOKEN_SUCCESS";
 export const TOKEN_FAILED = "TOKEN_FAILED";
+
+//запрос авторизации
+export const AUTHORIZATION_REQUEST = "AUTHORIZATION_REQUEST";
+export const AUTHORIZATION_SUCCESS = "AUTHORIZATION_SUCCESS";
+export const AUTHORIZATION_FAILED = "AUTHORIZATION_FAILED";
 
 
 //восстановление пароля (RECOVERY - восстановить)
@@ -199,6 +205,28 @@ export function updateToken() {
          })
          .catch(err => {
             dispatch({ type: TOKEN_FAILED })
+         })
+   }
+}
+
+//запрос авторизации
+export function authorizationUser(email, password) {
+   return function (dispatch) {
+      dispatch({ type: AUTHORIZATION_REQUEST })
+
+      authorizationLogin(email, password)
+         .then(res => {
+            if (res && res.success) {
+               let authToken = res.accessToken.split('Bearer ')[1]
+               setCookie('token', authToken)
+               localStorage.setItem('token', res.refreshToken)
+               dispatch({ type: AUTHORIZATION_SUCCESS, user: res.user })
+            } else {
+               dispatch({ type: AUTHORIZATION_FAILED })
+            }
+         })
+         .catch(err => {
+            dispatch({ type: AUTHORIZATION_FAILED })
          })
    }
 }

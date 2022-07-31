@@ -1,18 +1,19 @@
 import styles from "./authorization.module.css";
 import { useState } from "react";
 import { Link, useHistory, Redirect, useLocation } from "react-router-dom";
-
+import { authorizationUser } from "../../services/actions/login";
 import {
   EmailInput,
   PasswordInput,
   Button
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Authorization = () => {
   const [emailAuthorization, setEmailAuthorization] = useState("");
   const [passwordAuthorization, setPasswordAuthorization] = useState("");
   const location = useLocation();
+  const dispatch = useDispatch()
 
   const { user } = useSelector(state => ({
     user: state.loginReducer.user
@@ -26,6 +27,11 @@ const Authorization = () => {
     setPasswordAuthorization(e.target.value);
   };
 
+  const submitAuthorization = (e) => {
+    e.preventDefault();
+    dispatch(authorizationUser(emailAuthorization, passwordAuthorization));
+  };
+
   if (user) {
     return (
       <Redirect to={location?.state?.from || '/'} />
@@ -37,7 +43,7 @@ const Authorization = () => {
     <div className={styles.container}>
       <h2 className="text text_type_main-medium">Вход</h2>
 
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={submitAuthorization}>
         <div className="mt-6 mb-6">
           <EmailInput
             placeholder={"E-mail"}
