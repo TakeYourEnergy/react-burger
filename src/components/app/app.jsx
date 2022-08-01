@@ -34,6 +34,7 @@ function App() {
     tokenSuccess: state.loginReducer.tokenSuccess
   }))
 
+
   const getRefreshToken = localStorage.getItem('token')
   const getAccessTokenFromCookie = getCookie('token') //document.cookie
 
@@ -44,7 +45,6 @@ function App() {
   const onClose = () => {
     dispatch({ type: CLOSE_MODAL_INGREDIENT })
     history.goBack()
-    //dispatch({ type: NUMBER_NULL })
   }
 
   useEffect(() => {

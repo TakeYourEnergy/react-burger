@@ -1,6 +1,6 @@
 import styles from './reset-password.module.css';
 import { PasswordInput, Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getNewPassword } from '../../services/actions/login';
@@ -9,11 +9,13 @@ const ResetPassword = () => {
    const [passwordInput, setPasswordInput] = useState('')
    const [tokenFromLetter, setTokenFromLettert] = useState('')
    const dispatch = useDispatch()
+   const location = useLocation()
+   const frgt = location.state?.frgt
 
-   const { resetPasswordSuccess } = useSelector(state => ({
-      resetPasswordSuccess: state.loginReducer.resetPasswordSuccess
+   const { resetPasswordSuccess, user } = useSelector(state => ({
+      resetPasswordSuccess: state.loginReducer.resetPasswordSuccess,
+      user: state.loginReducer.user
    }))
-
 
    const emailInputReset = (e) => {
       setPasswordInput(e.target.value)
@@ -36,6 +38,14 @@ const ResetPassword = () => {
             }}
          />
       )
+   }
+
+   if (!frgt) {
+      return <Redirect to='/forgot-password' />
+   }
+
+   if (user) {
+      return <Redirect to='/' />
    }
 
    return (

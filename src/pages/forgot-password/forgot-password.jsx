@@ -4,7 +4,7 @@ import {
    Button,
    Input
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link, useHistory, Redirect } from "react-router-dom";
+import { Link, useHistory, Redirect, useLocation } from "react-router-dom";
 import { recoveryPasswordEmail } from '../../services/actions/login';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -13,10 +13,12 @@ import { useDispatch, useSelector } from 'react-redux';
 const ForgotPassword = () => {
    const [emailForgot, setEmailForgot] = useState('')
    const dispatch = useDispatch();
+   const location = useLocation();
 
    //В случае успеха обращения к серверу на странице восстановления пользователь направляется на маршрут /reset-password
-   const { forgotPasswordSuccess } = useSelector(state => ({
-      forgotPasswordSuccess: state.loginReducer.forgotPasswordSuccess
+   const { forgotPasswordSuccess, user } = useSelector(state => ({
+      forgotPasswordSuccess: state.loginReducer.forgotPasswordSuccess,
+      user: state.loginReducer.user
    }))
 
    if (forgotPasswordSuccess) {
@@ -24,10 +26,16 @@ const ForgotPassword = () => {
          <Redirect
             to={{
                pathname: "/reset-password",
+               state: { frgt: location }
             }}
          />
       )
    }
+
+   if (user) {
+      return <Redirect to='/' />
+   }
+
 
    const emailForgotInput = (e) => {
       setEmailForgot(e.target.value)
