@@ -15,7 +15,7 @@ import Registration from '../../pages/registration/registration';
 import ForgotPassword from '../../pages/forgot-password/forgot-password';
 import ResetPassword from '../../pages/reset-password/reset-password';
 import Profile from '../../pages/profile/profile';
-import ProtectedRoute from '../../pages/protectedRoute/ProtectedRoute';
+import ProtectedRoute from '../protectedRoute/ProtectedRoute';
 import { getCookie } from '../../pages/cookie';
 import { getProfileData, updateToken } from '../../services/actions/login';
 import Modal from '../modal/modal';
