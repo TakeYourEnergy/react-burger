@@ -22,7 +22,7 @@
 .link {
    display: flex;
    align-items: center;
-   color: #F2F2F3;
+   color: #8585AD;
 }
 
 .personal {
@@ -30,3 +30,6 @@
    margin-left: 289px;
 }
 
+.activeLink {
+   color: #F2F2F3;
+}

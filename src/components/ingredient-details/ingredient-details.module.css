@@ -32,3 +32,8 @@
    font-family: 'Iceland', 'arial', sans-serif;
    font-size: 28px;
 }
+
+.page {
+   display: flex;
+   flex-direction: column;
+}

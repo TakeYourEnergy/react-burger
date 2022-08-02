@@ -1,32 +1,41 @@
-import React from "react";
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import styles from './app-header.module.css'
+import styles from './app-header.module.css';
+import { NavLink, useRouteMatch, Link } from 'react-router-dom';
 
 const AppHeader = () => {
+
+   //чтобы закрашивать иконку в нужный нам цвет при активной и неактивной ссылке
+   const isConstructor = !!useRouteMatch({ path: "/", exact: true });
+   const isOrders = !!useRouteMatch({ path: '/profile/orders', exact: true });
+   const isProfile = !!useRouteMatch({ path: '/profile', exact: true });
+
+
    return (
       <header className={styles.header}>
          <div className={styles.constructorAndTape}>
             <ul className={styles.list}>
                <li className={`${styles.item} mr-2`}>
-                  <a className={styles.link} href='1' onClick={(e) => e.preventDefault()}>
-                     <BurgerIcon type="primary" />
-                     <p className='text text_type_main-default pl-2'>Конструктор</p>
-                  </a>
+                  <NavLink className={`${styles.link} text text_type_main-default`} activeClassName={styles.activeLink} exact to='/'>
+                     <BurgerIcon type={isConstructor ? 'primary' : 'secondary'} />
+                     <p className='pl-2'>Конструктор</p>
+                  </NavLink>
                </li>
                <li className={styles.item}>
-                  <a className={styles.link} href='1' onClick={(e) => e.preventDefault()}>
-                     <ListIcon type="secondary" />
-                     <p className='text text_type_main-default text_color_inactive pl-2'>Лента заказов</p>
-                  </a>
+                  <NavLink className={`${styles.link} text text_type_main-default`} activeClassName={styles.activeLink} exact to='/profile/orders'>
+                     <ListIcon type={isOrders ? 'primary' : 'secondary'} />
+                     <p className='pl-2'>Лента заказов</p>
+                  </NavLink>
                </li>
             </ul>
          </div>
-         <Logo />
+         <Link to='/' >
+            <Logo />
+         </Link>
          <div className={styles.personal}>
-            <a className={styles.link} href='1' onClick={(e) => e.preventDefault()}>
-               <ProfileIcon type="secondary" />
-               <p className='text text_type_main-default text_color_inactive pl-2'>Личный кабинет</p>
-            </a>
+            <NavLink className={`${styles.link} text text_type_main-default`} activeClassName={styles.activeLink} exact to='/profile'>
+               <ProfileIcon type={isProfile ? 'primary' : 'secondary'} />
+               <p className='pl-2'>Личный кабинет</p>
+            </NavLink>
          </div>
       </header>
    )

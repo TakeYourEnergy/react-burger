@@ -12,18 +12,18 @@ import { v4 as uuidv4 } from 'uuid';
 import { ADD_ITEM, MOVE_ITEM } from "../../services/actions/burger-constructor";
 import BurgerConstructorList from "../burger-constructor-list/burger-constructor-list";
 import { NUMBER_NULL } from "../../services/actions/order";
+import { useHistory } from "react-router-dom";
 
 
 const BurgerConstructor = () => {
    const dispatch = useDispatch()
    const [totalPrice, setTotalPrice] = useState(0)
 
-   const { buns, mains } = useSelector(state => ({
+   const { buns, mains, user } = useSelector(state => ({
       buns: state.burgerConstructorReducer.buns,
-      mains: state.burgerConstructorReducer.mains
+      mains: state.burgerConstructorReducer.mains,
+      user: state.loginReducer.user
    }))
-
-   console.log(mains)
 
    const orderLoading = useSelector(state => state.orderReducer.ingrSpin)
    const isOrderDetailsOpened = useSelector(state => state.orderReducer.isOrderDetailsOpened)
@@ -49,13 +49,20 @@ const BurgerConstructor = () => {
       setTotalPrice(sumMains + sumBuns)
    }, [mains, buns])
 
+   const history = useHistory();
+
    const postOrder = () => {
-      if (mains.length && buns.price > 0) {
-         const orderArrIdAll = [...mains, buns, buns]
-         dispatch(getOrderNumber(orderArrIdAll))
+      if (user) {
+         if (mains.length && buns.price > 0) {
+            const orderArrIdAll = [...mains, buns, buns]
+            dispatch(getOrderNumber(orderArrIdAll))
+         } else {
+            alert('не хватает либо булки, либо нет ингредиентов')
+         }
       } else {
-         alert('не хватает либо булки, либо нет ингредиентов')
+         history.push('/login')
       }
+
    }
 
    const moveItem = useCallback((dragIndex, hoverIndex) => {

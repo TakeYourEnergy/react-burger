@@ -9,6 +9,7 @@
    cursor: pointer;
    position: relative;
    margin-bottom: 40px;
+   width: 272px;
 }
 
 .item:last-child {
@@ -24,3 +25,6 @@
    margin-bottom: 8px;
 }
 
+.link {
+   color: #F2F2F3;
+}

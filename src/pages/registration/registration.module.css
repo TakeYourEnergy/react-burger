@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 480px;
+  margin: 180px auto 0 auto;
+}
+
+.form {
+  width: 100%;
+}
+
+.form div {
+  width: 100%;
+}
+
+.form svg {
+  margin-left: 190px;
+}
+
+.form button {
+  margin-left: calc(240px - 125px);
+}
+
+.inp {
+  margin-bottom: 24px;
+}
+
+.text {
+  display: flex;
+  align-items: center;
+}
+
+.link {
+  cursor: pointer;
+  color: #4c4cff;
+}
+
+.question {
+  margin: 0;
+}

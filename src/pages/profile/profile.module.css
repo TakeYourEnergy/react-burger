@@ -1,0 +1,53 @@
+.profile {
+   display: flex;
+   margin-top: 80px;
+   margin-left: 20px;
+}
+
+.navigation {
+   max-width: 320px;
+   margin-right: 60px;
+}
+
+.list {
+   display: flex;
+   flex-direction: column;
+   margin-bottom: 80px;
+}
+
+.item {
+   list-style-type: none;
+   min-height: 64px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+}
+
+.link {
+   color: #8585AD;
+}
+
+.activeLink {
+   color: #F2F2F3;
+}
+
+.form div {
+   width: 100%;
+}
+
+.form svg {
+   margin-left: 180px;
+}
+
+.inp {
+   margin-bottom: 24px;
+}
+
+.buttons {
+   display: flex;
+   justify-content: end;
+}
+
+.text {
+   opacity: 0.4;
+}
