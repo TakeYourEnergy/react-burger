@@ -21,7 +21,7 @@ const AppHeader = () => {
                   </NavLink>
                </li>
                <li className={styles.item}>
-                  <NavLink className={`${styles.link} text text_type_main-default`} activeClassName={styles.activeLink} exact to='/profile/orders'>
+                  <NavLink className={`${styles.link} text text_type_main-default`} activeClassName={styles.activeLink} exact to='/feed'>
                      <ListIcon type={isOrders ? 'primary' : 'secondary'} />
                      <p className='pl-2'>Лента заказов</p>
                   </NavLink>

@@ -23,6 +23,7 @@ import { CLOSE_MODAL_INGREDIENT } from '../../services/actions/object-ingredient
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import IngredientPages from '../../pages/ingredientPages/ingredientPages';
 import NotFound404 from '../../pages/notFound404/notFound404';
+import Feed from '../../pages/feed/feed';
 
 function App() {
 
@@ -96,6 +97,9 @@ function App() {
         <Route
           path='/ingredient/:id'>
           <IngredientPages />
+        </Route>
+        <Route exact path='/feed'>
+          <Feed />
         </Route>
         <ProtectedRoute exact path='/profile'>
           <Profile />
