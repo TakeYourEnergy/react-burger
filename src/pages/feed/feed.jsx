@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import styles from './feed.module.css'
 import OrdersInformation from './orders-information/orders-information'
 import OrdersAll from './orders-all/orders-all'
 import { useDispatch, useSelector } from 'react-redux'
 import { wsConnectionOpen, wsConnectionClosed } from '../../services/actions/wsAction'
+import { Link, useLocation, useRouteMatch } from 'react-router-dom'
 
 
 const Feed = () => {
@@ -13,7 +14,8 @@ const Feed = () => {
    }))
 
 
-   const dispatch = useDispatch()
+   const dispatch = useDispatch();
+   const location = useLocation();
 
    useEffect(() => {
       dispatch(wsConnectionOpen())
@@ -31,14 +33,21 @@ const Feed = () => {
             <div className={styles.ordersInformation}>
                {
                   orders && orders.map((order, index) => (
-                     <a key={order._id} className={styles.link}>
+                     <Link
+                        key={order._id}
+                        className={styles.link}
+                        to={{
+                           pathname: `/feed/${order._id}`,
+                           state: { background: location }
+                        }}>
+
                         <OrdersInformation
                            orderCreatedAt={order.createdAt}
                            orderName={order.name}
                            orderNumber={order.number}
                            orderIngredients={order.ingredients}
                         />
-                     </a>
+                     </Link>
                   ))
                }
                <OrdersInformation />

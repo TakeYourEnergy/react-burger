@@ -24,6 +24,7 @@ import IngredientDetails from '../ingredient-details/ingredient-details';
 import IngredientPages from '../../pages/ingredientPages/ingredientPages';
 import NotFound404 from '../../pages/notFound404/notFound404';
 import Feed from '../../pages/feed/feed';
+import OrdersInformation from '../../pages/feed/orders-information/orders-information';
 
 function App() {
 
@@ -100,6 +101,10 @@ function App() {
         </Route>
         <Route exact path='/feed'>
           <Feed />
+        </Route>
+        <Route
+          path='/feed/:id'>
+          <OrdersInformation />
         </Route>
         <ProtectedRoute exact path='/profile'>
           <Profile />
