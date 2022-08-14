@@ -25,6 +25,7 @@ import IngredientPages from '../../pages/ingredientPages/ingredientPages';
 import NotFound404 from '../../pages/notFound404/notFound404';
 import Feed from '../../pages/feed/feed';
 import OrdersInformation from '../../pages/feed/orders-information/orders-information';
+import ModalInformationAboutOrder from '../../pages/modal-information-about-order/modal-information-about-order';
 
 function App() {
 
@@ -104,7 +105,7 @@ function App() {
         </Route>
         <Route
           path='/feed/:id'>
-          <OrdersInformation />
+          <ModalInformationAboutOrder />
         </Route>
         <ProtectedRoute exact path='/profile'>
           <Profile />
@@ -115,13 +116,24 @@ function App() {
       </Switch>
       {/* Show the modal when a background page is set */}
       {background &&
-        <Route exact path="/ingredient/:id">
-          <Modal
-            title="Детали ингредиента" onClose={onClose}
-          >
-            <IngredientDetails />
-          </Modal>
-        </Route>
+        <>
+          <Route exact path="/ingredient/:id">
+            <Modal
+              title="Детали ингредиента" onClose={onClose}
+            >
+              <IngredientDetails />
+            </Modal>
+          </Route>
+
+          <Route exact path='/feed/:id'>
+            <Modal
+              title=""
+              onClose={onClose}
+            >
+              <ModalInformationAboutOrder />
+            </Modal>
+          </Route>
+        </>
       }
 
     </div>
