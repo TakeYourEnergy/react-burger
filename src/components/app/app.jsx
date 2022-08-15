@@ -26,6 +26,8 @@ import NotFound404 from '../../pages/notFound404/notFound404';
 import Feed from '../../pages/feed/feed';
 import OrdersInformation from '../../pages/feed/orders-information/orders-information';
 import ModalInformationAboutOrder from '../../pages/modal-information-about-order/modal-information-about-order';
+import OrderInfo from '../../pages/order-info/order-info';
+import MyOrders from '../../pages/my-orders/my-orders';
 
 function App() {
 
@@ -105,10 +107,13 @@ function App() {
         </Route>
         <Route
           path='/feed/:id'>
-          <ModalInformationAboutOrder />
+          <OrderInfo />
         </Route>
         <ProtectedRoute exact path='/profile'>
           <Profile />
+        </ProtectedRoute>
+        <ProtectedRoute exact path='/profile/orders'>
+          <MyOrders />
         </ProtectedRoute>
         <Route >
           <NotFound404 />

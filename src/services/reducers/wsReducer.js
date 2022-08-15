@@ -9,7 +9,7 @@ import {
 
 const initialState = {
    wsConnected: false,
-   messages: {},
+   orders: [],
    total: 0,
    totalToday: 0,
 };

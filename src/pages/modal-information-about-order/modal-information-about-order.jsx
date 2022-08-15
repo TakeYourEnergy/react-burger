@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useMemo } from 'react';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
+
 const ModalInformationAboutOrder = () => {
    const { id } = useParams();
 
@@ -17,7 +18,9 @@ const ModalInformationAboutOrder = () => {
 
    //заказ по id
    const order = useMemo(() => {
-      return orders.find((order) => order._id === id)
+      if (orders) {
+         return orders.find((order) => order._id === id)
+      }
    }, [orders, id]);
 
 
@@ -28,15 +31,18 @@ const ModalInformationAboutOrder = () => {
 
    //подсчет одинаковых id в массиве order.ingredients
    const countId = useMemo(() => {
-      const objWithId = order.ingredients.reduce((acc, item) => {
-         if (!acc[item]) {
-            acc[item] = 1;
-         } else {
-            acc[item] += 1;
-         }
-         return acc;
-      }, {})
-      return objWithId
+      if (order) {
+         const objWithId = order.ingredients.reduce((acc, item) => {
+            if (!acc[item]) {
+               acc[item] = 1;
+            } else {
+               acc[item] += 1;
+            }
+            return acc;
+         }, {})
+         return objWithId
+      }
+
    }, [order])
 
 
@@ -46,14 +52,16 @@ const ModalInformationAboutOrder = () => {
 
 
    const fullPrice = useMemo(() => {
-      const arrWithIngr = order.ingredients.map(id => {
-         return data.find(ing => ing._id === id)
-      })
-      const sum = arrWithIngr.reduce((acc, item) => {
-         return acc + item.price
-      }, 0)
-      return sum
-   })
+      if (order && data) {
+         const arrWithIngr = order.ingredients.map(id => {
+            return data.find(ing => ing._id === id)
+         })
+         const sum = arrWithIngr.reduce((acc, item) => {
+            return acc + item.price
+         }, 0)
+         return sum
+      }
+   }, [order, data])
 
 
    return (
