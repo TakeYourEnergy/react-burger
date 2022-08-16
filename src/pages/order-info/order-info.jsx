@@ -3,6 +3,7 @@ import { wsConnectionOpen, wsConnectionClosed } from '../../services/actions/wsA
 import { useEffect } from 'react';
 import ModalInformationAboutOrder from '../modal-information-about-order/modal-information-about-order';
 import styles from './order-info.module.css'
+import { wsUserConnectionStart, wsUserConnectionClosed } from '../../services/actions/ws-user-action';
 
 
 const OrderInfo = () => {
@@ -10,9 +11,11 @@ const OrderInfo = () => {
 
    useEffect(() => {
       dispatch(wsConnectionOpen())
+      dispatch(wsUserConnectionStart())
 
       return () => {
          dispatch(wsConnectionClosed())
+         dispatch(wsUserConnectionClosed())
       }
    }, [dispatch])
 

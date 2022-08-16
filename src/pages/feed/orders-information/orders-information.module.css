@@ -89,9 +89,15 @@
 .ingredientsImagesAndPrices {
    display: flex;
    justify-content: space-between;
+   margin-top: 24px;
 }
 
 .ingredientsPrices {
    display: flex;
    align-items: center;
+}
+
+.status {
+   color: #00CCCC;
+   margin-top: 8px;
 }

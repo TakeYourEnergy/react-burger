@@ -6,6 +6,7 @@ import { useEffect } from 'react'
 import { wsUserConnectionStart } from '../../services/actions/ws-user-action'
 import { wsUserConnectionClosed } from '../../services/actions/ws-user-action'
 import OrdersInformation from '../feed/orders-information/orders-information'
+import PageCardOrder from '../page-card-order/page-card-order'
 
 
 
@@ -13,15 +14,19 @@ export const MyOrders = () => {
    const dispatch = useDispatch()
    const location = useLocation()
    const background = location.state?.background
+   const getRefreshToken = localStorage.getItem('token')
+   // console.log(getRefreshToken)
 
    useEffect(() => {
       dispatch(wsUserConnectionStart())
+
       return () => {
          dispatch(wsUserConnectionClosed())
       }
    }, [dispatch])
 
-   const getRefreshToken = localStorage.getItem('token')
+   const myOrders = useSelector(state => state.wsUserReducer.orders)
+
    //выход из профиля
    const signOutProfile = () => {
       dispatch(logOut(getRefreshToken))
@@ -61,7 +66,7 @@ export const MyOrders = () => {
             <Route exact path='/profile/orders'>
                <div className={styles.box}>
                   <div className={`${styles.item} pl-2 pr-2`}>
-                     <OrdersInformation />
+                     <PageCardOrder />
                   </div>
                </div>
             </Route>

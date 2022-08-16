@@ -12,11 +12,14 @@ export const socketMiddleware = (wsUrl, wsActions) => {
 
          if (type === wsInitWithToken) {
             const token = getCookie('token')
+            console.log(token)
             if (token) {
                console.log('my orders')
                socket = new WebSocket(`${wsUrl}?token=${token}`);
             }
-         } else if (type === wsInit) {
+         }
+
+         if (type === wsInit) {
             console.log('all orders')
             socket = new WebSocket(wsUrl);
          }
@@ -44,7 +47,7 @@ export const socketMiddleware = (wsUrl, wsActions) => {
             };
 
             if (type === wsSendMessage) {
-               const message = {...payload};
+               const message = { ...payload };
                socket.send(JSON.stringify(message));
             }
          }

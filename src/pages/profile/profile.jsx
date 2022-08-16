@@ -6,7 +6,7 @@ import { getProfileData } from '../../services/actions/login';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateProfileData } from '../../services/actions/login';
 import { logOut } from '../../services/actions/login';
-
+import { wsUserConnectionStart, wsUserConnectionClosed } from '../../services/actions/ws-user-action';
 
 const Profile = () => {
    const location = useLocation()
@@ -57,6 +57,14 @@ const Profile = () => {
       setEmailProfile(user.email)
       setPasswordProfile('')
    }
+
+   useEffect(() => {
+      dispatch(wsUserConnectionStart())
+
+      return () => {
+         dispatch(wsUserConnectionClosed())
+      }
+   }, [dispatch])
 
    return (
       <div className={styles.profile}>

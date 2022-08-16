@@ -3,6 +3,7 @@ import {
    WS_USER_CONNECTION_ERROR,
    WS_USER_CONNECTION_CLOSED,
    WS_USER_GET_MESSAGE,
+   WS_USER_CONNECTION_START
 } from "../actions/ws-user-action";
 
 
@@ -41,6 +42,12 @@ export const wsUserReducer = (state = initialState, action) => {
             total: action.payload.total,
             totalToday: action.payload.totalToday
          };
+
+      // case WS_USER_CONNECTION_START:
+      //    return {
+      //       ...state,
+      //       wsConnected: true
+      //    }
       default:
          return state;
    }

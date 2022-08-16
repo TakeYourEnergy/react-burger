@@ -25,18 +25,18 @@ export const wsUserConnectionClosed = () => {
 };
 
 
-export const wsUserGetMessage = message => {
+export const wsUserGetMessage = order => {
    return {
       type: WS_USER_GET_MESSAGE,
-      payload: message
+      payload: order
    };
 };
 
 
-export const wsUserSendMessage = message => {
+export const wsUserSendMessage = order => {
    return {
       type: WS_USER_SEND_MESSAGE,
-      payload: message
+      payload: order
    };
 };
 

@@ -5,7 +5,8 @@ import cheese from '../../../images/cheese.jpg'
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
 
-const OrdersInformation = ({ orderCreatedAt, orderName, orderNumber, orderIngredients }) => {
+const OrdersInformation = ({ orderCreatedAt, orderName, orderNumber, orderIngredients, status }) => {
+   console.log(status)
    //изменение даты
    const getFormatDate = (string) => {
       return new Date(string).toLocaleString();
@@ -42,7 +43,13 @@ const OrdersInformation = ({ orderCreatedAt, orderName, orderNumber, orderIngred
             <p className="text text_type_digits-default">#{orderNumber}</p>
             <p className="text text_type_main-default text_color_inactive">{getFormatDate(orderCreatedAt)}</p>
          </div>
-         <h3 className="text text_type_main-medium mb-6">{orderName}</h3>
+         <h3 className="text text_type_main-medium">{orderName}</h3>
+         {
+            status && status !== '' &&
+            <p className={`text text_type_main-default ${styles.status}`}>
+               {status === 'done' ? 'Выполнен' : status === 'pending' ? 'Готовится' : status === 'created' ? 'Создан' : 'Выполнен'}
+            </p>
+         }
          <div className={styles.ingredientsImagesAndPrices}>
             <ul className={styles.ingredientsImages}>
                {
