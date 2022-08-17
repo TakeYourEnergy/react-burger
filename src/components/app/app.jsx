@@ -115,6 +115,9 @@ function App() {
         <ProtectedRoute exact path='/profile/orders'>
           <MyOrders />
         </ProtectedRoute>
+        <Route exact path='/profile/orders/:id'>
+          <OrderInfo />
+        </Route>
         <Route >
           <NotFound404 />
         </Route>
@@ -131,6 +134,15 @@ function App() {
           </Route>
 
           <Route exact path='/feed/:id'>
+            <Modal
+              title=""
+              onClose={onClose}
+            >
+              <ModalInformationAboutOrder />
+            </Modal>
+          </Route>
+
+          <Route exact path='/profile/orders/:id'>
             <Modal
               title=""
               onClose={onClose}

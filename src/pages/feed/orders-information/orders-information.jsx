@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
 import cheese from '../../../images/cheese.jpg'
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import PropTypes from "prop-types";
 
 
 const OrdersInformation = ({ orderCreatedAt, orderName, orderNumber, orderIngredients, status }) => {
-   console.log(status)
    //изменение даты
    const getFormatDate = (string) => {
       return new Date(string).toLocaleString();
@@ -24,7 +24,7 @@ const OrdersInformation = ({ orderCreatedAt, orderName, orderNumber, orderIngred
             return data.filter(item => item._id === id)
          })
       }
-   }, [orderIngredients])
+   }, [orderIngredients, data])
 
 
    const totalPrice = useMemo(() => {
@@ -34,7 +34,7 @@ const OrdersInformation = ({ orderCreatedAt, orderName, orderNumber, orderIngred
             return ing ? acc + ing.price : acc
          }, 0)
       }
-   }, [orderIngredients])
+   }, [orderIngredients, data])
 
 
    return (
@@ -100,3 +100,11 @@ const OrdersInformation = ({ orderCreatedAt, orderName, orderNumber, orderIngred
 }
 
 export default OrdersInformation
+
+OrdersInformation.propTypes = {
+   orderCreatedAt: PropTypes.string.isRequired,
+   orderName: PropTypes.string.isRequired,
+   orderNumber: PropTypes.number.isRequired,
+   orderIngredients: PropTypes.array.isRequired,
+   status: PropTypes.string.isRequired,
+}

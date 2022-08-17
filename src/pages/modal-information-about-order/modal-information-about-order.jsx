@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import styles from './modal-information-about-order.module.css'
-import { useParams } from 'react-router-dom';
+import { useParams, useRouteMatch } from 'react-router-dom';
 import { useMemo } from 'react';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -10,18 +10,26 @@ const ModalInformationAboutOrder = () => {
 
    //data - все ингредиенты
    //orders - все заказы
-   const { orders, data } = useSelector(state => ({
+   const { orders, data, myOrders } = useSelector(state => ({
       orders: state.wsReducer.orders,
-      data: state.ingredientsReducer.ingredients
+      data: state.ingredientsReducer.ingredients,
+      myOrders: state.wsUserReducer.orders
    }))
 
+   const profileOrdersPath = '/profile/orders/:id'
+
+
+   let match = useRouteMatch()
+   let isProfileOrdersPath = match.path === profileOrdersPath
+
+   let usedOrders = isProfileOrdersPath ? myOrders : orders;
 
    //заказ по id
    const order = useMemo(() => {
-      if (orders) {
-         return orders.find((order) => order._id === id)
+      if (usedOrders) {
+         return usedOrders.find((order) => order._id === id)
       }
-   }, [orders, id]);
+   }, [usedOrders, id]);
 
 
    //уникальные id

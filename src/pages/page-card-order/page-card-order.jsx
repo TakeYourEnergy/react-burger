@@ -11,13 +11,12 @@ const PageCardOrder = () => {
    }))
    const location = useLocation()
    const profileOrdersPath = '/profile/orders'
-   const feedPath = '/feed'
 
    let match = useRouteMatch()
 
    let isProfileOrdersPath = match.path === profileOrdersPath
    let ordersState = !isProfileOrdersPath ? orders : myOrders
-   let initPath = !isProfileOrdersPath ? '/feed/' : '/profile/orders'
+   let initPath = !isProfileOrdersPath ? '/feed/' : '/profile/orders/'
 
 
    return (

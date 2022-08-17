@@ -12,15 +12,12 @@ export const socketMiddleware = (wsUrl, wsActions) => {
 
          if (type === wsInitWithToken) {
             const token = getCookie('token')
-            console.log(token)
             if (token) {
-               console.log('my orders')
                socket = new WebSocket(`${wsUrl}?token=${token}`);
             }
          }
 
          if (type === wsInit) {
-            console.log('all orders')
             socket = new WebSocket(wsUrl);
          }
 
