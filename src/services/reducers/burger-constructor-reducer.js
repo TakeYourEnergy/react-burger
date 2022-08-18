@@ -1,4 +1,4 @@
-import { ADD_ITEM, DELETE_ITEM, MOVE_ITEM } from "../actions/burger-constructor";
+import { ADD_ITEM, DELETE_ITEM, MOVE_ITEM, RESET_ITEM } from "../actions/burger-constructor";
 
 
 const initialState = {
@@ -30,12 +30,17 @@ export const burgerConstructorReducer = (state = initialState, action) => {
          const dragItems = state.mains[action.dragIndex];
          newList.splice(action.dragIndex, 1);
          newList.splice(action.hoverIndex, 0, dragItems)
-         
-         //console.log('newList>>>', newList)
-         
+
          return {
             ...state,
             mains: newList
+         }
+      }
+      case RESET_ITEM: {
+         return {
+            ...state,
+            buns: [],
+            mains: []
          }
       }
       default:
