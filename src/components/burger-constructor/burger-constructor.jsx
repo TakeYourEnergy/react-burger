@@ -8,11 +8,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getOrderNumber } from "../../services/actions/order";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrop } from "react-dnd";
-import { v4 as uuidv4 } from 'uuid';
-import { ADD_ITEM, MOVE_ITEM } from "../../services/actions/burger-constructor";
 import BurgerConstructorList from "../burger-constructor-list/burger-constructor-list";
 import { NUMBER_NULL } from "../../services/actions/order";
 import { useHistory } from "react-router-dom";
+import { addItem, moveItemActionCreator } from "../../services/actions/burger-constructor";
 
 
 const BurgerConstructor = () => {
@@ -31,10 +30,7 @@ const BurgerConstructor = () => {
    const [, dropTarget] = useDrop({
       accept: "item",
       drop({ item }) {
-         dispatch({
-            type: ADD_ITEM,
-            payload: { ...item, uuid: uuidv4() }
-         })
+         dispatch(addItem(item))
       },
    });
 
@@ -66,11 +62,7 @@ const BurgerConstructor = () => {
    }
 
    const moveItem = useCallback((dragIndex, hoverIndex) => {
-      dispatch({
-         type: MOVE_ITEM,
-         dragIndex,
-         hoverIndex
-      })
+      dispatch(moveItemActionCreator(dragIndex, hoverIndex))
    }, [dispatch])
 
    return (

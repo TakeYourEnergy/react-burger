@@ -1,5 +1,6 @@
 import { getOrder } from "../../utils/api";
 import { RESET_ITEM } from "./burger-constructor";
+import { resetItemActionCreator } from "./burger-constructor";
 
 export const GET_ORDER = "GET_ORDER_REQUEST";
 export const GET_ORDER_SUCCESS = "GET_ORDER_SUCCESS";
@@ -20,7 +21,7 @@ export function getOrderNumber(arr) {
             }
          })
          .then(res => {
-            dispatch({ type: RESET_ITEM })
+            dispatch(resetItemActionCreator())
          })
          .catch(err => {
             console.log(err)

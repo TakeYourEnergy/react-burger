@@ -1,11 +1,9 @@
 import { useRef } from 'react';
 import styles from './burger-constructor-list.module.css';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import PropTypes from 'prop-types';
-import { menuItemPropTypes } from '../../utils/prop-types';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useDrop, useDrag } from "react-dnd";
-import { DELETE_ITEM } from '../../services/actions/burger-constructor';
+import { deleteItem } from '../../services/actions/burger-constructor';
 
 const BurgerConstructorList = ({ items, index, moveItem }) => {
 
@@ -61,10 +59,7 @@ const BurgerConstructorList = ({ items, index, moveItem }) => {
             price={items.price}
             thumbnail={items.image}
             handleClose={() => {
-               dispatch({
-                  type: DELETE_ITEM,
-                  payload: items
-               })
+               dispatch(deleteItem(items))
             }}
          />
       </div>

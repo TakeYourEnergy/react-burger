@@ -1,11 +1,22 @@
+import { TIngredient } from "../../utils/types";
 import {
    GET_INGREDIENTS,
    GET_INGREDIENTS_SUCCESS,
-   GET_INGREDIENTS_FAILED
+   GET_INGREDIENTS_FAILED,
+   TIngredients
 } from "../actions/ingredients";
 
 
-const initialState = {
+
+type TInitialStateIngredient = {
+   ingredients: TIngredient | [];
+   ingredientsRequest: boolean;
+   ingredientsFailed: boolean;
+   ingredientsPending: boolean;
+   ingrSpin: string | boolean;
+}
+
+const initialState: TInitialStateIngredient = {
    ingredients: [],
    ingredientsRequest: false,
    ingredientsFailed: false,
@@ -13,7 +24,7 @@ const initialState = {
    ingrSpin: ''
 }
 
-export const ingredientsReducer = (state = initialState, action) => {
+export const ingredientsReducer = (state = initialState, action: TIngredients) => {
 
    switch (action.type) {
       case GET_INGREDIENTS:
