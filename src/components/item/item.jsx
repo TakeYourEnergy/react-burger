@@ -2,7 +2,7 @@ import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-c
 import styles from './item.module.css';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux'
-import { OPEN_MODAL_INGREDIENT } from '../../services/actions/object-ingredient';
+import { openModalIngredient } from '../../services/actions/object-ingredient';
 import { useDrag } from "react-dnd";
 import { Link, useLocation } from 'react-router-dom';
 
@@ -32,7 +32,7 @@ const Item = ({ name, image, price, id, item }) => {
 
    //открытие модального окна с ингредиентами
    const openIngredientModal = () => {
-      dispatch({ type: OPEN_MODAL_INGREDIENT, idIngredients: id })
+      dispatch(openModalIngredient(id))
    }
 
    return (

@@ -19,7 +19,7 @@ import ProtectedRoute from '../protectedRoute/ProtectedRoute';
 import { getCookie } from '../../pages/cookie';
 import { getProfileData, updateToken } from '../../services/actions/login';
 import Modal from '../modal/modal';
-import { CLOSE_MODAL_INGREDIENT } from '../../services/actions/object-ingredient';
+import { closeModalIngredient, CLOSE_MODAL_INGREDIENT } from '../../services/actions/object-ingredient';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import IngredientPages from '../../pages/ingredientPages/ingredientPages';
 import NotFound404 from '../../pages/notFound404/notFound404';
@@ -48,7 +48,7 @@ function App() {
   const background = location.state?.background
 
   const onClose = () => {
-    dispatch({ type: CLOSE_MODAL_INGREDIENT })
+    dispatch(closeModalIngredient())
     history.goBack()
   }
 

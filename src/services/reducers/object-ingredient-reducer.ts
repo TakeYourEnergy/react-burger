@@ -1,11 +1,17 @@
-import { OPEN_MODAL_INGREDIENT, CLOSE_MODAL_INGREDIENT } from "../actions/object-ingredient"
+import { OPEN_MODAL_INGREDIENT, CLOSE_MODAL_INGREDIENT, TModalActions } from "../actions/object-ingredient"
 
-const initialState = {
+
+type TInitialStateModal = {
+   isOpened: boolean;
+   idIngredients: string
+}
+
+const initialState: TInitialStateModal = {
    isOpened: false,
    idIngredients: ''
 }
 
-export const objectIngredient = (state = initialState, action) => {
+export const objectIngredient = (state = initialState, action: TModalActions) => {
 
    switch (action.type) {
       case OPEN_MODAL_INGREDIENT:

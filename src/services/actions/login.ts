@@ -8,7 +8,7 @@ import { signOut } from "../../utils/api";
 import { deleteCookie } from "../../pages/cookie";
 import { refreshToken } from "../../utils/api";
 import { authorizationLogin } from "../../utils/api";
-import { TUser } from "../../utils/types";
+import { AppDispatch, TUser } from "../../utils/types";
 
 //восстановление пароля (RECOVERY - восстановить) /forgot-password
 export const RECOVERY_PASSWORD_REQUEST: "RECOVERY_PASSWORD_REQUEST" = "RECOVERY_PASSWORD_REQUEST";
@@ -53,98 +53,98 @@ export const AUTHORIZATION_FAILED: "AUTHORIZATION_FAILED" = "AUTHORIZATION_FAILE
 
 
 //!типизация actions
-//регистрация пользователя /register
+//восстановление пароля (RECOVERY - восстановить) /forgot-password
 export interface IRecoveryPasswordRequest {
-   type: typeof RECOVERY_PASSWORD_REQUEST
+   readonly type: typeof RECOVERY_PASSWORD_REQUEST
 }
 export interface IRecoveryPasswordSuccess {
-   type: typeof RECOVERY_PASSWORD_SUCCESS
+   readonly type: typeof RECOVERY_PASSWORD_SUCCESS
 }
 export interface IRecoveryPasswordFailed {
-   type: typeof RECOVERY_PASSWORD_FAILED
+   readonly type: typeof RECOVERY_PASSWORD_FAILED
 }
 
 //регистрация пользователя /register
 export interface IRegistrationUserRequest {
-   type: typeof REGISTRATION_USER_REQUEST
+   readonly type: typeof REGISTRATION_USER_REQUEST
 }
 export interface IRegistrationUserSuccess {
-   type: typeof REGISTRATION_USER_SUCCESS;
-   user: TUser
+   readonly type: typeof REGISTRATION_USER_SUCCESS;
+   readonly user: TUser
 }
 export interface IRegistrationUserFailed {
-   type: typeof REGISTRATION_USER_FAILED
+   readonly type: typeof REGISTRATION_USER_FAILED
 }
 
 //получение нового пароля /reset-password
 export interface IGetResetPasswordRequest {
-   type: typeof GET_RESET_PASSWORD_REQUEST
+   readonly type: typeof GET_RESET_PASSWORD_REQUEST
 }
 export interface IGetResetPasswordSuccess {
-   type: typeof GET_RESET_PASSWORD_SUCCESS;
+   readonly type: typeof GET_RESET_PASSWORD_SUCCESS;
    success: boolean;
    message: string
 }
 export interface IGetResetPasswordFailed {
-   type: typeof GET_RESET_PASSWORD_FAILED
+   readonly type: typeof GET_RESET_PASSWORD_FAILED
 }
 
 //обновления данных о пользователе
 export interface IUpdateProfileRequest {
-   type: typeof UPDATE_PROFILE_REQUEST;
+   readonly type: typeof UPDATE_PROFILE_REQUEST;
 }
 export interface IUpdateProfileSuccess {
-   type: typeof UPDATE_PROFILE_SUCCESS;
-   user: TUser
+   readonly type: typeof UPDATE_PROFILE_SUCCESS;
+   readonly user: TUser
 }
 export interface IUpdateProfileFailed {
-   type: typeof UPDATE_PROFILE_FAILED;
+   readonly type: typeof UPDATE_PROFILE_FAILED;
 }
 
 //выход из системы
 export interface ISignoutRequest {
-   type: typeof SIGNOUT_REQUEST;
+   readonly type: typeof SIGNOUT_REQUEST;
 }
 export interface ISignoutSuccess {
-   type: typeof SIGNOUT_SUCCESS;
+   readonly type: typeof SIGNOUT_SUCCESS;
 }
 export interface ISignoutFailed {
-   type: typeof SIGNOUT_FAILED;
+   readonly type: typeof SIGNOUT_FAILED;
 }
 
 //обновление токена
 export interface ITokenRequest {
-   type: typeof TOKEN_REQUEST;
+   readonly type: typeof TOKEN_REQUEST;
 }
 export interface ITokenSuccess {
-   type: typeof TOKEN_SUCCESS;
+   readonly type: typeof TOKEN_SUCCESS;
 }
 export interface ITokenFailed {
-   type: typeof TOKEN_FAILED;
+   readonly type: typeof TOKEN_FAILED;
 }
 
 //запрос авторизации
 export interface IAuthorizationRequest {
-   type: typeof AUTHORIZATION_REQUEST;
+   readonly type: typeof AUTHORIZATION_REQUEST;
 }
 export interface IAuthorizationSuccess {
-   type: typeof AUTHORIZATION_SUCCESS;
-   user: TUser
+   readonly type: typeof AUTHORIZATION_SUCCESS;
+   readonly user: TUser
 }
 export interface IAuthorizationFailed {
-   type: typeof AUTHORIZATION_FAILED;
+   readonly type: typeof AUTHORIZATION_FAILED;
 }
 
 //получение данных о пользователе /profile
 export interface IGetProfileRequest {
-   type: typeof GET_PROFILE_REQUEST;
+   readonly type: typeof GET_PROFILE_REQUEST;
 }
 export interface IGetProfileSuccess {
-   type: typeof GET_PROFILE_SUCCESS;
-   user: TUser
+   readonly type: typeof GET_PROFILE_SUCCESS;
+   readonly user: TUser
 }
 export interface IGetProfileFailed {
-   type: typeof GET_PROFILE_FAILED;
+   readonly type: typeof GET_PROFILE_FAILED;
 }
 
 export type TUserActions =
@@ -176,8 +176,8 @@ export type TUserActions =
 
 
 //восстановление пароля (RECOVERY - восстановить)
-export function recoveryPasswordEmail(email) {
-   return function (dispatch) {
+export function recoveryPasswordEmail(email: string) {
+   return function (dispatch: AppDispatch) {
       dispatch({ type: RECOVERY_PASSWORD_REQUEST })
 
       recoveryPassword(email)
@@ -195,8 +195,8 @@ export function recoveryPasswordEmail(email) {
 }
 
 //регистрация пользователя
-export function registrationUser(name, email, password) {
-   return function (dispatch) {
+export function registrationUser(name: string, email: string, password: string) {
+   return function (dispatch: AppDispatch) {
       dispatch({ type: REGISTRATION_USER_REQUEST })
 
       newUser(name, email, password)
@@ -223,8 +223,8 @@ export function registrationUser(name, email, password) {
 }
 
 ///получение нового пароля /reset-password
-export function getNewPassword(password, token) {
-   return function (dispatch) {
+export function getNewPassword(password: string, token: string) {
+   return function (dispatch: AppDispatch) {
       dispatch({ type: GET_RESET_PASSWORD_REQUEST })
 
       newPassword(password, token)
@@ -247,7 +247,7 @@ export function getNewPassword(password, token) {
 
 //получение данных о пользователе /profile
 export function getProfileData() {
-   return function (dispatch) {
+   return function (dispatch: AppDispatch) {
       dispatch({ type: GET_PROFILE_REQUEST })
 
       getProfile()
@@ -268,8 +268,8 @@ export function getProfileData() {
 }
 
 //обновления данных о пользователе /profile
-export function updateProfileData(email, name, password) {
-   return function (dispatch) {
+export function updateProfileData(email: string, name: string, password: string) {
+   return function (dispatch: AppDispatch) {
       dispatch({ type: UPDATE_PROFILE_REQUEST })
 
       getProfileUpdate(email, name, password)
@@ -290,8 +290,8 @@ export function updateProfileData(email, name, password) {
 }
 
 //выход из системы
-export function logOut(refreshToken) {
-   return function (dispatch) {
+export function logOut(refreshToken: string) {
+   return function (dispatch: AppDispatch) {
       dispatch({ type: SIGNOUT_REQUEST })
 
       signOut(refreshToken)
@@ -314,7 +314,7 @@ export function logOut(refreshToken) {
 
 //обновление токена
 export function updateToken() {
-   return function (dispatch) {
+   return function (dispatch: AppDispatch) {
       dispatch({ type: TOKEN_REQUEST })
 
       refreshToken()
@@ -335,8 +335,8 @@ export function updateToken() {
 }
 
 //запрос авторизации
-export function authorizationUser(email, password) {
-   return function (dispatch) {
+export function authorizationUser(email: string, password: string) {
+   return function (dispatch: AppDispatch) {
       dispatch({ type: AUTHORIZATION_REQUEST })
 
       authorizationLogin(email, password)

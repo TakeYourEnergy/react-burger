@@ -1,5 +1,5 @@
 import { getIngredients } from "../../utils/api";
-import { TIngredient } from "../../utils/types";
+import { AppDispatch, TIngredient } from "../../utils/types";
 
 
 export const GET_INGREDIENTS: "GET_INGREDIENTS" = "GET_INGREDIENTS";
@@ -29,7 +29,7 @@ export type TIngredients =
 
 
 export function getIngredientsData() {
-   return function (dispatch) {
+   return function (dispatch: AppDispatch) {
       dispatch({ type: GET_INGREDIENTS })
 
       getIngredients()
