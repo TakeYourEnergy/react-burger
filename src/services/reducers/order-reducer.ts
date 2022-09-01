@@ -3,16 +3,22 @@ import {
    GET_ORDER_SUCCESS,
    GET_ORDER_FAILED,
    NUMBER_NULL,
+   TGetOrderActions,
 } from "../actions/order";
 
+type TInitialState = {
+   numberOrder: number | null;
+   ingrSpin: boolean | string;
+   isOrderDetailsOpened: boolean
+}
 
-const initiaState = {
+const initiaState: TInitialState = {
    numberOrder: null,
    ingrSpin: '',
    isOrderDetailsOpened: false,
 }
 
-export const orderReducer = (state = initiaState, action) => {
+export const orderReducer = (state = initiaState, action: TGetOrderActions): TInitialState => {
 
    switch (action.type) {
       case GET_ORDER:
@@ -30,7 +36,7 @@ export const orderReducer = (state = initiaState, action) => {
       case GET_ORDER_FAILED:
          return {
             ...state,
-            loading: false,
+            ingrSpin: false,
             isOrderDetailsOpened: false,
          }
       case NUMBER_NULL:

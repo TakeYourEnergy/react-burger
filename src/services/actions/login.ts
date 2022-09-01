@@ -8,7 +8,7 @@ import { signOut } from "../../utils/api";
 import { deleteCookie } from "../../pages/cookie";
 import { refreshToken } from "../../utils/api";
 import { authorizationLogin } from "../../utils/api";
-import { AppDispatch, TUser } from "../../utils/types";
+import { AppDispatch, AppThunk, TUser } from "../../utils/types";
 
 //восстановление пароля (RECOVERY - восстановить) /forgot-password
 export const RECOVERY_PASSWORD_REQUEST: "RECOVERY_PASSWORD_REQUEST" = "RECOVERY_PASSWORD_REQUEST";
@@ -176,7 +176,7 @@ export type TUserActions =
 
 
 //восстановление пароля (RECOVERY - восстановить)
-export function recoveryPasswordEmail(email: string) {
+export const recoveryPasswordEmail: AppThunk = (email: string) => {
    return function (dispatch: AppDispatch) {
       dispatch({ type: RECOVERY_PASSWORD_REQUEST })
 
@@ -195,7 +195,7 @@ export function recoveryPasswordEmail(email: string) {
 }
 
 //регистрация пользователя
-export function registrationUser(name: string, email: string, password: string) {
+export const registrationUser: AppThunk = (name: string, email: string, password: string) => {
    return function (dispatch: AppDispatch) {
       dispatch({ type: REGISTRATION_USER_REQUEST })
 
@@ -223,7 +223,7 @@ export function registrationUser(name: string, email: string, password: string) 
 }
 
 ///получение нового пароля /reset-password
-export function getNewPassword(password: string, token: string) {
+export const getNewPassword: AppThunk = (password: string, token: string) => {
    return function (dispatch: AppDispatch) {
       dispatch({ type: GET_RESET_PASSWORD_REQUEST })
 
@@ -246,7 +246,7 @@ export function getNewPassword(password: string, token: string) {
 }
 
 //получение данных о пользователе /profile
-export function getProfileData() {
+export const getProfileData: AppThunk = () => {
    return function (dispatch: AppDispatch) {
       dispatch({ type: GET_PROFILE_REQUEST })
 
@@ -268,7 +268,7 @@ export function getProfileData() {
 }
 
 //обновления данных о пользователе /profile
-export function updateProfileData(email: string, name: string, password: string) {
+export const updateProfileData: AppThunk = (email: string, name: string, password: string) => {
    return function (dispatch: AppDispatch) {
       dispatch({ type: UPDATE_PROFILE_REQUEST })
 
@@ -290,7 +290,7 @@ export function updateProfileData(email: string, name: string, password: string)
 }
 
 //выход из системы
-export function logOut(refreshToken: string) {
+export const logOut: AppThunk = (refreshToken: string) => {
    return function (dispatch: AppDispatch) {
       dispatch({ type: SIGNOUT_REQUEST })
 
@@ -313,7 +313,7 @@ export function logOut(refreshToken: string) {
 }
 
 //обновление токена
-export function updateToken() {
+export const updateToken: AppThunk = () => {
    return function (dispatch: AppDispatch) {
       dispatch({ type: TOKEN_REQUEST })
 
@@ -335,7 +335,7 @@ export function updateToken() {
 }
 
 //запрос авторизации
-export function authorizationUser(email: string, password: string) {
+export const authorizationUser: AppThunk = (email: string, password: string) => {
    return function (dispatch: AppDispatch) {
       dispatch({ type: AUTHORIZATION_REQUEST })
 

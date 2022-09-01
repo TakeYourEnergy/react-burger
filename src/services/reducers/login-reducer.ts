@@ -1,3 +1,4 @@
+import { TUser } from "../../utils/types";
 import {
    RECOVERY_PASSWORD_REQUEST,
    RECOVERY_PASSWORD_SUCCESS,
@@ -29,10 +30,44 @@ import {
 
    AUTHORIZATION_REQUEST,
    AUTHORIZATION_SUCCESS,
-   AUTHORIZATION_FAILED
+   AUTHORIZATION_FAILED,
+   TUserActions
 } from "../actions/login";
 
-const initialState = {
+export type TInitialStateLogin = {
+   user: TUser | null;
+
+   forgotPasswordRequest: boolean;
+   forgotPasswordSuccess: boolean;
+   forgotPasswordFailed: boolean;
+
+   newUserRequest: boolean;
+   newUserFailed: boolean;
+
+   resetPasswordRequest: boolean;
+   resetPasswordSuccess: boolean;
+   resetPasswordFailed: boolean;
+
+   getProfileRequest: boolean;
+   getProfileFailed: boolean;
+   answer: boolean;
+
+   updateProfileRequest: boolean;
+   updateProfileFailed: boolean;
+
+   signOutRequest: boolean;
+   signOutFailed: boolean;
+
+   tokenRequest: boolean;
+   tokenSuccess: boolean;
+   tokenFailed: boolean;
+
+   authorizationRequest: boolean;
+   authorizationFailed: boolean;
+
+}
+
+const initialState: TInitialStateLogin = {
    user: null,
 
    forgotPasswordRequest: false,
@@ -66,7 +101,7 @@ const initialState = {
 
 
 
-export const loginReducer = (state = initialState, action) => {
+export const loginReducer = (state = initialState, action: TUserActions): TInitialStateLogin => {
 
    switch (action.type) {
       case RECOVERY_PASSWORD_REQUEST:
@@ -112,6 +147,7 @@ export const loginReducer = (state = initialState, action) => {
          }
       case REGISTRATION_USER_FAILED:
          return {
+            ...state,
             newUserRequest: false,
             newUserFailed: true
          }
@@ -207,12 +243,14 @@ export const loginReducer = (state = initialState, action) => {
          }
       case TOKEN_SUCCESS:
          return {
+            ...state,
             tokenRequest: false,
             tokenSuccess: true,
             tokenFailed: false,
          }
       case TOKEN_FAILED:
          return {
+            ...state,
             tokenRequest: false,
             tokenSuccess: false,
             tokenFailed: true,
@@ -226,12 +264,14 @@ export const loginReducer = (state = initialState, action) => {
          }
       case AUTHORIZATION_SUCCESS:
          return {
+            ...state,
             authorizationRequest: false,
             authorizationFailed: false,
             user: action.user
          }
       case AUTHORIZATION_FAILED:
          return {
+            ...state,
             authorizationRequest: false,
             authorizationFailed: true,
          }

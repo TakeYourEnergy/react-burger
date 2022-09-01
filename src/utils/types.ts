@@ -6,16 +6,15 @@ import { Action, ActionCreator } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import { TypedUseSelectorHook, useSelector, useDispatch } from 'react-redux';
 import { TModalActions } from "../services/actions/object-ingredient";
-
-
-
+import { TGetOrderActions } from "../services/actions/order";
+import { TwsUser } from "../services/actions/ws-user-action";
 
 
 //тип, повторяющий структуру хранилища
 export type RootState = ReturnType<typeof store.getState>;
 
 // Типизация всех экшенов приложения
-type TApplicationActions = TUserActions | TBurgerConstructor | TIngredients | TModalActions
+type TApplicationActions = TUserActions | TBurgerConstructor | TIngredients | TModalActions | TGetOrderActions | TwsUser
 
 // Типизация thunk
 export type AppThunk<ReturnType = void> = ActionCreator<
@@ -56,3 +55,21 @@ export type TUser = {
    email: string;
    name: string;
 }
+
+//для WS-user
+export type TOrderDetails = {
+   ingredients: Array<string>;
+   name: string;
+   _id: string;
+   status: string;
+   number: number;
+   createdAt: string;
+   id?: string;
+};
+//для WS-user
+export type TOrder = {
+   orders: TOrderDetails[];
+   success: boolean;
+   total: number;
+   totalToday: number;
+};

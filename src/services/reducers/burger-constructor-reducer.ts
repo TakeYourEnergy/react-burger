@@ -12,7 +12,7 @@ const initialState: TInitialStateBurgerConstructor = {
    mains: [],
 }
 
-export const burgerConstructorReducer = (state = initialState, action: TBurgerConstructor) => {
+export const burgerConstructorReducer = (state = initialState, action: TBurgerConstructor): TInitialStateBurgerConstructor => {
    switch (action.type) {
       case ADD_ITEM:
          if (action.payload.type === 'bun') {

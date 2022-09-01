@@ -9,7 +9,7 @@ import {
 
 
 type TInitialStateIngredient = {
-   ingredients: TIngredient | [];
+   ingredients: ReadonlyArray<TIngredient>;
    ingredientsRequest: boolean;
    ingredientsFailed: boolean;
    ingredientsPending: boolean;
@@ -24,7 +24,7 @@ const initialState: TInitialStateIngredient = {
    ingrSpin: ''
 }
 
-export const ingredientsReducer = (state = initialState, action: TIngredients) => {
+export const ingredientsReducer = (state = initialState, action: TIngredients): TInitialStateIngredient => {
 
    switch (action.type) {
       case GET_INGREDIENTS:

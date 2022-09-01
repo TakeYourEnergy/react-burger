@@ -5,11 +5,10 @@ import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import Spinner from "../spinner/spinner";
 import { useSelector, useDispatch } from 'react-redux';
-import { getOrderNumber } from "../../services/actions/order";
+import { getOrderNumber, numberNull } from "../../services/actions/order";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrop } from "react-dnd";
 import BurgerConstructorList from "../burger-constructor-list/burger-constructor-list";
-import { NUMBER_NULL } from "../../services/actions/order";
 import { useHistory } from "react-router-dom";
 import { addItem, moveItemActionCreator } from "../../services/actions/burger-constructor";
 
@@ -35,7 +34,7 @@ const BurgerConstructor = () => {
    });
 
    const onClose = () => {
-      dispatch({ type: NUMBER_NULL })
+      dispatch(numberNull())
    }
 
    //вычисление суммы заказа
