@@ -1,13 +1,21 @@
+import { TOrderDetails } from "../../utils/types";
 import {
    WS_CONNECTION_SUCCESS,
    WS_CONNECTION_CLOSED,
    WS_CONNECTION_ERROR,
    WS_GET_MESSAGE,
-   WS_CONNECTION_START
+   WS_CONNECTION_START,
+   TWsAction
 } from "../actions/wsAction";
 
+type TInitialStateWsReduce = {
+   wsConnected: boolean;
+   orders: TOrderDetails[];
+   total: number;
+   totalToday: number
+}
 
-const initialState = {
+const initialState: TInitialStateWsReduce = {
    wsConnected: false,
    orders: [],
    total: 0,
@@ -15,7 +23,7 @@ const initialState = {
 };
 
 
-export const wsReducer = (state = initialState, action) => {
+export const wsReducer = (state = initialState, action: TWsAction): TInitialStateWsReduce => {
    switch (action.type) {
       // Опишем обработку экшена с типом WS_CONNECTION_SUCCESS
       // Установим флаг wsConnected в состояние true

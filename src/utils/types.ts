@@ -56,7 +56,7 @@ export type TUser = {
    name: string;
 }
 
-//для WS-user
+//для WS
 export type TOrderDetails = {
    ingredients: Array<string>;
    name: string;
@@ -66,7 +66,7 @@ export type TOrderDetails = {
    createdAt: string;
    id?: string;
 };
-//для WS-user
+//для WS
 export type TOrder = {
    orders: TOrderDetails[];
    success: boolean;
