@@ -1,21 +1,33 @@
 import { getCookie } from "../pages/cookie"
+import { TIngredient, TOrderDetails, TUser } from "./types"
 
 const config = {
    url: 'https://norma.nomoreparties.space/api'
 }
 
-const checkResponse = (res) => {
+const checkResponse = <T>(res: Response): Promise<T> => {
    return res.ok ? res.json() : Promise.reject(res.status)
+}
+
+type TgetIngredients = {
+   data: TIngredient[],
+   success: boolean;
 }
 
 //получение ингедиентов с сервера
 export const getIngredients = () => {
    return fetch(`${config.url}/ingredients`)
-      .then(checkResponse)
+      .then(res => checkResponse<TgetIngredients>(res))
+}
+
+type TGetOrder = {
+   name: string;
+   order: TOrderDetails;
+   success: boolean;
 }
 
 //получение номера заказа
-export const getOrder = (arr) => {
+export const getOrder = (arr: Array<string>) => {
    return fetch(`${config.url}/orders`, {
       method: 'POST',
       headers: { "Content-Type": "application/json", Authorization: 'Bearer ' + getCookie('token') },
@@ -23,11 +35,16 @@ export const getOrder = (arr) => {
          ingredients: arr,
       }),
    })
-      .then(checkResponse)
+      .then(res => checkResponse<TGetOrder>(res))
+}
+
+type TRecoveryPassword = {
+   success: boolean;
+   message: string;
 }
 
 //запрос на восстановление пароля пользователя
-export const recoveryPassword = (email) => {
+export const recoveryPassword = (email: string) => {
    return fetch(`${config.url}/password-reset`, {
       method: 'POST',
       headers: { "Content-Type": "application/json" },
@@ -35,13 +52,12 @@ export const recoveryPassword = (email) => {
          email: email,
       }),
    })
-      .then(checkResponse)
+      .then(res => checkResponse<TRecoveryPassword>(res))
 }
 
 
-
 //запрос на создание пользователя
-export const newUser = (name, email, password) => {
+export const newUser = (name: string, email: string, password: string) => {
    return fetch(`${config.url}/auth/register`, {
       method: 'POST',
       headers: { "Content-Type": "application/json" },
@@ -51,12 +67,16 @@ export const newUser = (name, email, password) => {
          name: name,
       }),
    })
-      .then(checkResponse)
+      .then(res => checkResponse<TUser>(res))
 }
 
+type TNewPassword = {
+   success: boolean;
+   message: string;
+}
 
 // запрос на новый пароль
-export const newPassword = (password, token) => {
+export const newPassword = (password: string, token: string) => {
    return fetch(`${config.url}/password-reset/reset`, {
       method: 'POST',
       headers: { "Content-Type": "application/json" },
@@ -65,7 +85,7 @@ export const newPassword = (password, token) => {
          token: token
       }),
    })
-      .then(checkResponse)
+      .then(res => checkResponse<TNewPassword>(res))
 }
 
 //эндпоинт получения данных о пользователе
@@ -77,12 +97,12 @@ export const getProfile = () => {
          Authorization: 'Bearer ' + getCookie('token')
       },
    })
-      .then(checkResponse)
+      .then(res => checkResponse<TUser>(res))
 }
 
 
 //эндпоинт обновления данных о пользователе
-export const getProfileUpdate = (email, name, password) => {
+export const getProfileUpdate = (email: string, name: string, password: string) => {
    return fetch(`${config.url}/auth/user`, {
       method: 'PATCH',
       headers: {
@@ -95,11 +115,16 @@ export const getProfileUpdate = (email, name, password) => {
          password: password,
       }),
    })
-      .then(checkResponse)
+      .then(res => checkResponse<TUser>(res))
+}
+
+type TSignOut = {
+   success: boolean;
+   message: string;
 }
 
 //выход из системы
-export const signOut = (refreshToken) => {
+export const signOut = (refreshToken: string) => {
    return fetch(`${config.url}/auth/logout`, {
       method: 'POST',
       headers: {
@@ -109,7 +134,7 @@ export const signOut = (refreshToken) => {
          token: refreshToken
       }),
    })
-      .then(checkResponse)
+      .then(res => checkResponse<TSignOut>(res))
 }
 
 //обновление токена
@@ -124,11 +149,11 @@ export const refreshToken = () => {
          token: localStorage.getItem('token')
       }),
    })
-      .then(checkResponse)
+      .then(res => checkResponse<TUser>(res))
 }
 
 //запрос авторизации
-export const authorizationLogin = (email, password) => {
+export const authorizationLogin = (email: string, password: string) => {
    return fetch(`${config.url}/auth/login`, {
       method: 'POST',
       headers: {
@@ -139,5 +164,5 @@ export const authorizationLogin = (email, password) => {
          password: password
       }),
    })
-      .then(checkResponse)
+      .then(res => checkResponse<TUser>(res))
 }

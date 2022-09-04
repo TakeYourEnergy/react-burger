@@ -19,6 +19,7 @@ import {
    WS_USER_GET_MESSAGE,
    WS_USER_SEND_MESSAGE
 } from './actions/ws-user-action';
+import { TWsMiddleware, TWsUserMiddleware } from '../utils/types';
 
 
 //Чтобы подключиться к бэкенду для получения всех заказов
@@ -26,7 +27,7 @@ const wsOrders = 'wss://norma.nomoreparties.space/orders/all';
 //Чтобы получить заказы конкретного пользователя
 const wsUserUrl = 'wss://norma.nomoreparties.space/orders';
 
-const wsActions = {
+const wsActions: TWsMiddleware = {
    wsInit: WS_CONNECTION_START,
    wsSendMessage: WS_SEND_MESSAGE,
    onOpen: WS_CONNECTION_SUCCESS,
@@ -36,7 +37,7 @@ const wsActions = {
 }
 
 
-const wsUserActions = {
+const wsUserActions: TWsUserMiddleware = {
    wsInitWithToken: WS_USER_CONNECTION_START,
    wsSendMessage: WS_USER_SEND_MESSAGE,
    onOpen: WS_USER_CONNECTION_SUCCESS,
@@ -46,11 +47,13 @@ const wsUserActions = {
 };
 
 
+declare global {
+   interface Window {
+      __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+   }
+}
 
-const composeEnhancers = typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-   ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
-   : compose
-
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 
 export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk, socketMiddleware(wsOrders, wsActions), socketMiddleware(wsUserUrl, wsUserActions))));

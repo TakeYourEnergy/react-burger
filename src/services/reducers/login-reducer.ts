@@ -35,7 +35,7 @@ import {
 } from "../actions/login";
 
 export type TInitialStateLogin = {
-   user: TUser | null;
+   user: TUser['user'] | null;
 
    forgotPasswordRequest: boolean;
    forgotPasswordSuccess: boolean;

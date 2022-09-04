@@ -70,7 +70,7 @@ export interface IRegistrationUserRequest {
 }
 export interface IRegistrationUserSuccess {
    readonly type: typeof REGISTRATION_USER_SUCCESS;
-   readonly user: TUser
+   readonly user: TUser['user']
 }
 export interface IRegistrationUserFailed {
    readonly type: typeof REGISTRATION_USER_FAILED
@@ -95,7 +95,7 @@ export interface IUpdateProfileRequest {
 }
 export interface IUpdateProfileSuccess {
    readonly type: typeof UPDATE_PROFILE_SUCCESS;
-   readonly user: TUser
+   readonly user: TUser['user']
 }
 export interface IUpdateProfileFailed {
    readonly type: typeof UPDATE_PROFILE_FAILED;
@@ -129,7 +129,7 @@ export interface IAuthorizationRequest {
 }
 export interface IAuthorizationSuccess {
    readonly type: typeof AUTHORIZATION_SUCCESS;
-   readonly user: TUser
+   readonly user: TUser['user']
 }
 export interface IAuthorizationFailed {
    readonly type: typeof AUTHORIZATION_FAILED;
@@ -141,7 +141,7 @@ export interface IGetProfileRequest {
 }
 export interface IGetProfileSuccess {
    readonly type: typeof GET_PROFILE_SUCCESS;
-   readonly user: TUser
+   readonly user: TUser['user']
 }
 export interface IGetProfileFailed {
    readonly type: typeof GET_PROFILE_FAILED;
