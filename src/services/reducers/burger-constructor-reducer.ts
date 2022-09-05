@@ -2,7 +2,7 @@ import { TIngredient } from "../../utils/types";
 import { ADD_ITEM, DELETE_ITEM, MOVE_ITEM, RESET_ITEM, TBurgerConstructor } from "../actions/burger-constructor";
 
 type TInitialStateBurgerConstructor = {
-   buns: TIngredient | []
+   buns: TIngredient | [] | any
    mains: Array<TIngredient>;
 }
 

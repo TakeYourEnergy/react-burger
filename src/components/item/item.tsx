@@ -1,12 +1,21 @@
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './item.module.css';
-import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux'
 import { openModalIngredient } from '../../services/actions/object-ingredient';
 import { useDrag } from "react-dnd";
 import { Link, useLocation } from 'react-router-dom';
+import { FC } from "react";
+import { TIngredient, useAppSelector } from '../../utils/types';
 
-const Item = ({ name, image, price, id, item }) => {
+interface IItem {
+   name: string;
+   image: string;
+   price: number;
+   id: string;
+   item: TIngredient
+}
+
+const Item: FC<IItem> = ({ name, image, price, id, item }) => {
 
    const dispatch = useDispatch()
    const location = useLocation()
@@ -17,8 +26,8 @@ const Item = ({ name, image, price, id, item }) => {
    })
 
    let count = 0
-   const buns = useSelector(state => state.burgerConstructorReducer.buns)
-   const mains = useSelector(state => state.burgerConstructorReducer.mains)
+   const buns = useAppSelector(state => state.burgerConstructorReducer.buns)
+   const mains = useAppSelector(state => state.burgerConstructorReducer.mains)
 
 
    mains.forEach(element => {
@@ -57,9 +66,3 @@ const Item = ({ name, image, price, id, item }) => {
 
 export default Item
 
-Item.propTypes = {
-   id: PropTypes.string.isRequired,
-   name: PropTypes.string.isRequired,
-   image: PropTypes.string.isRequired,
-   price: PropTypes.number.isRequired,
-}
