@@ -1,9 +1,9 @@
 import styles from './order-details.module.css';
 import done from '../../images/done.svg'
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../utils/types';
 
 const OrderDetails = () => {
-   const order = useSelector(state => state.orderReducer.numberOrder)
+   const order = useAppSelector(state => state.orderReducer.numberOrder)
 
    return (
       <>

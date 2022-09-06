@@ -1,17 +1,22 @@
 import styles from './modal.module.css';
-import { useEffect } from 'react';
+import { FC, ReactNode, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ModalOverlay from '../modal-overlay/modal-overlay';
 import ReactDOM from 'react-dom';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
+interface IModal {
+   title: string;
+   children?: ReactNode;
+   onClose: () => void;
+}
 
-const modalsContainer = document.querySelector('#modals');
+const modalsContainer = document.querySelector('#modals') as HTMLElement;
 
-const Modal = ({ title, children, onClose }) => {
+const Modal: FC<IModal> = ({ title, children, onClose }) => {
 
    useEffect(() => {
-      const handleEscKeydown = (e) => {
+      const handleEscKeydown = (e: {key: string}) => {
          e.key === "Escape" && onClose()
       }
       document.addEventListener('keydown', handleEscKeydown);

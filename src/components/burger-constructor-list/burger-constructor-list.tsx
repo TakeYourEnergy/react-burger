@@ -1,13 +1,28 @@
-import { useRef } from 'react';
+import { FC, useRef } from 'react';
 import styles from './burger-constructor-list.module.css';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch } from 'react-redux';
-import { useDrop, useDrag } from "react-dnd";
+import { useDrop, useDrag, DropTargetMonitor } from "react-dnd";
 import { deleteItem } from '../../services/actions/burger-constructor';
+import { TIngredient } from '../../utils/types';
+import type { Identifier, XYCoord } from 'dnd-core'
 
-const BurgerConstructorList = ({ items, index, moveItem }) => {
+interface IBurgerConstructorList {
+   items: TIngredient;
+   index: number;
+   moveItem: (dragIndex: number, hoverIndex: number) => void
+}
+
+interface IDragItem {
+   index: number;
+   id: string;
+   type: string;
+}
+
+const BurgerConstructorList: FC<IBurgerConstructorList> = ({ items, index, moveItem }) => {
 
    const dispatch = useDispatch();
+
 
    const [{ isDragging }, drag] = useDrag({
       type: 'ing',
@@ -20,7 +35,7 @@ const BurgerConstructorList = ({ items, index, moveItem }) => {
    })
    const [, drop] = useDrop({
       accept: 'ing',
-      hover: (item, monitor) => {
+      hover: (item: IDragItem, monitor) => {
          if (!ref.current) {
             return
          }
@@ -34,7 +49,7 @@ const BurgerConstructorList = ({ items, index, moveItem }) => {
          const hoverBoundingRect = ref.current?.getBoundingClientRect()
          const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
          const clientOffset = monitor.getClientOffset()
-         const hoverClientY = clientOffset.y - hoverBoundingRect.top
+         const hoverClientY = (clientOffset as XYCoord).y - hoverBoundingRect.top
 
          if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
             return
@@ -48,12 +63,12 @@ const BurgerConstructorList = ({ items, index, moveItem }) => {
       }
    })
    const opacity = isDragging ? 0 : 1
-   const ref = useRef(null)
+   const ref = useRef<HTMLDivElement>(null)
    drag(drop(ref));
 
    return (
       <div className={styles.main} style={{ opacity }} ref={ref}>
-         <DragIcon type="main" />
+         <DragIcon type="primary" />
          <ConstructorElement
             text={items.name}
             price={items.price}
@@ -68,6 +83,3 @@ const BurgerConstructorList = ({ items, index, moveItem }) => {
 
 export default BurgerConstructorList
 
-// BurgerConstructorList.propTypes = {
-//    burgerIngr: PropTypes.arrayOf(menuItemPropTypes.isRequired).isRequired,
-// }

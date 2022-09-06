@@ -1,10 +1,14 @@
-import { Route, useLocation, Redirect } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import { Route, useLocation, Redirect, RouteProps } from 'react-router-dom';
+import { useAppSelector } from '../../utils/types';
+import { FC, ReactNode } from 'react';
 
+interface IProtected {
+   children: ReactNode
+}
 
 //защищенный маршрут
-export function ProtectedRoute({ children, ...rest }) {
-   const user = useSelector(state => state.loginReducer.user)
+const ProtectedRoute: FC<IProtected> = ({ children, ...rest }) => {
+   const user = useAppSelector(state => state.loginReducer.user)
    const location = useLocation();
 
    return (
@@ -21,6 +25,6 @@ export function ProtectedRoute({ children, ...rest }) {
          }
       />
    );
-} 
+}
 
 export default ProtectedRoute

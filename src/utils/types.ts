@@ -8,7 +8,7 @@ import { TypedUseSelectorHook, useSelector, useDispatch } from 'react-redux';
 import { TModalActions } from "../services/actions/object-ingredient";
 import { TGetOrderActions } from "../services/actions/order";
 import { TwsUser, WS_USER_CONNECTION_CLOSED, WS_USER_CONNECTION_ERROR, WS_USER_CONNECTION_START, WS_USER_CONNECTION_SUCCESS, WS_USER_GET_MESSAGE, WS_USER_SEND_MESSAGE } from "../services/actions/ws-user-action";
-import { WS_CONNECTION_CLOSED, WS_CONNECTION_ERROR, WS_CONNECTION_START, WS_CONNECTION_SUCCESS, WS_GET_MESSAGE, WS_SEND_MESSAGE } from "../services/actions/wsAction";
+import { TWsAction, WS_CONNECTION_CLOSED, WS_CONNECTION_ERROR, WS_CONNECTION_START, WS_CONNECTION_SUCCESS, WS_GET_MESSAGE, WS_SEND_MESSAGE } from "../services/actions/wsAction";
 
 
 
@@ -16,7 +16,7 @@ import { WS_CONNECTION_CLOSED, WS_CONNECTION_ERROR, WS_CONNECTION_START, WS_CONN
 export type RootState = ReturnType<typeof store.getState>;
 
 // Типизация всех экшенов приложения
-type TApplicationActions = TUserActions | TBurgerConstructor | TIngredients | TModalActions | TGetOrderActions | TwsUser
+type TApplicationActions = TUserActions | TBurgerConstructor | TIngredients | TModalActions | TGetOrderActions | TwsUser | TWsAction
 
 // Типизация thunk
 export type AppThunk<ReturnType = void> = ActionCreator<

@@ -1,11 +1,12 @@
 import styles from './ingredient-details.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { useAppSelector } from '../../utils/types';
 
 const IngredientDetails = () => {
-   const { id } = useParams();
+   const { id } = useParams<{ id: string }>();
 
-   const {isOpened, data} = useSelector(state => ({
+   const { isOpened, data } = useAppSelector(state => ({
       isOpened: state.objectIngredient.isOpened,
       data: state.ingredientsReducer.ingredients
    }))

@@ -11,25 +11,26 @@ import { useDrop } from "react-dnd";
 import BurgerConstructorList from "../burger-constructor-list/burger-constructor-list";
 import { useHistory } from "react-router-dom";
 import { addItem, moveItemActionCreator } from "../../services/actions/burger-constructor";
+import { TIngredient, useAppSelector } from "../../utils/types";
 
 
 const BurgerConstructor = () => {
    const dispatch = useDispatch()
    const [totalPrice, setTotalPrice] = useState(0)
 
-   const { buns, mains, user } = useSelector(state => ({
+   const { buns, mains, user } = useAppSelector(state => ({
       buns: state.burgerConstructorReducer.buns,
       mains: state.burgerConstructorReducer.mains,
       user: state.loginReducer.user
    }))
 
-   const orderLoading = useSelector(state => state.orderReducer.ingrSpin)
-   const isOrderDetailsOpened = useSelector(state => state.orderReducer.isOrderDetailsOpened)
+   const orderLoading = useAppSelector(state => state.orderReducer.ingrSpin)
+   const isOrderDetailsOpened = useAppSelector(state => state.orderReducer.isOrderDetailsOpened)
 
    const [, dropTarget] = useDrop({
       accept: "item",
-      drop({ item }) {
-         dispatch(addItem(item))
+      drop(dragObj: {ingredient: TIngredient}) {
+         dispatch(addItem(dragObj.ingredient))
       },
    });
 
@@ -60,7 +61,7 @@ const BurgerConstructor = () => {
 
    }
 
-   const moveItem = useCallback((dragIndex, hoverIndex) => {
+   const moveItem = useCallback((dragIndex: number, hoverIndex: number) => {
       dispatch(moveItemActionCreator(dragIndex, hoverIndex))
    }, [dispatch])
 

@@ -1,10 +1,16 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, FC } from "react";
 import styles from "./burger-ingredients.module.css";
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientList from "../ingredient-list/ingredient-list";
 import { useInView } from "react-intersection-observer";
 
-const BurgerIngredients = () => {
+declare module 'react' {
+   interface FunctionComponent<P = {}> {
+      (props: PropsWithChildren<P>, context?: any): ReactElement<any, any> | null;
+   }
+}
+
+const BurgerIngredients: FC = () => {
 
    const [current, setCurrent] = useState('rolls')
 
@@ -19,8 +25,8 @@ const BurgerIngredients = () => {
       else if (inViewToppings) { setCurrent('toppings') }
    }, [inViewBuns, inViewSauces, inViewToppings])
 
-   const setScroll = (value) => {
-      document.getElementById(value).scrollIntoView({ behavior: "smooth", block: 'start' })
+   const setScroll = (value: string) => {
+      document.getElementById(value)?.scrollIntoView({ behavior: "smooth", block: 'start' })
    }
 
    return (

@@ -1,8 +1,11 @@
+import { FC } from 'react';
 import styles from './modal-overlay.module.css';
-import PropTypes from 'prop-types';
 
+interface IModalOverlay {
+   onClickClose: () => void;
+}
 
-const ModalOverlay = ({ onClickClose }) => {
+const ModalOverlay: FC<IModalOverlay> = ({ onClickClose }) => {
    return (
       <div className={styles.overlay} onClick={onClickClose} />
    )
@@ -10,6 +13,3 @@ const ModalOverlay = ({ onClickClose }) => {
 
 export default ModalOverlay
 
-ModalOverlay.propTypes = {
-   onClickClose: PropTypes.func.isRequired
-}

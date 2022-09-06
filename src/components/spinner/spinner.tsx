@@ -1,5 +1,4 @@
 import styles from './spinner.module.css'
-import ModalOverlay from '../modal-overlay/modal-overlay'
 import { Triangle } from 'react-loader-spinner'
 
 
