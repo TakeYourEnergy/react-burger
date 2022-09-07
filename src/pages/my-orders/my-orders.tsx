@@ -7,15 +7,26 @@ import { wsUserConnectionStart } from '../../services/actions/ws-user-action'
 import { wsUserConnectionClosed } from '../../services/actions/ws-user-action'
 import OrdersInformation from '../feed/orders-information/orders-information'
 import PageCardOrder from '../page-card-order/page-card-order'
+import { useAppSelector } from '../../utils/types'
 
-
+interface ILocation {
+   background: {
+      pathname: string;
+      search: string;
+      hash: string;
+      state: null;
+      key: string;
+   }
+   from: string;
+   state?: object;
+};
 
 export const MyOrders = () => {
    const dispatch = useDispatch()
-   const location = useLocation()
+   const location = useLocation<ILocation>()
    const background = location.state?.background
    const getRefreshToken = localStorage.getItem('token')
-   // console.log(getRefreshToken)
+
 
    useEffect(() => {
       dispatch(wsUserConnectionStart())
@@ -25,7 +36,7 @@ export const MyOrders = () => {
       }
    }, [dispatch])
 
-   const myOrders = useSelector(state => state.wsUserReducer.orders)
+   const myOrders = useAppSelector(state => state.wsUserReducer.orders)
 
    //выход из профиля
    const signOutProfile = () => {

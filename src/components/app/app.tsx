@@ -28,13 +28,26 @@ import OrdersInformation from '../../pages/feed/orders-information/orders-inform
 import ModalInformationAboutOrder from '../../pages/modal-information-about-order/modal-information-about-order';
 import OrderInfo from '../../pages/order-info/order-info';
 import MyOrders from '../../pages/my-orders/my-orders';
+import { useAppSelector } from '../../utils/types';
+
+interface ILocation {
+  background: {
+    pathname: string;
+    search: string;
+    hash: string;
+    state: null;
+    key: string;
+  }
+  from: string;
+  state?: object;
+};
 
 function App() {
 
-  const stateToSpinner = useSelector(state => state.ingredientsReducer.ingrSpin)
+  const stateToSpinner = useAppSelector(state => state.ingredientsReducer.ingrSpin)
   const dispatch = useDispatch();
 
-  const { user, tokenSuccess } = useSelector(state => ({
+  const { user, tokenSuccess } = useAppSelector(state => ({
     user: state.loginReducer.user,
     tokenSuccess: state.loginReducer.tokenSuccess
   }))
@@ -44,7 +57,7 @@ function App() {
   const getAccessTokenFromCookie = getCookie('token') //document.cookie
 
   const history = useHistory()
-  const location = useLocation()
+  const location = useLocation<ILocation>()
   const background = location.state?.background
 
   const onClose = () => {

@@ -3,14 +3,15 @@ import styles from './modal-information-about-order.module.css'
 import { useParams, useRouteMatch } from 'react-router-dom';
 import { useMemo } from 'react';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { TIngredient, useAppSelector } from '../../utils/types';
 
 
 const ModalInformationAboutOrder = () => {
-   const { id } = useParams();
+   const { id } = useParams<{ id: string }>();
 
    //data - все ингредиенты
    //orders - все заказы
-   const { orders, data, myOrders } = useSelector(state => ({
+   const { orders, data, myOrders } = useAppSelector(state => ({
       orders: state.wsReducer.orders,
       data: state.ingredientsReducer.ingredients,
       myOrders: state.wsUserReducer.orders
@@ -38,9 +39,9 @@ const ModalInformationAboutOrder = () => {
    const uniqueArrWithIngredients = uniqueArrWithOrdersId.map(id => data.find(ingredient => ingredient._id === id))
 
    //подсчет одинаковых id в массиве order.ingredients
-   const countId = useMemo(() => {
+   const countId: any = useMemo(() => {
       if (order) {
-         const objWithId = order.ingredients.reduce((acc, item) => {
+         const objWithId = order.ingredients.reduce<Record<string, number>>((acc, item) => {
             if (!acc[item]) {
                acc[item] = 1;
             } else {
@@ -54,7 +55,7 @@ const ModalInformationAboutOrder = () => {
    }, [order])
 
 
-   const date = (str) => {
+   const date = (str: string) => {
       return new Date(str).toLocaleString();
    }
 
@@ -64,7 +65,7 @@ const ModalInformationAboutOrder = () => {
          const arrWithIngr = order.ingredients.map(id => {
             return data.find(ing => ing._id === id)
          })
-         const sum = arrWithIngr.reduce((acc, item) => {
+         const sum = arrWithIngr.reduce((acc, item: any) => {
             return acc + item.price
          }, 0)
          return sum
@@ -86,21 +87,21 @@ const ModalInformationAboutOrder = () => {
                <p className={`${styles.compound} text text_type_main-medium mb-6`}>Состав:</p>
                <div className={styles.box}>
                   {
-                     uniqueArrWithIngredients.map((item, index) => {
+                     uniqueArrWithIngredients.map((item: any, index) => {
                         return (
                            <div className={styles.container} key={index}>
                               <div className={styles.info}>
                                  <div>
-                                    <img className={styles.image} src={item.image} alt={item.name} />
+                                    <img className={styles.image} src={item?.image} alt={item?.name} />
                                  </div>
-                                 <p className={`${styles.title} text_type_main-default ml-4 `}>{item.name}</p>
+                                 <p className={`${styles.title} text_type_main-default ml-4 `}>{item?.name}</p>
                               </div>
                               <div className={styles.price}>
                                  <p className={'text text_type_digits-default mr-2 '}>
                                     {countId[item._id]}&nbsp;x
                                  </p>
                                  <p className={'text text_type_digits-default mr-2 '}>
-                                    {item.price}
+                                    {item?.price}
                                  </p>
                                  <CurrencyIcon type="primary" />
                               </div>

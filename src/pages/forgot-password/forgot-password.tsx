@@ -1,5 +1,5 @@
 import styles from './forgot-password.module.css'
-import { useCallback, useState } from 'react';
+import { useCallback, useState, ChangeEvent, FormEvent } from 'react';
 import {
    Button,
    Input
@@ -7,6 +7,7 @@ import {
 import { Link, useHistory, Redirect, useLocation } from "react-router-dom";
 import { recoveryPasswordEmail } from '../../services/actions/login';
 import { useDispatch, useSelector } from 'react-redux';
+import { useAppSelector } from '../../utils/types';
 
 
 
@@ -16,7 +17,7 @@ const ForgotPassword = () => {
    const location = useLocation();
 
    //В случае успеха обращения к серверу на странице восстановления пользователь направляется на маршрут /reset-password
-   const { forgotPasswordSuccess, user } = useSelector(state => ({
+   const { forgotPasswordSuccess, user } = useAppSelector(state => ({
       forgotPasswordSuccess: state.loginReducer.forgotPasswordSuccess,
       user: state.loginReducer.user
    }))
@@ -37,11 +38,11 @@ const ForgotPassword = () => {
    }
 
 
-   const emailForgotInput = (e) => {
+   const emailForgotInput = (e: ChangeEvent<HTMLInputElement>) => {
       setEmailForgot(e.target.value)
    }
 
-   const forgotPasswordSubmit = (e) => {
+   const forgotPasswordSubmit = (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       //диспачим введенное мыло, делая запрос к серверу
       dispatch(recoveryPasswordEmail(emailForgot))

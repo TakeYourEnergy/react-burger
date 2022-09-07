@@ -1,42 +1,43 @@
 import styles from './profile.module.css';
 import { NavLink, useLocation } from "react-router-dom";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FC, ChangeEvent, SyntheticEvent, FormEvent } from 'react';
 import { Button, Input, EmailInput, PasswordInput, } from "@ya.praktikum/react-developer-burger-ui-components";
 import { getProfileData } from '../../services/actions/login';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateProfileData } from '../../services/actions/login';
 import { logOut } from '../../services/actions/login';
 import { wsUserConnectionStart, wsUserConnectionClosed } from '../../services/actions/ws-user-action';
+import { useAppSelector } from '../../utils/types';
 
-const Profile = () => {
+const Profile: FC = () => {
    const location = useLocation()
    const getRefreshToken = localStorage.getItem('token')
 
    const dispatch = useDispatch();
 
-   const { user, answer } = useSelector(state => ({
+   const { user, answer } = useAppSelector(state => ({
       user: state.loginReducer.user,
       answer: state.loginReducer.answer
    }))
 
-   const [nameProfile, setNameProfile] = useState(`${user.name}`)
-   const [emailProfile, setEmailProfile] = useState(`${user.email}`)
+   const [nameProfile, setNameProfile] = useState(`${user?.name}`)
+   const [emailProfile, setEmailProfile] = useState(`${user?.email}`)
    const [passwordProfile, setPasswordProfile] = useState('')
 
-   const onChangeInputNameProfile = (e) => {
+   const onChangeInputNameProfile = (e: ChangeEvent<HTMLInputElement>) => {
       setNameProfile(e.target.value)
    }
 
-   const onChangeInputEmailProfile = (e) => {
+   const onChangeInputEmailProfile = (e: ChangeEvent<HTMLInputElement>) => {
       setEmailProfile(e.target.value)
    }
 
-   const onChangeInputPasswordProfile = (e) => {
+   const onChangeInputPasswordProfile = (e: ChangeEvent<HTMLInputElement>) => {
       setPasswordProfile(e.target.value)
    }
 
    //отредактирует информацию на экране профиля и нажмёт «Сохранить»
-   const submitProfile = (e) => {
+   const submitProfile = (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault()
       dispatch(updateProfileData(emailProfile, nameProfile, passwordProfile))
    }
@@ -51,10 +52,10 @@ const Profile = () => {
    }
 
    //кнопка отмены -  возвращает информацию о пользователе к исходному значению до редактирования
-   const cancellation = (e) => {
+   const cancellation = (e: SyntheticEvent<Element, Event>) => {
       e.preventDefault()
-      setNameProfile(user.name)
-      setEmailProfile(user.email)
+      user && setNameProfile(user.name)
+      user && setEmailProfile(user.email)
       setPasswordProfile('')
    }
 
@@ -112,25 +113,17 @@ const Profile = () => {
             </div>
             <div className={styles.inp}>
                <EmailInput
-                  type={'email'}
-                  placeholder={'Логин'}
                   value={emailProfile}
                   onChange={onChangeInputEmailProfile}
                   name={'email'}
-                  error={false}
-                  errorText={'Ошибка'}
                   size={'default'}
                />
             </div>
             <div className={styles.inp}>
                <PasswordInput
-                  type={'email'}
-                  placeholder={'Логин'}
                   value={passwordProfile}
                   onChange={onChangeInputPasswordProfile}
                   name={'email'}
-                  error={false}
-                  errorText={'Ошибка'}
                   size={'default'}
                />
             </div>

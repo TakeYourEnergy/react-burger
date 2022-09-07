@@ -1,11 +1,12 @@
 import { useSelector } from "react-redux";
 import { Link, useLocation, useRouteMatch } from 'react-router-dom'
+import { useAppSelector } from "../../utils/types";
 import OrdersInformation from "../feed/orders-information/orders-information";
 import styles from './page-card-order.module.css'
 
 const PageCardOrder = () => {
 
-   const { orders, myOrders } = useSelector(state => ({
+   const { orders, myOrders } = useAppSelector(state => ({
       orders: state.wsReducer.orders,
       myOrders: state.wsUserReducer.orders
    }))

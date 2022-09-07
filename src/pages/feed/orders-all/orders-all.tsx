@@ -1,9 +1,10 @@
 import styles from './orders-all.module.css'
 import { useSelector } from 'react-redux'
 import { useMemo } from 'react'
+import { useAppSelector } from '../../../utils/types'
 
 const OrdersAll = () => {
-   const { orders, total, totalToday } = useSelector(state => ({
+   const { orders, total, totalToday } = useAppSelector(state => ({
       orders: state.wsReducer.orders,
       total: state.wsReducer.total,
       totalToday: state.wsReducer.totalToday

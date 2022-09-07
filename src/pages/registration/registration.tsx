@@ -6,9 +6,10 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, Redirect } from "react-router-dom";
 import styles from "./registration.module.css";
-import { useState } from "react";
+import { useState, ChangeEvent } from "react";
 import { registrationUser } from "../../services/actions/login";
 import { useDispatch, useSelector } from "react-redux";
+import { useAppSelector } from "../../utils/types";
 
 const Registration = () => {
   const [nameRegistration, setNameRegistration] = useState("");
@@ -16,23 +17,23 @@ const Registration = () => {
   const [passwordRegistration, setPasswordRegistration] = useState("");
   const dispatch = useDispatch()
 
-  const { user } = useSelector(state => ({
+  const { user } = useAppSelector(state => ({
     user: state.loginReducer.user
   }))
 
-  const inputNameRegistration = (e) => {
+  const inputNameRegistration = (e: ChangeEvent<HTMLInputElement>) => {
     setNameRegistration(e.target.value);
   };
 
-  const inputEmailRegistration = (e) => {
+  const inputEmailRegistration = (e: ChangeEvent<HTMLInputElement>) => {
     setEmailRegistration(e.target.value);
   };
 
-  const inputPasswordRegistration = (e) => {
+  const inputPasswordRegistration = (e: ChangeEvent<HTMLInputElement>) => {
     setPasswordRegistration(e.target.value);
   };
 
-  const newUserRegistation = (e) => {
+  const newUserRegistation = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(registrationUser(nameRegistration, emailRegistration, passwordRegistration));
   }
@@ -66,26 +67,18 @@ const Registration = () => {
         </div>
         <div className={styles.inp}>
           <EmailInput
-            placeholder={"E-mail"}
             name={"email"}
-            type={"email"}
             value={emailRegistration}
             onChange={inputEmailRegistration}
             size={"default"}
-            error={false}
-            errorText={"Ошибка"}
           />
         </div>
         <div className={styles.inp}>
           <PasswordInput
-            placeholder={"Пароль"}
             name={"password"}
             value={passwordRegistration}
             onChange={inputPasswordRegistration}
             size={"default"}
-            error={false}
-            errorText={"Ошибка"}
-            type={"password"}
           />
         </div>
         <div>

@@ -6,7 +6,7 @@ const Spinner = () => {
    return (
       <div className={styles.over}>
          <div className={styles.spinner}>
-            <Triangle className={styles.spinner} color="red" height={80} width={80} ariaLabel="loading-indicator" />
+            <Triangle color="red" height={80} width={80} ariaLabel="loading-indicator" />
          </div>
       </div>
    )

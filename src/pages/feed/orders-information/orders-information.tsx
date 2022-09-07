@@ -1,18 +1,25 @@
 import styles from './orders-information.module.css'
-import { useSelector } from 'react-redux';
-import { useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import cheese from '../../../images/cheese.jpg'
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
+import { useAppSelector } from '../../../utils/types';
 
+interface IOrderInformation {
+   orderCreatedAt: string;
+   orderName: string;
+   orderNumber: number;
+   orderIngredients: string[];
+   status: string
+}
 
-const OrdersInformation = ({ orderCreatedAt, orderName, orderNumber, orderIngredients, status }) => {
+const OrdersInformation: FC<IOrderInformation> = ({ orderCreatedAt, orderName, orderNumber, orderIngredients, status }) => {
    //изменение даты
-   const getFormatDate = (string) => {
+   const getFormatDate = (string: string) => {
       return new Date(string).toLocaleString();
    }
 
-   const { data } = useSelector(state => ({
+   const { data } = useAppSelector(state => ({
       data: state.ingredientsReducer.ingredients
    })) //ингридиенты в сторе
 
