@@ -7,13 +7,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateProfileData } from '../../services/actions/login';
 import { logOut } from '../../services/actions/login';
 import { wsUserConnectionStart, wsUserConnectionClosed } from '../../services/actions/ws-user-action';
-import { useAppSelector } from '../../utils/types';
+import { useAppDispatch, useAppSelector } from '../../utils/types';
 
 const Profile: FC = () => {
    const location = useLocation()
    const getRefreshToken = localStorage.getItem('token')
 
-   const dispatch = useDispatch();
+   const dispatch = useAppDispatch();
 
    const { user, answer } = useAppSelector(state => ({
       user: state.loginReducer.user,

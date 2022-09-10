@@ -9,6 +9,7 @@ import { TModalActions } from "../services/actions/object-ingredient";
 import { TGetOrderActions } from "../services/actions/order";
 import { TwsUser, WS_USER_CONNECTION_CLOSED, WS_USER_CONNECTION_ERROR, WS_USER_CONNECTION_START, WS_USER_CONNECTION_SUCCESS, WS_USER_GET_MESSAGE, WS_USER_SEND_MESSAGE } from "../services/actions/ws-user-action";
 import { TWsAction, WS_CONNECTION_CLOSED, WS_CONNECTION_ERROR, WS_CONNECTION_START, WS_CONNECTION_SUCCESS, WS_GET_MESSAGE, WS_SEND_MESSAGE } from "../services/actions/wsAction";
+import { Dispatch } from 'redux';
 
 
 
@@ -25,6 +26,7 @@ export type AppThunk<ReturnType = void> = ActionCreator<
 
 // Типизация метода dispatch для проверки на валидность отправляемого экшена
 export type AppDispatch = typeof store.dispatch;
+
 // Теперь этот хук знает структуру хранилища
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 // Хук не даст отправить экшен, который ему не знаком

@@ -7,13 +7,13 @@ import {
 import { Link, useHistory, Redirect, useLocation } from "react-router-dom";
 import { recoveryPasswordEmail } from '../../services/actions/login';
 import { useDispatch, useSelector } from 'react-redux';
-import { useAppSelector } from '../../utils/types';
+import { useAppDispatch, useAppSelector } from '../../utils/types';
 
 
 
 const ForgotPassword = () => {
    const [emailForgot, setEmailForgot] = useState('')
-   const dispatch = useDispatch();
+   const dispatch = useAppDispatch();
    const location = useLocation();
 
    //В случае успеха обращения к серверу на странице восстановления пользователь направляется на маршрут /reset-password

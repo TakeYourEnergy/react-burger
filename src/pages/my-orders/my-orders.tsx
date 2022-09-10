@@ -7,7 +7,7 @@ import { wsUserConnectionStart } from '../../services/actions/ws-user-action'
 import { wsUserConnectionClosed } from '../../services/actions/ws-user-action'
 import OrdersInformation from '../feed/orders-information/orders-information'
 import PageCardOrder from '../page-card-order/page-card-order'
-import { useAppSelector } from '../../utils/types'
+import { useAppDispatch, useAppSelector } from '../../utils/types'
 
 interface ILocation {
    background: {
@@ -22,7 +22,7 @@ interface ILocation {
 };
 
 export const MyOrders = () => {
-   const dispatch = useDispatch()
+   const dispatch = useAppDispatch()
    const location = useLocation<ILocation>()
    const background = location.state?.background
    const getRefreshToken = localStorage.getItem('token')

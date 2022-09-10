@@ -8,7 +8,7 @@ import {
   Button
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch } from "react-redux";
-import { useAppSelector } from "../../utils/types";
+import { useAppDispatch, useAppSelector } from "../../utils/types";
 
 interface stateType {
   from: { pathname: string }
@@ -19,7 +19,7 @@ const Authorization: FC = () => {
   const [emailAuthorization, setEmailAuthorization] = useState("");
   const [passwordAuthorization, setPasswordAuthorization] = useState("");
   const location = useLocation<stateType>();
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const { user } = useAppSelector(state => ({
     user: state.loginReducer.user

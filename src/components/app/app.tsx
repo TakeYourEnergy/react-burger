@@ -28,7 +28,7 @@ import OrdersInformation from '../../pages/feed/orders-information/orders-inform
 import ModalInformationAboutOrder from '../../pages/modal-information-about-order/modal-information-about-order';
 import OrderInfo from '../../pages/order-info/order-info';
 import MyOrders from '../../pages/my-orders/my-orders';
-import { useAppSelector } from '../../utils/types';
+import { useAppDispatch, useAppSelector } from '../../utils/types';
 
 interface ILocation {
   background: {
@@ -45,7 +45,7 @@ interface ILocation {
 function App() {
 
   const stateToSpinner = useAppSelector(state => state.ingredientsReducer.ingrSpin)
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const { user, tokenSuccess } = useAppSelector(state => ({
     user: state.loginReducer.user,

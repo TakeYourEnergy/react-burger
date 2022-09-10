@@ -9,13 +9,13 @@ import styles from "./registration.module.css";
 import { useState, ChangeEvent } from "react";
 import { registrationUser } from "../../services/actions/login";
 import { useDispatch, useSelector } from "react-redux";
-import { useAppSelector } from "../../utils/types";
+import { useAppDispatch, useAppSelector } from "../../utils/types";
 
 const Registration = () => {
   const [nameRegistration, setNameRegistration] = useState("");
   const [emailRegistration, setEmailRegistration] = useState("");
   const [passwordRegistration, setPasswordRegistration] = useState("");
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const { user } = useAppSelector(state => ({
     user: state.loginReducer.user

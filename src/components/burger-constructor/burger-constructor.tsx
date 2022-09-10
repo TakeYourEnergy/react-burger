@@ -11,11 +11,11 @@ import { useDrop } from "react-dnd";
 import BurgerConstructorList from "../burger-constructor-list/burger-constructor-list";
 import { useHistory } from "react-router-dom";
 import { addItem, moveItemActionCreator } from "../../services/actions/burger-constructor";
-import { TIngredient, useAppSelector } from "../../utils/types";
+import { TIngredient, useAppDispatch, useAppSelector } from "../../utils/types";
 
 
 const BurgerConstructor = () => {
-   const dispatch = useDispatch()
+   const dispatch = useAppDispatch()
    const [totalPrice, setTotalPrice] = useState(0)
 
    const { buns, mains, user } = useAppSelector(state => ({
@@ -24,13 +24,14 @@ const BurgerConstructor = () => {
       user: state.loginReducer.user
    }))
 
+
    const orderLoading = useAppSelector(state => state.orderReducer.ingrSpin)
    const isOrderDetailsOpened = useAppSelector(state => state.orderReducer.isOrderDetailsOpened)
 
    const [, dropTarget] = useDrop({
       accept: "item",
-      drop(dragObj: {ingredient: TIngredient}) {
-         dispatch(addItem(dragObj.ingredient))
+      drop({ item }: { item: TIngredient }) {
+         dispatch(addItem(item))
       },
    });
 

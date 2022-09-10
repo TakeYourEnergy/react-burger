@@ -7,7 +7,7 @@ export const socketMiddleware = (wsUrl: string, wsActions: TWsUserMiddleware | T
    return (store: MiddlewareAPI) => {
       let socket: WebSocket | null = null;
 
-      return next => action => {
+      return next => (action) => {
          const { dispatch } = store;
          const { type, payload } = action;
          const { wsSendMessage, onOpen, onClose, onError, onMessage } = wsActions;
