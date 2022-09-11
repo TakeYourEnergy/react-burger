@@ -1,6 +1,5 @@
-import { useSelector } from "react-redux";
 import { Link, useLocation, useRouteMatch } from 'react-router-dom'
-import { useAppSelector } from "../../utils/types";
+import { useAppSelector } from '../../services/store';
 import OrdersInformation from "../feed/orders-information/orders-information";
 import styles from './page-card-order.module.css'
 

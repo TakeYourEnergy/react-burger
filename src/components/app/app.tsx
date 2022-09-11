@@ -5,7 +5,6 @@ import BurgerConstructor from '../burger-constructor/burger-constructor';
 import styles from './app.module.css'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Spinner from '../spinner/spinner';
-import { useSelector, useDispatch } from 'react-redux'
 import { getIngredientsData } from '../../services/actions/ingredients';
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -19,16 +18,16 @@ import ProtectedRoute from '../protectedRoute/ProtectedRoute';
 import { getCookie } from '../../pages/cookie';
 import { getProfileData, updateToken } from '../../services/actions/login';
 import Modal from '../modal/modal';
-import { closeModalIngredient, CLOSE_MODAL_INGREDIENT } from '../../services/actions/object-ingredient';
+import { closeModalIngredient } from '../../services/actions/object-ingredient';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import IngredientPages from '../../pages/ingredientPages/ingredientPages';
 import NotFound404 from '../../pages/notFound404/notFound404';
 import Feed from '../../pages/feed/feed';
-import OrdersInformation from '../../pages/feed/orders-information/orders-information';
 import ModalInformationAboutOrder from '../../pages/modal-information-about-order/modal-information-about-order';
 import OrderInfo from '../../pages/order-info/order-info';
 import MyOrders from '../../pages/my-orders/my-orders';
-import { useAppDispatch, useAppSelector } from '../../utils/types';
+import { useAppDispatch, useAppSelector } from '../../services/store';
+
 
 interface ILocation {
   background: {

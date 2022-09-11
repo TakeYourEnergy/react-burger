@@ -1,5 +1,5 @@
 import { getOrder } from "../../utils/api";
-import { AppDispatch, AppThunk } from "../../utils/types";
+import { AppDispatch, AppThunk } from "../store";
 import { resetItemActionCreator } from "./burger-constructor";
 
 export const GET_ORDER: "GET_ORDER_REQUEST" = "GET_ORDER_REQUEST";

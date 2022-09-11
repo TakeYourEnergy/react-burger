@@ -2,8 +2,7 @@ import styles from './orders-information.module.css'
 import { FC, useMemo } from 'react';
 import cheese from '../../../images/cheese.jpg'
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
-import { useAppSelector } from '../../../utils/types';
+import { useAppSelector } from '../../../services/store';
 
 interface IOrderInformation {
    orderCreatedAt: string;
@@ -108,10 +107,3 @@ const OrdersInformation: FC<IOrderInformation> = ({ orderCreatedAt, orderName, o
 
 export default OrdersInformation
 
-OrdersInformation.propTypes = {
-   orderCreatedAt: PropTypes.string.isRequired,
-   orderName: PropTypes.string.isRequired,
-   orderNumber: PropTypes.number.isRequired,
-   orderIngredients: PropTypes.array.isRequired,
-   status: PropTypes.string.isRequired,
-}

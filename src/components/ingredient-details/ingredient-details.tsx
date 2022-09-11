@@ -1,7 +1,6 @@
 import styles from './ingredient-details.module.css';
-import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { useAppSelector } from '../../utils/types';
+import { useAppSelector } from '../../services/store';
 
 const IngredientDetails = () => {
    const { id } = useParams<{ id: string }>();

@@ -7,8 +7,7 @@ import {
   PasswordInput,
   Button
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch } from "react-redux";
-import { useAppDispatch, useAppSelector } from "../../utils/types";
+import { useAppDispatch, useAppSelector } from "../../services/store";
 
 interface stateType {
   from: { pathname: string }

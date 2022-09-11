@@ -1,7 +1,7 @@
 import styles from './orders-all.module.css'
-import { useSelector } from 'react-redux'
 import { useMemo } from 'react'
-import { useAppSelector } from '../../../utils/types'
+import { useAppSelector } from '../../../services/store'
+
 
 const OrdersAll = () => {
    const { orders, total, totalToday } = useAppSelector(state => ({

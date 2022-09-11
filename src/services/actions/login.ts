@@ -8,7 +8,8 @@ import { signOut } from "../../utils/api";
 import { deleteCookie } from "../../pages/cookie";
 import { refreshToken } from "../../utils/api";
 import { authorizationLogin } from "../../utils/api";
-import { AppDispatch, AppThunk, TUser } from "../../utils/types";
+import { TUser } from "../../utils/types";
+import { AppDispatch, AppThunk } from "../store";
 
 //восстановление пароля (RECOVERY - восстановить) /forgot-password
 export const RECOVERY_PASSWORD_REQUEST: "RECOVERY_PASSWORD_REQUEST" = "RECOVERY_PASSWORD_REQUEST";

@@ -8,8 +8,8 @@ import { Link, Redirect } from "react-router-dom";
 import styles from "./registration.module.css";
 import { useState, ChangeEvent } from "react";
 import { registrationUser } from "../../services/actions/login";
-import { useDispatch, useSelector } from "react-redux";
-import { useAppDispatch, useAppSelector } from "../../utils/types";
+import { useAppDispatch, useAppSelector } from "../../services/store";
+
 
 const Registration = () => {
   const [nameRegistration, setNameRegistration] = useState("");

@@ -1,11 +1,12 @@
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './item.module.css';
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { openModalIngredient } from '../../services/actions/object-ingredient';
 import { useDrag } from "react-dnd";
 import { Link, useLocation } from 'react-router-dom';
 import { FC } from "react";
-import { TIngredient, useAppSelector } from '../../utils/types';
+import { TIngredient } from '../../utils/types';
+import { useAppSelector } from '../../services/store';
 
 interface IItem {
    name: string;

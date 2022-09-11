@@ -1,5 +1,6 @@
 import { getIngredients } from "../../utils/api";
-import { AppDispatch, TIngredient } from "../../utils/types";
+import { TIngredient } from "../../utils/types";
+import { AppDispatch } from "../store";
 
 
 export const GET_INGREDIENTS: "GET_INGREDIENTS" = "GET_INGREDIENTS";

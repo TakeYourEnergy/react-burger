@@ -11,7 +11,8 @@ import { useDrop } from "react-dnd";
 import BurgerConstructorList from "../burger-constructor-list/burger-constructor-list";
 import { useHistory } from "react-router-dom";
 import { addItem, moveItemActionCreator } from "../../services/actions/burger-constructor";
-import { TIngredient, useAppDispatch, useAppSelector } from "../../utils/types";
+import { TIngredient } from "../../utils/types";
+import { useAppDispatch, useAppSelector } from "../../services/store";
 
 
 const BurgerConstructor = () => {

@@ -1,9 +1,8 @@
-import { useSelector } from 'react-redux'
 import styles from './modal-information-about-order.module.css'
 import { useParams, useRouteMatch } from 'react-router-dom';
 import { useMemo } from 'react';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { TIngredient, useAppSelector } from '../../utils/types';
+import { useAppSelector } from '../../services/store';
 
 
 const ModalInformationAboutOrder = () => {

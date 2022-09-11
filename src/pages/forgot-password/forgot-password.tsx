@@ -1,14 +1,12 @@
 import styles from './forgot-password.module.css'
-import { useCallback, useState, ChangeEvent, FormEvent } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
 import {
    Button,
    Input
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link, useHistory, Redirect, useLocation } from "react-router-dom";
+import { Link, Redirect, useLocation } from "react-router-dom";
 import { recoveryPasswordEmail } from '../../services/actions/login';
-import { useDispatch, useSelector } from 'react-redux';
-import { useAppDispatch, useAppSelector } from '../../utils/types';
-
+import { useAppDispatch, useAppSelector } from '../../services/store';
 
 
 const ForgotPassword = () => {

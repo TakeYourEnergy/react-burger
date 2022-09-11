@@ -1,6 +1,7 @@
 import styles from './order-details.module.css';
 import done from '../../images/done.svg'
-import { useAppSelector } from '../../utils/types';
+import { useAppSelector } from '../../services/store';
+
 
 const OrderDetails = () => {
    const order = useAppSelector(state => state.orderReducer.numberOrder)

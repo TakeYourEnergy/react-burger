@@ -1,6 +1,6 @@
 import { Route, useLocation, Redirect, RouteProps } from 'react-router-dom';
-import { useAppSelector } from '../../utils/types';
 import { FC, ReactNode } from 'react';
+import { useAppSelector } from '../../services/store';
 
 
 interface IProtected {

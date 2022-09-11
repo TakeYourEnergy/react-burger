@@ -1,13 +1,12 @@
 import styles from './my-orders.module.css'
 import { NavLink, useLocation, Route, Switch } from "react-router-dom"
-import { useDispatch, useSelector } from 'react-redux'
 import { logOut } from '../../services/actions/login'
 import { useEffect } from 'react'
 import { wsUserConnectionStart } from '../../services/actions/ws-user-action'
 import { wsUserConnectionClosed } from '../../services/actions/ws-user-action'
-import OrdersInformation from '../feed/orders-information/orders-information'
 import PageCardOrder from '../page-card-order/page-card-order'
-import { useAppDispatch, useAppSelector } from '../../utils/types'
+import { useAppDispatch, useAppSelector } from '../../services/store'
+
 
 interface ILocation {
    background: {

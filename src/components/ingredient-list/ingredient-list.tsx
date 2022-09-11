@@ -1,7 +1,7 @@
 import React, { LegacyRef } from 'react';
 import styles from './ingredient-list.module.css';
 import Item from '../item/item';
-import { useAppSelector } from '../../utils/types';
+import { useAppSelector } from '../../services/store';
 
 interface IIngredientList {
    id: string;

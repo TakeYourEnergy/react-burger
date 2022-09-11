@@ -3,11 +3,10 @@ import { NavLink, useLocation } from "react-router-dom";
 import { useState, useEffect, FC, ChangeEvent, SyntheticEvent, FormEvent } from 'react';
 import { Button, Input, EmailInput, PasswordInput, } from "@ya.praktikum/react-developer-burger-ui-components";
 import { getProfileData } from '../../services/actions/login';
-import { useDispatch, useSelector } from 'react-redux';
 import { updateProfileData } from '../../services/actions/login';
 import { logOut } from '../../services/actions/login';
 import { wsUserConnectionStart, wsUserConnectionClosed } from '../../services/actions/ws-user-action';
-import { useAppDispatch, useAppSelector } from '../../utils/types';
+import { useAppDispatch, useAppSelector } from '../../services/store';
 
 const Profile: FC = () => {
    const location = useLocation()
