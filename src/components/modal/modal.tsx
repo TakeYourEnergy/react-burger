@@ -16,7 +16,7 @@ const modalsContainer = document.querySelector('#modals') as HTMLElement;
 const Modal: FC<IModal> = ({ title, children, onClose }) => {
 
    useEffect(() => {
-      const handleEscKeydown = (e: {key: string}) => {
+      const handleEscKeydown = (e: KeyboardEvent) => {
          e.key === "Escape" && onClose()
       }
       document.addEventListener('keydown', handleEscKeydown);

@@ -1,11 +1,11 @@
 import { FC, useRef } from 'react';
 import styles from './burger-constructor-list.module.css';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch } from 'react-redux';
 import { useDrop, useDrag, DropTargetMonitor } from "react-dnd";
 import { deleteItem } from '../../services/actions/burger-constructor';
 import { TIngredient } from '../../utils/types';
 import type { Identifier, XYCoord } from 'dnd-core'
+import { useAppDispatch } from '../../services/store';
 
 interface IBurgerConstructorList {
    items: TIngredient;
@@ -21,7 +21,7 @@ interface IDragItem {
 
 const BurgerConstructorList: FC<IBurgerConstructorList> = ({ items, index, moveItem }) => {
 
-   const dispatch = useDispatch();
+   const dispatch = useAppDispatch();
 
 
    const [{ isDragging }, drag] = useDrag({

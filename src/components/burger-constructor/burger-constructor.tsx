@@ -4,7 +4,6 @@ import { Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-co
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import Spinner from "../spinner/spinner";
-import { useSelector, useDispatch } from 'react-redux';
 import { getOrderNumber, numberNull } from "../../services/actions/order";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrop } from "react-dnd";
