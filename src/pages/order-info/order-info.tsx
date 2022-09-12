@@ -1,13 +1,13 @@
-import { useDispatch } from 'react-redux';
 import { wsConnectionOpen, wsConnectionClosed } from '../../services/actions/wsAction';
 import { useEffect } from 'react';
 import ModalInformationAboutOrder from '../modal-information-about-order/modal-information-about-order';
 import styles from './order-info.module.css'
 import { wsUserConnectionStart, wsUserConnectionClosed } from '../../services/actions/ws-user-action';
+import { useAppDispatch } from '../../services/store';
 
 
 const OrderInfo = () => {
-   const dispatch = useDispatch()
+   const dispatch = useAppDispatch()
 
    useEffect(() => {
       dispatch(wsConnectionOpen())

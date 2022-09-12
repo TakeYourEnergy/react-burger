@@ -1,12 +1,11 @@
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './item.module.css';
-import { useDispatch } from 'react-redux'
 import { openModalIngredient } from '../../services/actions/object-ingredient';
 import { useDrag } from "react-dnd";
 import { Link, useLocation } from 'react-router-dom';
 import { FC } from "react";
 import { TIngredient } from '../../utils/types';
-import { useAppSelector } from '../../services/store';
+import { useAppDispatch, useAppSelector } from '../../services/store';
 
 interface IItem {
    name: string;
@@ -18,7 +17,7 @@ interface IItem {
 
 const Item: FC<IItem> = ({ name, image, price, id, item }) => {
 
-   const dispatch = useDispatch()
+   const dispatch = useAppDispatch()
    const location = useLocation()
 
    const [, dragRef] = useDrag({

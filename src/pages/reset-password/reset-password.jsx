@@ -2,17 +2,17 @@ import styles from './reset-password.module.css';
 import { PasswordInput, Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, Redirect, useLocation } from 'react-router-dom';
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { getNewPassword } from '../../services/actions/login';
+import { useAppDispatch, useAppSelector } from '../../services/store';
 
 const ResetPassword = () => {
    const [passwordInput, setPasswordInput] = useState('')
    const [tokenFromLetter, setTokenFromLettert] = useState('')
-   const dispatch = useDispatch()
+   const dispatch = useAppDispatch()
    const location = useLocation()
    const frgt = location.state?.frgt
 
-   const { resetPasswordSuccess, user } = useSelector(state => ({
+   const { resetPasswordSuccess, user } = useAppSelector(state => ({
       resetPasswordSuccess: state.loginReducer.resetPasswordSuccess,
       user: state.loginReducer.user
    }))

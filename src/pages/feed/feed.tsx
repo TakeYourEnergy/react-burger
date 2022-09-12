@@ -1,12 +1,12 @@
 import { useEffect } from 'react'
 import styles from './feed.module.css'
 import OrdersAll from './orders-all/orders-all'
-import { useDispatch } from 'react-redux'
 import { wsConnectionOpen, wsConnectionClosed } from '../../services/actions/wsAction'
 import PageCardOrder from '../page-card-order/page-card-order'
+import { useAppDispatch } from '../../services/store'
 
 const Feed = () => {
-   const dispatch = useDispatch();
+   const dispatch = useAppDispatch();
 
    useEffect(() => {
       dispatch(wsConnectionOpen())
