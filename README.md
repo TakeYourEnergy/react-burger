@@ -1,4 +1,4 @@
-# [Проект «React-Burger»](https://takeyourenergy.github.io/react-burger/)
+# [Учебный-Проект «React-Burger»:](https://takeyourenergy.github.io/react-burger/)
 
 ## Функционал
 Разработка интерфейса магазина, в котором пользователи могут зарегистрироваться,  создать свой бургер из любимых ингредиентов
